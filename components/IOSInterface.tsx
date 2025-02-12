@@ -96,7 +96,7 @@ export default function IOSInterface() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
-      <div className="relative w-[375px] h-[812px] bg-[url(/ios1.jpg)] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
+      <div className="relative w-[375px] h-[812px rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
         {/* iPhone Notch */}
         {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[30px] bg-black rounded-b-3xl z-50"></div> */}
 
