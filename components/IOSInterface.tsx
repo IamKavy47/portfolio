@@ -35,7 +35,7 @@ const apps = [
   { name: "App Store", icon: "🏪", component: IOSAppStore, background: "bg-gradient-to-b from-[#1E92FF] to-[#3867D6]" },
   { name: "Notes", icon: "📝", component: IOSNotes, background: "bg-[#FFFF9E]" },
   { name: "Contacts", icon: "👥", component: IOSContacts, background: "bg-[#1C1C1E]" },
-  { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp, background: "bg-white"},
+  { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp, background: "bg-white" },
 ]
 
 const dockApps = [
@@ -51,6 +51,7 @@ export default function IOSInterface() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isBooting, setIsBooting] = useState(true)
+  const [wallpaper, setWallpaper] = useState("/ios-wallpaper.jpg") // Default wallpaper
 
   const currentTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
@@ -67,6 +68,10 @@ export default function IOSInterface() {
 
   const closeApp = () => {
     setActiveApp(null)
+  }
+
+  const handleWallpaperChange = (url: string) => {
+    setWallpaper(url) // Update the wallpaper in the interface
   }
 
   const ActiveAppComponent = [...apps, ...dockApps].find((app) => app.name === activeApp)?.component
@@ -103,7 +108,8 @@ export default function IOSInterface() {
           <>
             <div
               ref={scrollRef}
-              className="h-full w-full bg-[url('/ios-wallpaper.jpg')] bg-cover bg-center overflow-y-auto"
+              className="h-full w-full bg-cover bg-center overflow-y-auto"
+              style={{ backgroundImage: `url(${wallpaper})` }} // Dynamic wallpaper
             >
               <div className="pt-16 px-6 grid grid-cols-4 gap-x-4 gap-y-8 pb-24">
                 {apps.map((app) => (
@@ -160,7 +166,7 @@ export default function IOSInterface() {
                   transition={{ type: "spring", damping: 20, stiffness: 300 }}
                   className="absolute inset-0 bg-white"
                 >
-                  <ActiveAppComponent onClose={closeApp} />
+                  <ActiveAppComponent onClose={closeApp} onWallpaperChange={handleWallpaperChange} />
                 </motion.div>
               )}
             </AnimatePresence>

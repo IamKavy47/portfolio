@@ -1,20 +1,21 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, Upload } from "lucide-react"
+import { ChevronLeft, Upload, Plus } from "lucide-react"
 
 interface IOSWallpaperAppProps {
   onClose: () => void
+  onWallpaperChange: (url: string) => void // Callback to update the wallpaper in the parent component
 }
 
 const defaultWallpapers = [
   { name: "Default", url: "/ios1.jpg" },
-  { name: "Nature", url: "/placeholder.svg?height=400&width=600" },
-  { name: "Abstract", url: "/placeholder.svg?height=400&width=600" },
-  { name: "City", url: "/placeholder.svg?height=400&width=600" },
+  { name: "Nature", url: "/nature.jpg" },
+  { name: "Abstract", url: "/abstract.jpg" },
+  { name: "City", url: "/city.jpg" },
 ]
 
-export default function IOSWallpaperApp({ onClose }: IOSWallpaperAppProps) {
+export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallpaperAppProps) {
   const [wallpapers, setWallpapers] = useState(defaultWallpapers)
   const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0])
 
@@ -26,9 +27,15 @@ export default function IOSWallpaperApp({ onClose }: IOSWallpaperAppProps) {
         const newWallpaper = { name: "Custom", url: reader.result as string }
         setWallpapers([...wallpapers, newWallpaper])
         setSelectedWallpaper(newWallpaper)
+        onWallpaperChange(newWallpaper.url) // Update the wallpaper in the parent component
       }
       reader.readAsDataURL(file)
     }
+  }
+
+  const handleWallpaperSelect = (wallpaper: { name: string; url: string }) => {
+    setSelectedWallpaper(wallpaper)
+    onWallpaperChange(wallpaper.url) // Update the wallpaper in the parent component
   }
 
   return (
@@ -45,26 +52,33 @@ export default function IOSWallpaperApp({ onClose }: IOSWallpaperAppProps) {
           {wallpapers.map((wallpaper) => (
             <div
               key={wallpaper.name}
-              className={`aspect-[9/16] rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                selectedWallpaper.name === wallpaper.name ? "border-[var(--ios-blue)] scale-105" : "border-transparent"
+              className={`relative aspect-[9/16] rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                selectedWallpaper.url === wallpaper.url
+                  ? "border-[var(--ios-blue)] scale-105"
+                  : "border-transparent"
               }`}
-              onClick={() => setSelectedWallpaper(wallpaper)}
+              onClick={() => handleWallpaperSelect(wallpaper)}
             >
               <img
                 src={wallpaper.url}
                 alt={wallpaper.name}
                 className="w-full h-full object-cover"
               />
+              {selectedWallpaper.url === wallpaper.url && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                  <span className="text-white font-semibold">Selected</span>
+                </div>
+              )}
             </div>
           ))}
+          {/* Upload Button */}
+          <label
+            htmlFor="wallpaper-upload"
+            className="aspect-[9/16] rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-all"
+          >
+            <Plus size={24} className="text-gray-500" />
+          </label>
         </div>
-        <label
-          htmlFor="wallpaper-upload"
-          className="ios-button mt-6 w-full flex items-center justify-center rounded-lg p-3 bg-white shadow-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition-all cursor-pointer"
-        >
-          <Upload size={18} className="mr-2" />
-          Upload New Wallpaper
-        </label>
         <input
           id="wallpaper-upload"
           type="file"
