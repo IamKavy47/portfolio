@@ -35,7 +35,7 @@ const apps = [
   { name: "App Store", icon: "🏪", component: IOSAppStore, background: "bg-gradient-to-b from-[#1E92FF] to-[#3867D6]" },
   { name: "Notes", icon: "📝", component: IOSNotes, background: "bg-[#FFFF9E]" },
   { name: "Contacts", icon: "👥", component: IOSContacts, background: "bg-[#1C1C1E]" },
-  { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp , background: "bg-white"}
+  // { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp, background: "bg-white"},
 ]
 
 const dockApps = [
@@ -96,7 +96,7 @@ export default function IOSInterface() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
-      <div className="relative w-[375px] h-[812px] bg-black rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
+      <div className="relative w-[375px] h-[812px] bg-[url(/ios1.jpg)] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
         {/* iPhone Notch */}
         {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[30px] bg-black rounded-b-3xl z-50"></div> */}
 
