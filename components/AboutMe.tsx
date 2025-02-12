@@ -70,7 +70,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           </h3>
           <ul className="list-disc list-inside text-sm">
             <li>Loading....</li>
-            <li></li>
+            
           </ul>
         </section>
       </div>
