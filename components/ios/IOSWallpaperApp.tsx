@@ -7,7 +7,7 @@ interface IOSWallpaperAppProps {
   onClose: () => void
 }
 
-const wallpapers = [
+const defaultWallpapers = [
   { name: "Default", url: "/ios1.jpg" },
   { name: "Nature", url: "/placeholder.svg?height=400&width=600" },
   { name: "Abstract", url: "/placeholder.svg?height=400&width=600" },
@@ -15,7 +15,21 @@ const wallpapers = [
 ]
 
 export default function IOSWallpaperApp({ onClose }: IOSWallpaperAppProps) {
+  const [wallpapers, setWallpapers] = useState(defaultWallpapers)
   const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0])
+
+  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const newWallpaper = { name: "Custom", url: reader.result as string }
+        setWallpapers([...wallpapers, newWallpaper])
+        setSelectedWallpaper(newWallpaper)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   return (
     <div className="ios-app">
@@ -31,25 +45,34 @@ export default function IOSWallpaperApp({ onClose }: IOSWallpaperAppProps) {
           {wallpapers.map((wallpaper) => (
             <div
               key={wallpaper.name}
-              className={`aspect-[9/16] rounded-xl overflow-hidden border-2 ${
-                selectedWallpaper.name === wallpaper.name ? "border-[var(--ios-blue)]" : "border-transparent"
+              className={`aspect-[9/16] rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                selectedWallpaper.name === wallpaper.name ? "border-[var(--ios-blue)] scale-105" : "border-transparent"
               }`}
               onClick={() => setSelectedWallpaper(wallpaper)}
             >
               <img
-                src={wallpaper.url || "/placeholder.svg"}
+                src={wallpaper.url}
                 alt={wallpaper.name}
                 className="w-full h-full object-cover"
               />
             </div>
           ))}
         </div>
-        <button className="ios-button mt-6 w-full flex items-center justify-center">
+        <label
+          htmlFor="wallpaper-upload"
+          className="ios-button mt-6 w-full flex items-center justify-center rounded-lg p-3 bg-white shadow-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition-all cursor-pointer"
+        >
           <Upload size={18} className="mr-2" />
           Upload New Wallpaper
-        </button>
+        </label>
+        <input
+          id="wallpaper-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleUpload}
+          className="hidden"
+        />
       </div>
     </div>
   )
 }
-
