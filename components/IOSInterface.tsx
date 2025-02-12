@@ -99,14 +99,14 @@ export default function IOSInterface() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[30px] bg-black rounded-b-3xl z-50"></div>
 
         {/* Status Bar */}
-        <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 pt-2 pb-1 text-white text-sm font-medium z-40">
+        {/* <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 pt-2 pb-1 text-white text-sm font-medium z-40">
           <span>{currentTime}</span>
           <div className="flex items-center gap-2">
             <SignalHigh size={16} />
             <Wifi size={16} />
             <Battery size={16} />
           </div>
-        </div>
+        </div> */}
 
         {isBooting ? (
           <BootAnimation onComplete={handleBootComplete} />
