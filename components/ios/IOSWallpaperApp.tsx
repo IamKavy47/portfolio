@@ -8,7 +8,7 @@ interface IOSWallpaperAppProps {
 }
 
 const wallpapers = [
-  { name: "Default", url: "/ios-wallpaper.jpg" },
+  { name: "Default", url: "/ios1.jpg" },
   { name: "Nature", url: "/placeholder.svg?height=400&width=600" },
   { name: "Abstract", url: "/placeholder.svg?height=400&width=600" },
   { name: "City", url: "/placeholder.svg?height=400&width=600" },
