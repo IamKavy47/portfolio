@@ -1,5 +1,6 @@
 "use client"
 
+// Previous imports remain the same...
 import { useState, useEffect, useRef } from "react"
 import { FaApple, FaWifi, FaBatteryFull, FaSearch, FaVolumeUp } from "react-icons/fa"
 import { motion, AnimatePresence } from "framer-motion"
@@ -10,6 +11,7 @@ interface TopBarProps {
 }
 
 export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
+  // Previous state and effects remain the same...
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false)
@@ -17,8 +19,8 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
   const spotlightRef = useRef<HTMLDivElement>(null)
   const [isMac, setIsMac] = useState(false)
 
+  // All previous useEffects remain the same...
   useEffect(() => {
-    // Detect if user is on a Mac
     setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0)
   }, [])
 
@@ -29,13 +31,11 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      // Check for Command/Windows + Space
       if ((event.metaKey || event.ctrlKey) && event.code === "Space") {
         event.preventDefault()
         setIsSpotlightOpen(prev => !prev)
         setSearchQuery("")
       }
-      // Add Escape key to close Spotlight
       if (event.code === "Escape" && isSpotlightOpen) {
         setIsSpotlightOpen(false)
         setSearchQuery("")
@@ -61,6 +61,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
     }
   }, [])
 
+  // Previous menuItems and apps arrays remain the same...
   const menuItems = [
     { name: "About This Mac", action: () => onOpenApp("AboutMe") },
     { name: "System Settings", action: () => onOpenApp("Settings") },
@@ -87,12 +88,12 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
     ? apps.filter((app) => app.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : []
 
-  // Get the appropriate shortcut symbol based on platform
   const shortcutSymbol = isMac ? "⌘" : "⊞"
 
   return (
     <>
       <div className="fixed top-0 left-0 right-0 h-7 px-2 flex items-center justify-between bg-white/80 backdrop-blur-md text-black z-50">
+        {/* Previous top bar content remains the same... */}
         <div className="flex items-center space-x-4 text-sm">
           <div className="relative">
             <FaApple
@@ -153,7 +154,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
               initial={{ scale: 0.95, opacity: 0, y: -20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: -20 }}
-              className="fixed left-1/2 top-1/4 -translate-x-1/2 w-[500px] max-w-[90vw] z-50"
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] max-w-[90vw] z-50"
             >
               <div className="bg-white/90 backdrop-blur-xl rounded-xl overflow-hidden shadow-2xl">
                 <div className="flex items-center px-4 py-3 border-b border-white/10">
