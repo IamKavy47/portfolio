@@ -15,11 +15,38 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const spotlightRef = useRef<HTMLDivElement>(null)
+  const [isMac, setIsMac] = useState(false)
+
+  useEffect(() => {
+    // Detect if user is on a Mac
+    setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000)
     return () => clearInterval(timer)
   }, [])
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      // Check for Command/Windows + Space
+      if ((event.metaKey || event.ctrlKey) && event.code === "Space") {
+        event.preventDefault()
+        setIsSpotlightOpen(prev => !prev)
+        setSearchQuery("")
+      }
+      // Add Escape key to close Spotlight
+      if (event.code === "Escape" && isSpotlightOpen) {
+        setIsSpotlightOpen(false)
+        setSearchQuery("")
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyPress)
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress)
+    }
+  }, [isSpotlightOpen])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -60,6 +87,9 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
     ? apps.filter((app) => app.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : []
 
+  // Get the appropriate shortcut symbol based on platform
+  const shortcutSymbol = isMac ? "⌘" : "⊞"
+
   return (
     <>
       <div className="fixed top-0 left-0 right-0 h-7 px-2 flex items-center justify-between bg-white/80 backdrop-blur-md text-black z-50">
@@ -96,7 +126,13 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
         </div>
         <div className="flex items-center space-x-4 text-sm">
           <FaWifi className="w-4 h-4" />
-          <FaSearch className="w-4 h-4 cursor-pointer" onClick={() => setIsSpotlightOpen(true)} />
+          <div className="flex items-center gap-1">
+            <FaSearch 
+              className="w-4 h-4 cursor-pointer" 
+              onClick={() => setIsSpotlightOpen(true)} 
+            />
+            <span className="text-xs text-gray-500">{shortcutSymbol} Space</span>
+          </div>
           <FaVolumeUp className="w-4 h-4" />
           <FaBatteryFull className="w-4 h-4" />
           <span>{currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
@@ -133,7 +169,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
                 </div>
                 {searchQuery && (
                   <div className="max-h-[400px] overflow-auto p-2">
-                    {filteredApps.map((app, index) => (
+                    {filteredApps.map((app) => (
                       <button
                         key={app.name}
                         className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-200 text-black"
@@ -162,4 +198,3 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
     </>
   )
 }
-
