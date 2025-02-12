@@ -97,29 +97,14 @@ export default function IOSInterface() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
       <div className="relative w-[375px] h-[812px] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
-        {/* iPhone Notch */}
-        {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[30px] bg-black rounded-b-3xl z-50"></div> */}
-
-        {/* Status Bar */}
-        {/* <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 pt-2 pb-1 text-white text-sm font-medium z-40">
-          <span>{currentTime}</span>
-          <div className="flex items-center gap-2">
-            <SignalHigh size={16} />
-            <Wifi size={16} />
-            <Battery size={16} />
-          </div>
-        </div> */}
-
         {isBooting ? (
           <BootAnimation onComplete={handleBootComplete} />
         ) : (
           <>
-            {/* App Content */}
             <div
               ref={scrollRef}
               className="h-full w-full bg-[url('/ios-wallpaper.jpg')] bg-cover bg-center overflow-y-auto"
             >
-              {/* App Grid */}
               <div className="pt-16 px-6 grid grid-cols-4 gap-x-4 gap-y-8 pb-24">
                 {apps.map((app) => (
                   <motion.button
@@ -142,7 +127,6 @@ export default function IOSInterface() {
               </div>
             </div>
 
-            {/* Dock */}
             <div className="absolute bottom-2 left-4 right-4 bg-white/20 backdrop-blur-xl rounded-[32px] p-2">
               <div className="flex justify-around">
                 {dockApps.map((app) => (
@@ -165,10 +149,8 @@ export default function IOSInterface() {
               </div>
             </div>
 
-            {/* Home Indicator */}
             <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-[134px] h-1 bg-white rounded-full"></div>
 
-            {/* App Transitions */}
             <AnimatePresence>
               {activeApp && ActiveAppComponent && (
                 <motion.div
@@ -188,4 +170,3 @@ export default function IOSInterface() {
     </div>
   )
 }
-
