@@ -28,7 +28,7 @@ export default function BootAnimation({ onComplete }: BootAnimationProps) {
           className="absolute inset-0 z-50 bg-black flex items-center justify-center"
         >
           <video autoPlay playsInline muted className="w-24 h-24 object-contain">
-            <source src="/boot.mp4" type="video/mp4" />
+            <source src="/Boot.mp4" type="video/mp4" />
           </video>
         </motion.div>
       )}
