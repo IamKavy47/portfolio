@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* iOS System Colors */
+  --ios-blue: #007aff;
+  --ios-green: #34c759;
+  --ios-indigo: #5856d6;
+  --ios-orange: #ff9500;
+  --ios-pink: #ff2d55;
+  --ios-purple: #af52de;
+  --ios-red: #ff3b30;
+  --ios-teal: #5ac8fa;
+  --ios-yellow: #ffcc00;
+
+  /* iOS Gray Colors */
+  --ios-gray: #8e8e93;
+  --ios-gray2: #636366;
+  --ios-gray3: #48484a;
+  --ios-gray4: #3a3a3c;
+  --ios-gray5: #2c2c2e;
+  --ios-gray6: #1c1c1e;
+
+  /* iOS Gradients */
+  --instagram-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/SF-Pro-Text-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/SF-Pro-Text-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/SF-Pro-Text-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+body {
+  @apply antialiased;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+/* iOS App Styles */
+.ios-app {
+  @apply h-full bg-white;
+}
+
+.ios-header {
+  @apply sticky top-0 flex items-center justify-between px-4 py-3 bg-gray-50/90 backdrop-blur-xl border-b border-gray-200;
+}
+
+.ios-content {
+  @apply flex-1 overflow-auto;
+}
+
+.ios-back-button {
+  @apply flex items-center text-[var(--ios-blue)] font-semibold;
+}
+
+.ios-button {
+  @apply bg-[var(--ios-blue)] text-white font-semibold py-3 px-6 rounded-lg active:opacity-70 transition-opacity;
+}
+
+.ios-input {
+  @apply w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--ios-blue)];
+}
+
+.ios-list-item {
+  @apply flex items-center px-4 py-3 bg-white active:bg-gray-50 border-b border-gray-200;
+}
+
+.ios-list-item-chevron {
+  @apply ml-auto text-[var(--ios-gray)];
+}
+
+.ios-segmented-control {
+  @apply flex p-1 bg-gray-100 rounded-lg;
+}
+
+.ios-segmented-control-option {
+  @apply flex-1 py-2 text-center text-sm font-semibold rounded-md transition-colors;
+}
+
+.ios-segmented-control-option[data-state="active"] {
+  @apply bg-white text-[var(--ios-blue)] shadow-sm;
+}
+
+.ios-icon-button {
+  @apply text-[var(--ios-blue)] p-2 rounded-full active:bg-gray-200 transition-colors;
+}
+
+/* iOS App Icons */
+.ios-app-icon {
+  @apply relative flex items-center justify-center rounded-[16px] shadow-lg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.ios-app-icon::before {
+  content: "";
+  @apply absolute inset-0 rounded-[16px] opacity-20;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), transparent 50%);
+}
+
+/* iOS Status Bar */
+.ios-status-bar {
+  @apply fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-2 text-white;
+}
+
+/* iOS Navigation Bar */
+.ios-nav-bar {
+  @apply fixed bottom-0 left-0 right-0 h-16 bg-black border-t border-gray-800;
+}
+
+/* iOS Tab Bar */
+.ios-tab-bar {
+  @apply flex items-center justify-around h-full px-6;
+}
+
+.ios-tab-button {
+  @apply flex flex-col items-center justify-center;
+}
+
+.ios-tab-icon {
+  @apply w-6 h-6 mb-1;
+}
+
+.ios-tab-label {
+  @apply text-xs font-medium;
+}
+
+/* iOS Dynamic Island */
+.ios-dynamic-island {
+  @apply absolute top-0 left-1/2 -translate-x-1/2 w-[126px] h-[35px] bg-black rounded-b-[24px];
+}
+
+/* iOS App Transitions */
+.ios-app-transition {
+  @apply fixed inset-0 bg-white transform transition-transform duration-300 ease-in-out;
+}
+
+.ios-app-transition-enter {
+  @apply translate-y-full;
+}
+
+.ios-app-transition-enter-active {
+  @apply translate-y-0;
+}
+
+.ios-app-transition-exit {
+  @apply translate-y-0;
+}
+
+.ios-app-transition-exit-active {
+  @apply translate-y-full;
+}
+
+/* iPhone Frame */
+.iphone-frame {
+  @apply relative w-[375px] h-[812px] bg-black rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black;
+}
+
+.iphone-notch {
+  @apply absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[30px] bg-black rounded-b-3xl z-50;
+}
+
+.iphone-home-indicator {
+  @apply absolute bottom-1 left-1/2 -translate-x-1/2 w-[134px] h-1 bg-white rounded-full;
+}
+
+/* Scrollbar Styles */
+.ios-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ios-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
