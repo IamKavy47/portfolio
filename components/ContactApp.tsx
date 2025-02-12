@@ -20,7 +20,7 @@ export default function ContactApp({ onClose, onFocus }: ContactAppProps) {
     location: "Mandsaur, India",
     github: "https://github.com/iamkavy47",
     linkedin: "https://linkedin.com/in/iamkavy47",
-    website: "soon",
+    website: "https://kavyporwal.vercel.app",
   }
 
   return (
