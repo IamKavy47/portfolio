@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Battery, Wifi, SignalHigh } from "lucide-react"
 import IOSFaceTime from "./ios/IOSFaceTime"
+import IOSWallpaerApp from "./ios/IOSWallpaperApp"
 import IOSCalendar from "./ios/IOSCalendar"
 import IOSPhotos from "./ios/IOSPhotos"
 import IOSCamera from "./ios/IOSCamera"
@@ -34,6 +35,7 @@ const apps = [
   { name: "App Store", icon: "🏪", component: IOSAppStore, background: "bg-gradient-to-b from-[#1E92FF] to-[#3867D6]" },
   { name: "Notes", icon: "📝", component: IOSNotes, background: "bg-[#FFFF9E]" },
   { name: "Contacts", icon: "👥", component: IOSContacts, background: "bg-[#1C1C1E]" },
+  { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp , background: "bg-white"}
 ]
 
 const dockApps = [
