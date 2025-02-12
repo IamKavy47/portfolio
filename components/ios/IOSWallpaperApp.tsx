@@ -16,6 +16,7 @@ const defaultWallpapers = [
 ]
 
 export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallpaperAppProps) {
+  // Initialize state with wallpapers from localStorage if available
   const [wallpapers, setWallpapers] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('customWallpapers')
@@ -26,6 +27,7 @@ export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallp
 
   const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0])
 
+  // Save custom wallpapers to localStorage whenever they change
   useEffect(() => {
     if (wallpapers.length > defaultWallpapers.length) {
       const customWallpapers = wallpapers.slice(defaultWallpapers.length)
@@ -69,11 +71,11 @@ export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallp
       </header>
 
       <div className="ios-content pt-20 px-4 pb-4 h-full overflow-y-auto">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 auto-rows-max">
           {wallpapers.map((wallpaper) => (
             <div
               key={wallpaper.name}
-              className={`relative h-[70vh] rounded-2xl overflow-hidden border-2 transition-all cursor-pointer hover:scale-[1.02] ${
+              className={`relative aspect-[9/16] rounded-2xl overflow-hidden border-2 transition-all cursor-pointer hover:scale-[1.02] ${
                 selectedWallpaper.url === wallpaper.url
                   ? "border-blue-500 scale-[1.02]"
                   : "border-transparent"
@@ -100,7 +102,7 @@ export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallp
           
           <label
             htmlFor="wallpaper-upload"
-            className="relative h-[70vh] rounded-2xl border-2 border-dashed border-gray-300 flex flex-col gap-2 items-center justify-center cursor-pointer hover:bg-gray-200/50 transition-all bg-white/80"
+            className="aspect-[9/16] rounded-2xl border-2 border-dashed border-gray-300 flex flex-col gap-2 items-center justify-center cursor-pointer hover:bg-gray-200/50 transition-all bg-white/80"
           >
             <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
               <Plus size={24} className="text-white" />
