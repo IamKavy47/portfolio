@@ -21,7 +21,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           <Image src="/Kp.jpg" alt="Kavy Porwal" width={128} height={128} className="object-cover" />
         </div>
         <h1 className="text-3xl font-bold mb-2">Kavy Porwal</h1>
-        <h2 className="text-xl text-gray-600">Frontent Developer</h2>
+        <h2 className="text-xl text-gray-600">Frontend Developer</h2>
       </div>
 
       <div className="space-y-6">
