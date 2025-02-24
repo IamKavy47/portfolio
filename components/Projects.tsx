@@ -17,12 +17,12 @@ const projects = [
     date: "February 2025",
   },
   {
-    title: "E-commerce Platform",
-    description: "Full-stack e-commerce platform with real-time inventory management.",
-    icon: "🛒",
-    github: "https://github.com/kavyporwal/ecommerce-platform",
-    demo: "https://ecommerce-platform.vercel.app",
-    date: "April 2023",
+    title: "MU CodeStorm",
+    description: "An 36 hours Hackathon website.",
+    icon: "🌐",
+    github: "https://github.com/princeyuviii",
+    demo: "https://www.mufests.com",
+    date: "February 2025",
   },
   {
     title: "Weather App",
