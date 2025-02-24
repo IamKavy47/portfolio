@@ -12,11 +12,11 @@ interface BrowserProps {
 }
 
 export default function Browser({ onClose, onFocus }: BrowserProps) {
-  const [url, setUrl] = useState<string>("https://www.example.com")
+  const [url, setUrl] = useState<string>("https://www.mufests.com")
   const [isLoading, setIsLoading] = useState(true)
-  const [history, setHistory] = useState<string[]>(["https://www.example.com"])
+  const [history, setHistory] = useState<string[]>(["https://www.mufests.com"])
   const [historyIndex, setHistoryIndex] = useState(0)
-  const [tabs, setTabs] = useState<string[]>(["https://www.example.com"])
+  const [tabs, setTabs] = useState<string[]>(["https://www.mufests.com"])
   const [activeTab, setActiveTab] = useState(0)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
