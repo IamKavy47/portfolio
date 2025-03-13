@@ -76,7 +76,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       </div>
 
       <div className="mt-6 text-center">
-        <Button variant="default">Download Resume</Button>
+        <Button className="bg-blue-500 rounded-3xl text-white" variant="default">Download Resume</Button>
       </div>
     </div>
   )

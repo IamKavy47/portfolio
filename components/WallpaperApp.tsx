@@ -39,6 +39,10 @@ const wallpaperCategories = {
       url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-R6esm5qov8GmwJqCkMTs8ieXPe25oU.png",
       description: "Colorful gradients",
     },
+    {
+      name: "Flower",
+      url:"/mw1.jpg"
+    }
   ],
   landscape: [
     {
