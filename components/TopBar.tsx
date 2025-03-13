@@ -154,7 +154,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
               initial={{ scale: 0.95, opacity: 0, y: -20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: -20 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] max-w-[90vw] z-50"
+              className="fixed left-[33%] top-[33%] -translate-x-1/4 -translate-y-1/2 w-[500px] max-w-[90vw] z-50"
             >
               <div className="bg-white/90 backdrop-blur-xl rounded-xl overflow-hidden shadow-2xl">
                 <div className="flex items-center px-4 py-3 border-b border-white/10">
