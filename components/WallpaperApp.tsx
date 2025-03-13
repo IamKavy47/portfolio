@@ -146,11 +146,11 @@ export default function WallpaperApp({ onClose, onChangeWallpaper, onFocus }: Wa
 
             {/* Add Buttons */}
             <div className="flex gap-2 justify-end">
-              <Button variant="outline" size="sm" onClick={() => setIsUploadOpen(true)}>
+              <Button className="rounded border-black" variant="outline" size="sm" onClick={() => setIsUploadOpen(true)}>
                 <Plus className="w-4 h-4 mr-1" />
                 Add Photo
               </Button>
-              <Button variant="outline" size="sm">
+              <Button className="rounded border-black" variant="outline" size="sm">
                 <Plus className="w-4 h-4 mr-1" />
                 Add Folder or Album
                 <ChevronDown className="w-4 h-4 ml-1" />

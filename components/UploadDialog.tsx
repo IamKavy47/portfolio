@@ -47,14 +47,14 @@ export default function UploadDialog({ open, onClose, onUpload }: UploadDialogPr
         onClose()
       }}
     >
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] rounded bg-white border-blue-500">
         <DialogHeader>
           <DialogTitle>Upload Wallpaper</DialogTitle>
         </DialogHeader>
         <div
           {...getRootProps()}
           className={cn(
-            "mt-4 border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
+            "mt-4 border-2 border-dashed rounded-lg p-8 text-center cursor-pointer border-blue bg-white rounded-xl",
             isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400",
           )}
         >
