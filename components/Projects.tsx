@@ -39,7 +39,7 @@ export default function Projects({ onClose, onFocus }: ProjectsProps) {
     <Window title="My Projects" onClose={onClose} onFocus={onFocus} initialSize={{ width: 800, height: 600 }}>
       <div className="h-full bg-gray-100 p-6 overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">My Recent Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded">
           {projects.map((project) => (
             <div key={project.title} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">

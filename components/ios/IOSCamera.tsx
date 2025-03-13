@@ -1,51 +1,117 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronLeft, Camera, RotateCw, Image } from "lucide-react"
+import { useRef, useState, useEffect } from "react"
+import { ArrowLeft, CameraIcon as FlipCamera, Image } from "lucide-react"
+import { motion } from "framer-motion"
 
 interface IOSCameraProps {
   onClose: () => void
 }
 
 export default function IOSCamera({ onClose }: IOSCameraProps) {
-  const [cameraMode, setCameraMode] = useState<"photo" | "video">("photo")
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isCameraOn, setIsCameraOn] = useState(false)
+  const [capturedImage, setCapturedImage] = useState<string | null>(null)
+  const [cameraFacing, setCameraFacing] = useState<"user" | "environment">("environment")
+
+  useEffect(() => {
+    let stream: MediaStream | null = null
+
+    const startCamera = async () => {
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: cameraFacing },
+          })
+
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream
+            setIsCameraOn(true)
+          }
+        }
+      } catch (err) {
+        console.error("Error accessing camera:", err)
+      }
+    }
+
+    startCamera()
+
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop())
+      }
+    }
+  }, [cameraFacing])
+
+  const takePhoto = () => {
+    if (videoRef.current && canvasRef.current) {
+      const video = videoRef.current
+      const canvas = canvasRef.current
+      const context = canvas.getContext("2d")
+
+      if (context) {
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+        context.drawImage(video, 0, 0, canvas.width, canvas.height)
+
+        const imageData = canvas.toDataURL("image/png")
+        setCapturedImage(imageData)
+      }
+    }
+  }
+
+  const retakePhoto = () => {
+    setCapturedImage(null)
+  }
+
+  const switchCamera = () => {
+    setCameraFacing((prev) => (prev === "user" ? "environment" : "user"))
+  }
 
   return (
-    <div className="h-full flex flex-col bg-black text-white">
-      <header className="px-4 py-2 flex items-center justify-between">
+    <div className="h-full w-full bg-black flex flex-col">
+      <div className="p-4 flex items-center justify-between">
         <button onClick={onClose} className="text-white">
-          <ChevronLeft size={24} />
+          <ArrowLeft size={24} />
         </button>
-        <div className="flex space-x-4">
-          <button
-            className={`px-3 py-1 rounded-full ${cameraMode === "photo" ? "bg-white text-black" : "text-white"}`}
-            onClick={() => setCameraMode("photo")}
-          >
-            Photo
-          </button>
-          <button
-            className={`px-3 py-1 rounded-full ${cameraMode === "video" ? "bg-white text-black" : "text-white"}`}
-            onClick={() => setCameraMode("video")}
-          >
-            Video
-          </button>
-        </div>
         <div className="w-6"></div>
-      </header>
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-64 h-64 rounded-full border-4 border-white flex items-center justify-center">
-          <Camera size={48} />
-        </div>
       </div>
-      <footer className="p-4 flex justify-between items-center">
+
+      <div className="flex-1 relative">
+        {capturedImage ? (
+          <img src={capturedImage || "/placeholder.svg"} alt="Captured" className="w-full h-full object-contain" />
+        ) : (
+          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+        )}
+        <canvas ref={canvasRef} className="hidden" />
+      </div>
+
+      <div className="p-6 flex items-center justify-between">
         <button className="text-white">
-          <Image size={24} />
+          <Image size={28} />
         </button>
-        <button className="w-16 h-16 rounded-full border-4 border-white"></button>
-        <button className="text-white">
-          <RotateCw size={24} />
+
+        {capturedImage ? (
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={retakePhoto}
+            className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center"
+          >
+            <span className="text-white text-sm">Retake</span>
+          </motion.button>
+        ) : (
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={takePhoto}
+            className="w-16 h-16 rounded-full border-4 border-white"
+          />
+        )}
+
+        <button onClick={switchCamera} className="text-white">
+          <FlipCamera size={28} />
         </button>
-      </footer>
+      </div>
     </div>
   )
 }
