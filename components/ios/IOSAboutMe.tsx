@@ -63,7 +63,7 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
           >
-            <Image src="/placeholder.svg" alt="Kavy Porwal" width={100} height={100} className="object-cover" />
+            <Image src="/kavy.jpeg" alt="Kavy Porwal" width={100} height={100} className="object-cover" />
           </motion.div>
           <motion.h2
             className="text-xl font-semibold mb-1"
