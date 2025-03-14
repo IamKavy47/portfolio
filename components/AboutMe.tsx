@@ -47,7 +47,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           <div className="space-y-2">
             <div>
               <h4 className="font-medium">Error 404</h4>
-              <p className="text-sm text-gray-600">No Experience Found</p>
+              <p className="text-sm text-gray-600">No Experience Found.</p>
             </div>
           </div>
         </section>
