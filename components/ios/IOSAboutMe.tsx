@@ -129,7 +129,7 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   </div>
                   <div className="p-4">
                     <p className="text-[15px] text-gray-600 leading-relaxed">
-                      Passionate full stack developer with expertise in modern web technologies. I love building
+                      Passionate front-end developer with expertise in modern web technologies. I love building
                       scalable applications and solving complex problems with elegant solutions. When I'm not coding,
                       you can find me hiking, reading tech blogs, or experimenting with new frameworks.
                     </p>
