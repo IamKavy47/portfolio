@@ -534,8 +534,8 @@ export default function IOSSafari({ onClose }: IOSSafariProps) {
       </div>
 
       {/* Home Indicator */}
-      <div className="h-1 w-36 bg-black mx-auto rounded-full my-2"></div>
-
+{/*       <div className="h-1 w-36 bg-black mx-auto rounded-full my-2"></div>
+ */}
       {/* Overlay Views */}
       {showTabsView && renderTabsView()}
       {showShareMenu && renderShareMenu()}
