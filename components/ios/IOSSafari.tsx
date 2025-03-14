@@ -384,6 +384,18 @@ export default function IOSSafari({ onClose }: IOSSafariProps) {
 
   return (
     <div className="h-full flex flex-col bg-white relative overflow-hidden">
+      <div
+        className="sticky top-0 z-10 px-4 py-3 flex items-center justify-center bg-[#F2F2F7]"
+        style={{
+          borderBottom: scrollY > 10 ? "0.5px solid rgba(0,0,0,0.2)" : "none",
+        }}
+      >
+        <button onClick={onClose} className="absolute left-2 text-[#007AFF] font-medium flex items-center">
+          <ChevronLeft size={20} />
+          <span>Back</span>
+        </button>
+        <h1 className="text-[17px] font-semibold">Safari</h1>
+      </div>
       {/* Content Area */}
       <div ref={contentRef} className="flex-1 overflow-auto" onScroll={handleScroll}>
         {isLoading ? (
