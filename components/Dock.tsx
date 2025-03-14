@@ -9,7 +9,7 @@ const dockItems = [
     name: "AboutMe",
     icon: (
       <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-        <img src="https://i.ibb.co/LDzGD6QZ/generated-image-1741935068996.webp" alt="AboutMe" className="w-8 h-8"/>
+        <UserCircle className="w-8 h-8 text-white" strokeWidth={1.5} />
       </div>
     ),
   },
