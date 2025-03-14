@@ -31,18 +31,18 @@ interface Tab {
 
 export default function IOSSafari({ onClose }: IOSSafariProps) {
   // Browser state
-  const [currentUrl, setCurrentUrl] = useState("https://www.apple.com")
+  const [currentUrl, setCurrentUrl] = useState("https://mufests.com")
   const [displayUrl, setDisplayUrl] = useState("apple.com")
   const [isLoading, setIsLoading] = useState(false)
   const [isAddressBarFocused, setIsAddressBarFocused] = useState(false)
   const [isScrolledDown, setIsScrolledDown] = useState(false)
 
   // Browser history
-  const [history, setHistory] = useState<string[]>(["https://www.apple.com"])
+  const [history, setHistory] = useState<string[]>(["https://mufests.com"])
   const [historyIndex, setHistoryIndex] = useState(0)
 
   // Tabs management
-  const [tabs, setTabs] = useState<Tab[]>([{ id: "tab-1", url: "https://www.apple.com", title: "Apple" }])
+  const [tabs, setTabs] = useState<Tab[]>([{ id: "tab-1", url: "https://mufests.com", title: "MU CodeStorm" }])
   const [activeTabId, setActiveTabId] = useState("tab-1")
   const [showTabsView, setShowTabsView] = useState(false)
 
@@ -51,8 +51,8 @@ export default function IOSSafari({ onClose }: IOSSafariProps) {
 
   // Bookmarks
   const [bookmarks, setBookmarks] = useState<{ url: string; title: string }[]>([
-    { url: "https://www.apple.com", title: "Apple" },
-    { url: "https://www.google.com", title: "Google" },
+    { url: "https://www.mufests.com", title: "MU CodeStorm" },
+    { url: "https://www.github.com/iamkavy47", title: "Github" },
   ])
   const [showBookmarks, setShowBookmarks] = useState(false)
 
