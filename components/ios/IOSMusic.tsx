@@ -61,9 +61,10 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   const [showMiniPlayer, setShowMiniPlayer] = useState(false)
   const [activeView, setActiveView] = useState<"home" | "player" | "playlist" | "library" | "search">("home")
   const [searchQuery, setSearchQuery] = useState("")
+  const [audioLoaded, setAudioLoaded] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // Sample data
+  // Sample data - Updated with working audio URL for the first song
   const playlists: Playlist[] = [
     {
       id: 1,
@@ -78,7 +79,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Chill Sessions",
           cover: "/placeholder.svg?height=400&width=400&text=Dreamy+Nights",
           duration: 260,
-          file: "/woops.mp3",
+          file: "/woops.mp3", // This is a path that should be valid in your project
         },
         {
           id: 2,
@@ -87,7 +88,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Downtown",
           cover: "/placeholder.svg?height=400&width=400&text=Urban+Rhythm",
           duration: 210,
-          file: "https://example.com/song2.mp3",
+          // Fixed: Use a fallback audio that is more likely to exist in public folder
+          file: "/woops.mp3", 
         },
         {
           id: 3,
@@ -96,7 +98,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Relaxation",
           cover: "/placeholder.svg?height=400&width=400&text=Ocean+Waves",
           duration: 240,
-          file: "https://example.com/song3.mp3",
+          // Fixed: Use a fallback audio that is more likely to exist in public folder
+          file: "/woops.mp3", 
         },
       ],
     },
@@ -113,7 +116,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Evening Sessions",
           cover: "/placeholder.svg?height=400&width=400&text=Sunset+Dreams",
           duration: 195,
-          file: "https://example.com/song4.mp3",
+          file: "/woops.mp3",
         },
         {
           id: 5,
@@ -122,7 +125,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Weather Moods",
           cover: "/placeholder.svg?height=400&width=400&text=Rainy+Day",
           duration: 225,
-          file: "https://example.com/song5.mp3",
+          file: "/woops.mp3",
         },
       ],
     },
@@ -139,7 +142,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Gym Sessions",
           cover: "/placeholder.svg?height=400&width=400&text=Power+Up",
           duration: 165,
-          file: "https://example.com/song6.mp3",
+          file: "/woops.mp3",
         },
         {
           id: 7,
@@ -148,7 +151,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Sprint",
           cover: "/placeholder.svg?height=400&width=400&text=Run+Faster",
           duration: 185,
-          file: "https://example.com/song7.mp3",
+          file: "/woops.mp3",
         },
       ],
     },
@@ -165,7 +168,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Concentration",
           cover: "/placeholder.svg?height=400&width=400&text=Deep+Focus",
           duration: 255,
-          file: "https://example.com/song8.mp3",
+          file: "/woops.mp3",
         },
         {
           id: 9,
@@ -174,7 +177,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           album: "Flow State",
           cover: "/placeholder.svg?height=400&width=400&text=Productivity",
           duration: 230,
-          file: "https://example.com/song9.mp3",
+          file: "/woops.mp3",
         },
       ],
     },
@@ -196,125 +199,195 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
         )
     : []
 
-  // Effects
+  // Effect to initialize audio element
   useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play().catch((error) => {
-          console.error("Error playing audio:", error)
-          setIsPlaying(false)
-        })
-      } else {
-        audioRef.current.pause()
+    // Initialize audio element if it doesn't exist
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.volume = volume;
+    }
+    
+    return () => {
+      // Cleanup when component unmounts
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Effect to handle song changes
+  useEffect(() => {
+    if (!audioRef.current) return;
+    
+    // Update the audio source when song changes
+    audioRef.current.src = currentSong.file;
+    audioRef.current.load();
+    setAudioLoaded(false);
+    
+    // If it was playing, continue playing the new song
+    if (isPlaying) {
+      const playPromise = audioRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setAudioLoaded(true);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setIsPlaying(false);
+            setAudioLoaded(false);
+          });
       }
     }
-  }, [isPlaying, currentSongIndex, currentPlaylistIndex])
+  }, [currentSongIndex, currentPlaylistIndex, currentSong.file]);
 
+  // Effect to handle play/pause
   useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
+    if (!audioRef.current) return;
 
-    const updateTime = () => setCurrentTime(audio.currentTime)
-    const updateDuration = () => setDuration(audio.duration)
+    if (isPlaying) {
+      const playPromise = audioRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setAudioLoaded(true);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setIsPlaying(false);
+            setAudioLoaded(false);
+          });
+      }
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  // Effect for audio event listeners
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+        setAudioLoaded(true);
+      }
+    };
+    
     const handleEnded = () => {
       if (isRepeat) {
-        audio.currentTime = 0
-        audio.play()
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+          console.error("Error repeating song:", err);
+          setIsPlaying(false);
+        });
       } else if (isShuffle) {
-        const randomIndex = Math.floor(Math.random() * currentPlaylist.songs.length)
-        setCurrentSongIndex(randomIndex)
+        const randomIndex = Math.floor(Math.random() * currentPlaylist.songs.length);
+        setCurrentSongIndex(randomIndex);
       } else {
-        handleNext()
+        handleNext();
       }
-    }
+    };
 
-    audio.addEventListener("timeupdate", updateTime)
-    audio.addEventListener("loadedmetadata", updateDuration)
-    audio.addEventListener("ended", handleEnded)
-    audio.volume = volume
+    // Update volume
+    audio.volume = volume;
+
+    // Add event listeners
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("canplaythrough", updateDuration);
+    audio.addEventListener("error", (e) => {
+      console.error("Audio error:", e);
+      setIsPlaying(false);
+      setAudioLoaded(false);
+    });
 
     return () => {
-      audio.removeEventListener("timeupdate", updateTime)
-      audio.removeEventListener("loadedmetadata", updateDuration)
-      audio.removeEventListener("ended", handleEnded)
-    }
-  }, [isRepeat, isShuffle, currentPlaylist.songs.length, volume])
+      // Remove event listeners on cleanup
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("canplaythrough", updateDuration);
+      audio.removeEventListener("error", (e) => {
+        console.error("Audio error:", e);
+      });
+    };
+  }, [isRepeat, isShuffle, currentPlaylist.songs.length, volume]);
 
   // Handlers
   const togglePlay = () => {
-    setIsPlaying(!isPlaying)
-  }
+    setIsPlaying(!isPlaying);
+  };
 
   const handlePrevious = () => {
     setCurrentSongIndex((prev) => {
-      if (prev === 0) return currentPlaylist.songs.length - 1
-      return prev - 1
-    })
-    if (isPlaying) {
-      setIsPlaying(false)
-      setTimeout(() => setIsPlaying(true), 100)
-    }
-  }
+      if (prev === 0) return currentPlaylist.songs.length - 1;
+      return prev - 1;
+    });
+  };
 
   const handleNext = () => {
     setCurrentSongIndex((prev) => {
-      if (prev === currentPlaylist.songs.length - 1) return 0
-      return prev + 1
-    })
-    if (isPlaying) {
-      setIsPlaying(false)
-      setTimeout(() => setIsPlaying(true), 100)
-    }
-  }
+      if (prev === currentPlaylist.songs.length - 1) return 0;
+      return prev + 1;
+    });
+  };
 
   const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60)
-    const seconds = Math.floor(time % 60)
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`
-  }
+    if (isNaN(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTime = Number.parseFloat(e.target.value)
-    setCurrentTime(newTime)
+    const newTime = Number.parseFloat(e.target.value);
+    setCurrentTime(newTime);
     if (audioRef.current) {
-      audioRef.current.currentTime = newTime
+      audioRef.current.currentTime = newTime;
     }
-  }
+  };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = Number.parseFloat(e.target.value)
-    setVolume(newVolume)
+    const newVolume = Number.parseFloat(e.target.value);
+    setVolume(newVolume);
     if (audioRef.current) {
-      audioRef.current.volume = newVolume
+      audioRef.current.volume = newVolume;
     }
-  }
+  };
 
   const handlePlaylistSelect = (index: number) => {
-    setCurrentPlaylistIndex(index)
-    setCurrentSongIndex(0)
-    setActiveView("playlist")
-  }
+    setCurrentPlaylistIndex(index);
+    setCurrentSongIndex(0);
+    setActiveView("playlist");
+  };
 
   const handleSongSelect = (playlistIndex: number, songIndex: number) => {
-    setCurrentPlaylistIndex(playlistIndex)
-    setCurrentSongIndex(songIndex)
-    setIsPlaying(true)
-    setActiveView("player")
-  }
+    setCurrentPlaylistIndex(playlistIndex);
+    setCurrentSongIndex(songIndex);
+    setIsPlaying(true);
+    setActiveView("player");
+  };
 
   const handleSearchSongSelect = (song: Song) => {
     // Find which playlist contains this song
     for (let i = 0; i < playlists.length; i++) {
-      const songIndex = playlists[i].songs.findIndex((s) => s.id === song.id)
+      const songIndex = playlists[i].songs.findIndex((s) => s.id === song.id);
       if (songIndex !== -1) {
-        setCurrentPlaylistIndex(i)
-        setCurrentSongIndex(songIndex)
-        setIsPlaying(true)
-        setActiveView("player")
-        return
+        setCurrentPlaylistIndex(i);
+        setCurrentSongIndex(songIndex);
+        setIsPlaying(true);
+        setActiveView("player");
+        return;
       }
     }
-  }
+  };
 
   // Render helpers
   const renderHomeView = () => (
@@ -360,7 +433,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             .map((song) => (
               <motion.div
                 key={song.id}
-                whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.98 }}
                 onClick={() => handleSearchSongSelect(song)}
                 className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
               >
