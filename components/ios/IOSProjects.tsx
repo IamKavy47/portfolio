@@ -137,7 +137,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
   return (
     <div className="h-full bg-[#F2F2F7] text-black flex flex-col">
       {/* iOS-style navigation bar */}
-      <div 
+      <div
         className="sticky top-0 z-10 px-4 py-3 flex items-center justify-center bg-[#F2F2F7]"
         style={{
           borderBottom: scrollY > 10 ? "0.5px solid rgba(0,0,0,0.2)" : "none",
@@ -164,13 +164,13 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
             >
               {/* Project header */}
               <div className="relative w-full h-48 bg-gray-200">
-                <img 
-                  src={selectedProject.image || "/placeholder.svg"} 
-                  alt={selectedProject.title} 
+                <img
+                  src={selectedProject.image || "/placeholder.svg"}
+                  alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <button 
-                  onClick={handleBackToList} 
+                <button
+                  onClick={handleBackToList}
                   className="absolute top-4 left-4 bg-black/30 text-white rounded-full p-2"
                 >
                   <ArrowLeft size={20} />
@@ -187,10 +187,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                   <h3 className="text-[15px] font-semibold mb-2 text-gray-500">TECHNOLOGIES</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.technologies.map((tech, index) => (
-                      <span 
-                        key={index} 
-                        className="bg-[#E5E5EA] px-3 py-1 rounded-full text-[13px]"
-                      >
+                      <span key={index} className="bg-[#E5E5EA] px-3 py-1 rounded-full text-[13px]">
                         {tech}
                       </span>
                     ))}
@@ -215,10 +212,10 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                   <h3 className="text-[15px] font-semibold mb-2 text-gray-500">SCREENSHOTS</h3>
                   <div className="flex overflow-x-auto space-x-3 pb-2 -mx-4 px-4">
                     {selectedProject.detailImages.map((image, index) => (
-                      <img 
-                        key={index} 
-                        src={image || "/placeholder.svg"} 
-                        alt={`${selectedProject.title} screenshot ${index + 1}`} 
+                      <img
+                        key={index}
+                        src={image || "/placeholder.svg"}
+                        alt={`${selectedProject.title} screenshot ${index + 1}`}
                         className="h-48 rounded-lg shadow-sm"
                       />
                     ))}
@@ -228,7 +225,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                 {/* Links */}
                 <div className="space-y-3">
                   {selectedProject.github && (
-                    <a 
+                    <a
                       href={selectedProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -241,9 +238,9 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                       <ExternalLink size={16} className="text-gray-400" />
                     </a>
                   )}
-                  
+
                   {selectedProject.liveUrl && (
-                    <a 
+                    <a
                       href={selectedProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -295,13 +292,13 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                     <h2 className="text-[15px] font-semibold mb-3 text-gray-500">FEATURED PROJECT</h2>
                     <motion.div
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => handleProjectSelect(projects.find(p => p.featured) || projects[0])}
+                      onClick={() => handleProjectSelect(projects.find((p) => p.featured) || projects[0])}
                       className="bg-white rounded-xl overflow-hidden shadow-sm"
                     >
                       <div className="relative w-full h-48">
-                        <img 
-                          src={projects.find(p => p.featured)?.image || projects[0].image} 
-                          alt="Featured project" 
+                        <img
+                          src={projects.find((p) => p.featured)?.image || projects[0].image}
+                          alt="Featured project"
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute top-3 right-3 bg-[#007AFF] text-white text-[12px] font-medium px-2 py-1 rounded-full flex items-center">
@@ -311,22 +308,26 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                       </div>
                       <div className="p-4">
                         <h3 className="text-[17px] font-semibold mb-1">
-                          {projects.find(p => p.featured)?.title || projects[0].title}
+                          {projects.find((p) => p.featured)?.title || projects[0].title}
                         </h3>
                         <p className="text-[15px] text-gray-600 mb-3 line-clamp-2">
-                          {projects.find(p => p.featured)?.description || projects[0].description}
+                          {projects.find((p) => p.featured)?.description || projects[0].description}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {(projects.find(p => p.featured)?.technologies || projects[0].technologies)
+                          {(projects.find((p) => p.featured)?.technologies || projects[0].technologies)
                             .slice(0, 3)
                             .map((tech, index) => (
                               <span key={index} className="bg-[#E5E5EA] px-2 py-0.5 rounded-full text-[12px]">
                                 {tech}
                               </span>
                             ))}
-                          {(projects.find(p => p.featured)?.technologies.length || projects[0].technologies.length) > 3 && (
+                          {(projects.find((p) => p.featured)?.technologies.length || projects[0].technologies.length) >
+                            3 && (
                             <span className="bg-[#E5E5EA] px-2 py-0.5 rounded-full text-[12px]">
-                              +{(projects.find(p => p.featured)?.technologies.length || projects[0].technologies.length) - 3} more
+                              +
+                              {(projects.find((p) => p.featured)?.technologies.length ||
+                                projects[0].technologies.length) - 3}{" "}
+                              more
                             </span>
                           )}
                         </div>
@@ -349,9 +350,9 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                         className="bg-white rounded-xl overflow-hidden shadow-sm flex"
                       >
                         <div className="w-24 h-24">
-                          <img 
-                            src={project.image || "/placeholder.svg"} 
-                            alt={project.title} 
+                          <img
+                            src={project.image || "/placeholder.svg"}
+                            alt={project.title}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -384,4 +385,6 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
         </AnimatePresence>
       </div>
     </div>
+  )
 }
+
