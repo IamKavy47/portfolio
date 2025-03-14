@@ -76,7 +76,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           id: 1,
           title: "Woops",
           artist: "Bounty Hunter Woops (TECHNO)",
-          album: "Chill Sessions",
+          album: "",
           cover: "/woop.jpg?height=400&width=400&text=Woops",
           duration: 259,
           file: "/woop.mp3", // This is a path that should be valid in your project
