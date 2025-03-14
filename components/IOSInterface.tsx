@@ -103,7 +103,7 @@ export default function IOSInterface() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
-      <div className="relative w-[375px] h-[812px] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
+      <div className="relative w-[475px] h-[912px] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
         {isBooting ? (
           <BootAnimation onComplete={() => setIsBooting(false)} />
         ) : (
