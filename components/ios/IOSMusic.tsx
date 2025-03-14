@@ -67,18 +67,18 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   const playlists: Playlist[] = [
     {
       id: 1,
-      title: "Today's Hits",
-      description: "The hottest tracks right now",
+      title: "Phonk",
+      description: "My Favourite phonks",
       cover: "/placeholder.svg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
-          title: "Dreamy Nights",
-          artist: "Ambient Collective",
+          title: "Woops",
+          artist: "Bounty Hunter Woops (TECHNO)",
           album: "Chill Sessions",
           cover: "/placeholder.svg?height=400&width=400&text=Dreamy+Nights",
-          duration: 180,
-          file: "https://example.com/song1.mp3",
+          duration: 260,
+          file: "/woops.mp3",
         },
         {
           id: 2,
