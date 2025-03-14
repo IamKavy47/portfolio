@@ -384,7 +384,4 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
         </AnimatePresence>
       </div>
     </div>
-  \
 }
-\
-
