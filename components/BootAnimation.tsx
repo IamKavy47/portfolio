@@ -27,7 +27,7 @@ export default function BootAnimation({ onComplete }: BootAnimationProps) {
           exit={{ opacity: 0 }}
           className="absolute inset-0 z-50 bg-black flex items-center justify-center"
         >
-          <video autoPlay playsInline muted className="w-[60vw] h-[60vh] object-contain">
+          <video autoPlay playsInline className="w-[60vw] h-[60vh] object-contain">
             <source src="/Boot.mp4" type="video/mp4" />
           </video>
         </motion.div>
