@@ -47,7 +47,7 @@ export default function IOSInterface() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isBooting, setIsBooting] = useState(true)
-  const [wallpaper, setWallpaper] = useState("/ios-wallpaper.jpg") // Default wallpaper
+  const [wallpaper, setWallpaper] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkngV7DRxydPQeJQnl0phPqmDKkQi8itfHg7r9aW-wggNKHvZ9R2CUnxtkYMneNqrk2JQ&usqp=CAU") // Default wallpaper
 
   const currentTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
