@@ -35,7 +35,7 @@ export default function IOSYouTube({ onClose }: IOSYouTubeProps) {
   }
 
   return (
-    <div className="h-[800px] w-[363px] bg-black text-white flex flex-col overflow-hidden relative">
+    <div className="h-[758px] w-[350px] bg-black text-white flex flex-col overflow-hidden relative">
       {/* Header */}
       <div className="bg-[#212121] px-4 py-3 flex items-center justify-between z-10">
         <div className="flex items-center">
