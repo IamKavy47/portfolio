@@ -52,7 +52,7 @@ const dockItems = [
   },
   {
     name: "WallpaperApp",
-    icon: <img src="/Icon/gallery.jpg" alt="wallpaer" className="w-[54px] h-[54px] rounded-[14px]" />,
+    icon: <img src="/Icon/gallery.jpg" alt="wallpaper" className="w-[54px] h-[54px] rounded-[14px]" />,
     background: "bg-transparent",
   },
   {
@@ -94,19 +94,19 @@ export default function Dock({ openApp, openApps }: DockProps) {
   }
 
   return (
-    <div className="fixed bottom-2 left-4 right-4">
+    <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
       <motion.div
         ref={dockRef}
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="bg-white/20 backdrop-blur-xl rounded-[28px] p-2 h-20 flex justify-between"
+        className="bg-white/20 backdrop-blur-xl rounded-[28px] px-3 h-20 flex items-center"
       >
         <AnimatePresence>
           {dockItems.map((item, index) => (
             <motion.button
               key={item.name}
-              className="relative group flex flex-col items-center"
+              className="relative group flex flex-col items-center mx-0.5 px-0.5"
               onMouseEnter={() => setHoveredItem(index)}
               onMouseLeave={() => setHoveredItem(null)}
               onClick={() => handleOpenApp(item.name)}
@@ -115,7 +115,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
               <motion.div
-                className={`mt-1 ${item.background} flex items-center justify-center shadow-md
+                className={`${item.background} flex items-center justify-center shadow-md
                   ${openApps.includes(item.name) ? "ring-2 ring-white/50" : ""}`}
                 animate={{
                   scale: hoveredItem === index ? 1.2 : openingApp === item.name ? 0.8 : 1,
@@ -152,7 +152,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
               
               <motion.span
                 className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white 
-                  bg-black/75 rounded-md whitespace-nowrap"
+                  bg-black/75 rounded-md whitespace-nowrap z-10"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{
                   opacity: hoveredItem === index ? 1 : 0,
