@@ -97,7 +97,7 @@ const dockApps = [
   },
   {
     name: "Projects",
-    icon: <img src="/Icon/Project.png" alt="Music" className="h-[54px] w-[54px] rounded-full"/>,
+    icon: <img src="/Icon/project.png" alt="Project" className="h-[54px] w-[54px] rounded-full"/>,
     background: "bg-white",
     component: IOSSafari,
   },
@@ -109,7 +109,7 @@ const dockApps = [
   },
   {
     name: "Music",
-    icon: <img src="/Icon/Music.png" alt="Music" className="h-[54px] w-[54px] rounded-full"/>,
+    icon: <img src="/Icon/Music.png" alt="Music" className="h-[50px] w-[50px] rounded-full"/>,
     background: "bg-white",
     component: IOSMusic,
   },
