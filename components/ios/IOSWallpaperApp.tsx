@@ -11,8 +11,8 @@ interface IOSWallpaperAppProps {
 
 export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallpaperAppProps) {
   const wallpapers = [
-    "/ios-wallpaper.jpg",
-    "/placeholder.svg?height=812&width=375",
+    "/ios1.jpg",
+    "/ios2.jpg?height=812&width=375",
     "/placeholder.svg?height=812&width=375&text=Wallpaper+2",
     "/placeholder.svg?height=812&width=375&text=Wallpaper+3",
     "/placeholder.svg?height=812&width=375&text=Wallpaper+4",

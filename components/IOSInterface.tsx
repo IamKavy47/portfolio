@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import IOSFaceTime from "./ios/IOSFaceTime"
+import { Calendar, Camera, Clock, Map, Calculator, Users, Layers, User, FolderOpen, Globe, Music, 
+  Signal,Battery,Wifi
+ } from "lucide-react"
 import IOSProjects from "./ios/IOSProjects"
 import IOSAboutMe from "./ios/IOSAboutMe"
 import IOSWallpaperApp from "./ios/IOSWallpaperApp"
@@ -12,33 +14,80 @@ import IOSClock from "./ios/IOSClock"
 import IOSMaps from "./ios/IOSMaps"
 import IOSCalculator from "./ios/IOSCalculator"
 import IOSContacts from "./ios/IOSContacts"
-import IOSMessages from "./ios/IOSMessages"
 import IOSSafari from "./ios/IOSSafari"
 import IOSMusic from "./ios/IOSMusic"
 import BootAnimation from "./BootAnimation"
 
 const apps = [
-  // { name: "FaceTime", icon: "📞", component: IOSFaceTime, background: "bg-[#31C759]" },
-
-  { name: "Calendar", icon: "📅", component: IOSCalendar, background: "bg-white" },
-  // { name: "Photos", icon: "🖼️", component: IOSPhotos, background: "bg-gradient-to-b from-[#3F99F8] to-[#3C5A99]" },
-  { name: "Camera", icon: "📸", component: IOSCamera, background: "bg-[#1C1C1E]" },
-  // { name: "Mail", icon: "✉️", component: IOSMail, background: "bg-gradient-to-b from-[#3478F6] to-[#5DAFFD]" },
-  { name: "Clock", icon: "🕰️", component: IOSClock, background: "bg-[#1C1C1E]" },
-  { name: "Maps", icon: "🗺️", component: IOSMaps, background: "bg-[#31AE5F]" },
-  { name: "Calculator", icon: "🧮", component: IOSCalculator, background: "bg-[#1C1C1E]" },
-  // { name: "Settings", icon: "⚙️", component: IOSSettings, background: "bg-[#8E8E93]" },
-  // { name: "App Store", icon: "🏪", component: IOSAppStore, background: "bg-gradient-to-b from-[#1E92FF] to-[#3867D6]" },
-  // { name: "Notes", icon: "📝", component: IOSNotes, background: "bg-[#FFFF9E]" },
-  { name: "Contacts", icon: "👥", component: IOSContacts, background: "bg-[#1C1C1E]" },
-  { name: "Wallpaper", icon: "🧱", component: IOSWallpaperApp, background: "bg-white" },
+  {
+    name: "Calendar",
+    icon: <Calendar className="w-7 h-7 text-white" />,
+    component: IOSCalendar,
+    background: "bg-gradient-to-b from-orange-500 to-red-500",
+  },
+  {
+    name: "Camera",
+    icon: <Camera className="w-7 h-7 text-white" />,
+    component: IOSCamera,
+    background: "bg-[#1C1C1E]",
+  },
+  {
+    name: "Clock",
+    icon: <Clock className="w-7 h-7 text-white" />,
+    component: IOSClock,
+    background: "bg-[#1C1C1E]",
+  },
+  {
+    name: "Maps",
+    icon: <Map className="w-7 h-7 text-white" />,
+    component: IOSMaps,
+    background: "bg-gradient-to-b from-green-400 to-green-600",
+  },
+  {
+    name: "Calculator",
+    icon: <Calculator className="w-7 h-7 text-white" />,
+    component: IOSCalculator,
+    background: "bg-gradient-to-b from-gray-600 to-gray-800",
+  },
+  {
+    name: "Contacts",
+    icon: <Users className="w-7 h-7 text-white" />,
+    component: IOSContacts,
+    background: "bg-gradient-to-b from-gray-400 to-gray-600",
+  },
+  {
+    name: "Wallpaper",
+    icon: <Layers className="w-7 h-7 text-white" />,
+    component: IOSWallpaperApp,
+    background: "bg-gradient-to-b from-purple-500 to-purple-700",
+  },
 ]
 
 const dockApps = [
-  { name: "About Me", icon: "", component: IOSAboutMe, background: "bg-green-500" },
-  { name: "Projects", icon: "💬", background: "bg-[#31C759]", component: IOSProjects },
-  { name: "Contact Me", icon: "🌐", background: "bg-gradient-to-b from-[#1E92FF] to-[#3867D6]", component: IOSSafari },
-  { name: "Music", icon: "🎵", background: "bg-gradient-to-b from-[#FC5C7D] to-[#6A82FB]", component: IOSMusic },
+  {
+    name: "About Me",
+    icon: <img src="/aboutme.png" className="w-[54px] h-[54px] rounded-[14px]" alt="" />,
+    component: IOSAboutMe,
+    background: "bg-white",
+  },
+  {
+    name: "Projects",
+    icon: <FolderOpen className="w-7 h-7 text-amber-500" />,
+    background: "bg-white",
+    component: IOSProjects,
+  },
+  {
+    name: "Contact Me",
+    icon: <Globe className="w-7 h-7 text-blue-500" />,
+    background: "bg-white",
+    component: IOSSafari,
+  },
+  {
+    name: "Music",
+    icon: <Music className="w-7 h-7 text-pink-500" />,
+    background: "bg-white",
+    component: IOSMusic,
+  },
 ]
 
 export default function IOSInterface() {
@@ -47,7 +96,9 @@ export default function IOSInterface() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isBooting, setIsBooting] = useState(true)
-  const [wallpaper, setWallpaper] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkngV7DRxydPQeJQnl0phPqmDKkQi8itfHg7r9aW-wggNKHvZ9R2CUnxtkYMneNqrk2JQ&usqp=CAU") // Default wallpaper
+  const [wallpaper, setWallpaper] = useState(
+    "https://9to5mac.com/wp-content/uploads/sites/6/2022/06/7411.WWDC_2022_Light-1024w-1366h@2xipad.jpeg?resize=2048,2048",
+  ) // Default wallpaper
 
   const currentTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
@@ -103,7 +154,7 @@ export default function IOSInterface() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
-      <div className="relative w-[375px] h-[812px] rounded-[60px] overflow-hidden shadow-xl border-[14px] border-black">
+      <div className="relative w-[375px] h-[812px] rounded-[55px] overflow-hidden shadow-xl border-[12px] border-black">
         {isBooting ? (
           <BootAnimation onComplete={() => setIsBooting(false)} />
         ) : (
@@ -113,7 +164,27 @@ export default function IOSInterface() {
               className="h-full w-full bg-cover bg-center overflow-y-auto"
               style={{ backgroundImage: `url(${wallpaper})` }} // Dynamic wallpaper
             >
-              <div className="pt-16 px-6 grid grid-cols-4 gap-x-4 gap-y-8 pb-24">
+              {/* Status Bar */}
+              {/* <div className="h-7 w-full flex justify-between items-center px-5 text-white text-xs">
+                <div>{currentTime}</div>
+                <div className="flex items-center space-x-1">
+                  <div className="w-4 h-2.5 bg-white rounded-sm"></div>
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+              </div> */}
+
+              {/* Dynamic Island - Only visible on home screen */}
+              {!activeApp && (
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10">
+                  <div className="bg-black w-[27vw] h-8 rounded-full mt-2 flex items-center justify-center">
+                    <div className="bg-[#1C1C1E] w-3 h-3 rounded-full absolute right-3"></div>
+                  </div>
+                </div>
+              )}
+
+              {/* App Grid */}
+              <div className="mt-[25px] pt-10 px-6 grid grid-cols-4 gap-x-4 gap-y-8 pb-24">
                 {apps.map((app) => (
                   <motion.button
                     key={app.name}
@@ -122,20 +193,21 @@ export default function IOSInterface() {
                     onClick={() => openApp(app.name)}
                   >
                     <div
-                      className={`w-[62px] h-[62px] rounded-[16px] ${app.background} flex items-center justify-center text-2xl shadow-lg`}
+                      className={`w-[62px] h-[62px] rounded-[16px] ${app.background} flex items-center justify-center shadow-lg`}
                       style={{
                         boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
                       }}
                     >
                       {app.icon}
                     </div>
-                    <span className="mt-1.5 text-xs text-white font-medium">{app.name}</span>
+                    <span className="mt-1.5 text-xs text-white font-medium drop-shadow-md">{app.name}</span>
                   </motion.button>
                 ))}
               </div>
             </div>
 
-            <div className="absolute bottom-2 left-4 right-4 bg-white/20 backdrop-blur-xl rounded-[32px] p-2">
+            {/* Dock */}
+            <div className="absolute bottom-2 left-4 right-4 bg-white/20 backdrop-blur-xl rounded-[28px] p-2 h-20">
               <div className="flex justify-around">
                 {dockApps.map((app) => (
                   <motion.button
@@ -145,7 +217,7 @@ export default function IOSInterface() {
                     onClick={() => openApp(app.name)}
                   >
                     <div
-                      className={`w-[54px] h-[54px] rounded-[14px] ${app.background} flex items-center justify-center text-2xl`}
+                      className={`w-[54px] h-[54px] rounded-[14px] mt-1 ${app.background} flex items-center justify-center shadow-md`}
                       style={{
                         boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
                       }}
@@ -156,8 +228,6 @@ export default function IOSInterface() {
                 ))}
               </div>
             </div>
-
-            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-[134px] h-1 bg-white rounded-full"></div>
 
             <AnimatePresence>
               {activeApp && ActiveAppComponent && (
@@ -182,4 +252,3 @@ export default function IOSInterface() {
     </div>
   )
 }
-
