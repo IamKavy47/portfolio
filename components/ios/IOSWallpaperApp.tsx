@@ -48,6 +48,7 @@ export default function IOSWallpaperApp({
   const [selectedWallpaper, setSelectedWallpaper] = useState(currentWallpaper)
   const [appliedWallpaper, setAppliedWallpaper] = useState(currentWallpaper)
   const [showPreview, setShowPreview] = useState(false)
+  const [previewWallpaper, setPreviewWallpaper] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   // Set initial wallpaper
@@ -67,9 +68,17 @@ export default function IOSWallpaperApp({
     setSelectedWallpaper(wallpaper)
   }
 
+  const handleShowPreview = (wallpaper: string) => {
+    setPreviewWallpaper(wallpaper)
+    setShowPreview(true)
+  }
+
   const handleApplyWallpaper = () => {
-    setAppliedWallpaper(selectedWallpaper)
-    onWallpaperChange(selectedWallpaper)
+    if (previewWallpaper) {
+      setSelectedWallpaper(previewWallpaper)
+      setAppliedWallpaper(previewWallpaper)
+      onWallpaperChange(previewWallpaper)
+    }
     setShowPreview(false)
   }
 
@@ -132,17 +141,14 @@ export default function IOSWallpaperApp({
               key={index}
               whileTap={{ scale: 0.97 }}
               className="relative rounded-lg overflow-hidden aspect-[9/19] shadow-sm"
-              onClick={() => {
-                handleWallpaperSelect(wallpaper)
-                setShowPreview(true)
-              }}
+              onClick={() => handleShowPreview(wallpaper)}
             >
               <img
                 src={wallpaper || "/placeholder.svg"}
                 alt={`${category.name} Wallpaper ${index + 1}`}
                 className="w-full h-full object-cover"
               />
-              {selectedWallpaper === wallpaper && (
+              {appliedWallpaper === wallpaper && (
                 <div className="absolute bottom-3 right-3 w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
                   <Check size={16} className="text-white" />
                 </div>
@@ -156,7 +162,7 @@ export default function IOSWallpaperApp({
 
   const renderPreview = () => (
     <AnimatePresence>
-      {showPreview && (
+      {showPreview && previewWallpaper && (
         <motion.div
           className="absolute inset-0 bg-black bg-opacity-80 z-10 flex flex-col items-center justify-center"
           initial={{ opacity: 0 }}
@@ -165,18 +171,16 @@ export default function IOSWallpaperApp({
         >
           <div className="relative w-[270px] h-[550px] rounded-[40px] overflow-hidden border-4 border-gray-300 shadow-xl">
             <img
-              src={selectedWallpaper || "/placeholder.svg"}
+              src={previewWallpaper || "/placeholder.svg"}
               alt="Wallpaper Preview"
               className="w-full h-full object-cover"
             />
 
-            {/* iOS Status Bar */}
-            <div className="absolute top-0 left-0 right-0 h-6 flex items-center justify-between px-5 text-white text-xs">
-              <span>9:41</span>
-              <div className="flex items-center space-x-1">
-                <div className="w-4 h-2 bg-white rounded-sm"></div>
-                <div className="w-4 h-3 bg-white rounded-sm"></div>
-                <div className="w-4 h-4 bg-white rounded-sm"></div>
+            {/* Dynamic Island */}
+            <div className="absolute top-3 left-0 right-0 flex justify-center">
+              <div className="w-[120px] h-[35px] bg-black rounded-full flex items-center justify-center">
+                {/* Inner cutout for camera/sensors */}
+                <div className="w-[10px] h-[10px] bg-black border border-gray-800 rounded-full absolute right-[30px]"></div>
               </div>
             </div>
 
@@ -222,7 +226,7 @@ export default function IOSWallpaperApp({
           <button onClick={onClose} className="text-blue-500 font-medium">
             <div className="flex items-center">
               <ArrowLeft size={18} className="mr-1" />
-              <span>Settings</span>
+              <span></span>
             </div>
           </button>
         )}
