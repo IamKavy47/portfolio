@@ -114,7 +114,7 @@ export default function IOSCalendar({ onClose }: IOSCalendarProps) {
           {getEventsForDay(today.getDate()).length > 0 ? (
             <div className="space-y-2">
               {getEventsForDay(today.getDate()).map((event, index) => (
-                <div key={index} className="bg-white p-3 rounded-lg shadow-sm flex items-center">
+                <div key={index} className="bg-white p-3 rounded-[12px] shadow-sm flex items-center">
                   <div className={`w-3 h-12 ${event.color} rounded-full mr-3`}></div>
                   <div>
                     <div className="font-medium">{event.title}</div>
