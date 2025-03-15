@@ -46,7 +46,7 @@ const apps = [
   },
   {
     name: "Calculator",
-    icon :<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-7 h-7">
+    icon :<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-[54px] h-[54px] rounded-[14px]">
   <defs>
     <linearGradient id="a" x1="59.25" x2="60.76" y1="119.1" y2="-.16" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#d4d4d2"></stop>
