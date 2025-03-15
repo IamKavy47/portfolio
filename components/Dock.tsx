@@ -43,7 +43,7 @@ const dockItems = [
   },
   {
     name: "VSCode",
-    icon: <img src="/Icon/code.png" alt="VS Code" className="w-[54px] h-[54px]" />,
+    icon: <img src="/Icon/code.png" alt="VS Code" className="w-full h-full" />,
     background: "bg-transparent",
   },
   {
