@@ -92,7 +92,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 h-7 px-2 flex items-center justify-between bg-white/80 backdrop-blur-md text-black z-50">
+      <div className="fixed top-0 left-0 right-0 h-7 px-2 flex items-center justify-between bg-white/40 backdrop-blur-lg text-black z-50">
         {/* Previous top bar content remains the same... */}
         <div className="flex items-center space-x-4 text-sm">
           <div className="relative">
