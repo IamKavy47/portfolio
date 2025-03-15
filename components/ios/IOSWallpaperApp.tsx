@@ -180,7 +180,7 @@ export default function IOSWallpaperApp({
             <div className="absolute top-3 left-0 right-0 flex justify-center">
               <div className="w-[120px] h-[35px] bg-black rounded-full flex items-center justify-center">
                 {/* Inner cutout for camera/sensors */}
-                <div className="w-[10px] h-[10px] bg-black border border-gray-800 rounded-full absolute right-[30px]"></div>
+                <div className="w-[10px] h-[10px] bg-black border border-gray-800 border-[5px] rounded-full absolute right-[85px]"></div>
               </div>
             </div>
 
@@ -193,7 +193,7 @@ export default function IOSWallpaperApp({
           <div className="mt-8 flex space-x-4">
             <motion.button
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-2 bg-gray-700 text-white rounded-lg"
+              className="px-8 py-2 bg-gray-700 text-white rounded-[10px]"
               onClick={() => setShowPreview(false)}
             >
               Cancel
@@ -201,7 +201,7 @@ export default function IOSWallpaperApp({
 
             <motion.button
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-2 bg-blue-500 text-white rounded-lg"
+              className="px-8 py-2 bg-blue-500 text-white rounded-[10px]"
               onClick={handleApplyWallpaper}
             >
               Set
