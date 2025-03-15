@@ -99,7 +99,7 @@ const dockApps = [
     name: "Projects",
     icon: <img src="/Icon/project.png" alt="Project" className="h-[54px] w-[54px] rounded"/>,
     background: "bg-white",
-    component: IOSSafari,
+    component: IOSProjects,
   },
    {
     name: "Safari",
