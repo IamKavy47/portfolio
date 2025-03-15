@@ -22,31 +22,45 @@ import IOSYouTube from "./ios/IOSYouTube"
 const apps = [
   {
     name: "Calendar",
-    icon: <Calendar className="w-7 h-7 text-white" />,
+    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calendar">
+    <path fill="#fff" fill-rule="evenodd" d="M94,120H26A25.9482,25.9482,0,0,1,0,94V26A25.9482,25.9482,0,0,1,26,0H94a25.9482,25.9482,0,0,1,26,26V94A25.9482,25.9482,0,0,1,94,120Z"></path>
+    <path fill="#ff3b30" d="M42.36084 25.63436c.15088 1.293 1.42187 2.12207 3.25342 2.12207 1.6914 0 2.8872-.85156 2.8872-2.05762 0-1.02343-.77587-1.61621-2.68261-2.03613l-2.02539-.44141c-2.833-.60351-4.22266-2.05761-4.22266-4.417 0-2.89746 2.35938-4.81543 5.94629-4.81543 3.42578 0 5.84961 1.90723 5.94678 4.65332H48.4043c-.15088-1.27051-1.29248-2.10058-2.86524-2.10058-1.627 0-2.7041.78711-2.7041 2.0039 0 .98047.74316 1.55176 2.564 1.9502l1.87451.39844c3.124.668 4.4707 2.01464 4.4707 4.417 0 3.10254-2.40234 5.01953-6.30225 5.01953-3.70556 0-6.10791-1.82031-6.22656-4.69629zM63.62109 26.1617H58.15918l-1.1958 3.77051H53.69922l5.39746-15.54492H62.9209l5.39746 15.54492H64.79492zm-4.76171-2.43457h4.07226l-1.92871-6.18359h-.19336zM73.06348 29.93221V17.06991H68.39941V14.38729h12.582v2.68262H76.31738v12.8623z"></path>
+    <path d="M37.11328 42.36776c9.813 0 16.78418 6.74414 16.78418 15.0791 0 5.91016-2.68994 10.38086-12.42725 20.4209L26.8457 93.13729v.15137H55.29932v4.62207H19.647V94.273L38.96973 73.96541c7.84277-8.18359 9.7749-11.4414 9.7749-16.25292 0-6.02442-4.73584-10.79786-11.63135-10.79786-7.23633 0-12.6543 4.96289-12.73 11.66895H19.38184C19.45752 49.22518 26.99756 42.36776 37.11328 42.36776zM62.00684 70.55624c0-17.16309 7.46386-28.18848 19.81543-28.18848 12.38867 0 19.77734 10.9873 19.77734 28.15039 0 17.27637-7.35059 28.26367-19.77734 28.26367S62.00684 87.8326 62.00684 70.55624zm34.40234 0c0-14.35938-5.418-23.6045-14.58691-23.6045-9.13086 0-14.58692 9.32032-14.58692 23.56641 0 14.51074 5.3418 23.71777 14.58692 23.71777C91.06641 94.23592 96.40918 85.02889 96.40918 70.55624z"></path>
+  </svg>,
     component: IOSCalendar,
-    background: "bg-gradient-to-b from-orange-500 to-red-500",
+    background: "bg-transparent",
   },
   {
     name: "Camera",
-    icon: <Camera className="w-7 h-7 text-white" />,
+    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="camera">
+    <defs>
+      <linearGradient id="a" x1="60" x2="60" y1="16" y2="-104" gradientTransform="translate(0 104)" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#8e8e93"></stop>
+        <stop offset="1" stop-color="#e5e5ea"></stop>
+      </linearGradient>
+    </defs>
+    <path fill="url(#a)" d="M26,0H94a25.94821,25.94821,0,0,1,26,26V94a25.94821,25.94821,0,0,1-26,26H26A25.94821,25.94821,0,0,1,0,94V26A25.94819,25.94819,0,0,1,26,0Z"></path>
+    <path fill="#2e2e2f" fill-rule="evenodd" d="M35.1,36c5.9,0,7.3-4.8,8-5.9a8.15641,8.15641,0,0,1,7-4.1h20a7.92375,7.92375,0,0,1,7,4.2C77.7,31.3,79,36,85,36H98.1a6.01764,6.01764,0,0,1,6,6V85a6.01763,6.01763,0,0,1-6,6h-76a6.01763,6.01763,0,0,1-6-6V42a6.01764,6.01764,0,0,1,6-6ZM60,81A18.5,18.5,0,1,0,41.5,62.5,18.52215,18.52215,0,0,0,60,81Zm0-3A15.5,15.5,0,1,1,75.5,62.5,15.44959,15.44959,0,0,1,60,78ZM26,30h7a.94477.94477,0,0,1,1,1v3H25V31A.94478.94478,0,0,1,26,30Z"></path>
+    <circle cx="82" cy="45" r="2.2" fill="#fc0"></circle>
+  </svg>,
     component: IOSCamera,
     background: "bg-[#1C1C1E]",
   },
   {
     name: "Clock",
-    icon: <Clock className="w-7 h-7 text-white" />,
+    icon: <img src="/Icon/clock.png" className="w-full h-full rounded-[10px]" alt="" />,
     component: IOSClock,
-    background: "bg-[#1C1C1E]",
+    background: "bg-transparent",
   },
   {
     name: "Maps",
-    icon: <Map className="w-7 h-7 text-white" />,
+    icon: <img src="/Icon/map.jpg" className="w-full h-full rounded-[10px]" alt="" />,
     component: IOSMaps,
     background: "bg-gradient-to-b from-green-400 to-green-600",
   },
   {
     name: "Calculator",
-    icon :<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-[54px] h-[54px] rounded-[14px]">
+    icon :<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 120 120" id="calculator" className="w-full h-full">
   <defs>
     <linearGradient id="a" x1="59.25" x2="60.76" y1="119.1" y2="-.16" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#d4d4d2"></stop>
@@ -70,19 +84,19 @@ const apps = [
   },
   {
     name: "Contacts",
-    icon: <Users className="w-7 h-7 text-white" />,
+    icon: <img src="/Icon/contact.png" alt="" />,
     component: IOSContacts,
     background: "bg-gradient-to-b from-gray-400 to-gray-600",
   },
   {
     name: "Wallpaper",
-    icon: <Layers className="w-7 h-7 text-white" />,
+    icon: <img src="/Icon/gallery.jpg" className="rounded-[10px]" alt="" />,
     component: IOSWallpaperApp,
     background: "bg-gradient-to-b from-purple-500 to-purple-700",
   },
   {
     name: "Youtube",
-    icon: <Youtube className="w-7 h-7 text-white" />,
+    icon: <img src="/Icon/yt.png" className="w-full h-full rounded-[12px]" alt="" />,
     component: IOSYouTube,
     background: "bg-gradient-to-b from-purple-500 to-purple-700",
   },
@@ -97,19 +111,19 @@ const dockApps = [
   },
   {
     name: "Projects",
-    icon: <img src="/Icon/project.png" alt="Project" className="h-[54px] w-[54px] rounded"/>,
+    icon: <img src="/Icon/project.png" alt="Project" className="h-[54px] w-[54px] "/>,
     background: "bg-white",
     component: IOSProjects,
   },
    {
     name: "Safari",
-    icon: <img src="/Icon/safari.png" alt="Music" className="h-[54px] w-[54px] rounded"/>,
+    icon: <img src="/Icon/safari.png" alt="Music" className="h-[54px] w-[54px]"/>,
     background: "bg-white",
     component: IOSSafari,
   },
   {
     name: "Music",
-    icon: <img src="/Icon/Music.png" alt="Music" className="h-[54px] w-[54px] rounded"/>,
+    icon: <img src="/Icon/Music.png" alt="Music" className="h-[54px] w-[54px] "/>,
     background: "bg-white",
     component: IOSMusic,
   },
