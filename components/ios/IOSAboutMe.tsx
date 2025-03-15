@@ -28,13 +28,13 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
   ]
 
   const skills = [
-    { name: "React", level: 90 },
-    { name: "Next.js", level: 85 },
-    { name: "TypeScript", level: 80 },
+    { name: "Python", level: 85 },
+    { name: "React", level: 60 },
+    { name: "Next.js", level: 65 },
+    { name: "TypeScript", level: 60 },
     { name: "Node.js", level: 75 },
-    { name: "Python", level: 70 },
-    { name: "AWS", level: 65 },
-    { name: "Docker", level: 60 },
+    { name: "Javascript", level: 60 },
+    // { name: "Docker", level: 60 },
   ]
 
   return (
@@ -96,11 +96,11 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
 
         {/* iOS-style segmented control */}
         <div className="px-4 mb-4">
-          <div className="bg-[#E5E5EA] p-1 rounded-lg flex">
+          <div className="bg-[#E5E5EA] p-1 rounded-[10px] flex">
             {sections.slice(0, 3).map((section) => (
               <button
                 key={section.id}
-                className={`flex-1 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
+                className={`flex-1 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                   activeSection === section.id ? "bg-white text-black shadow-sm" : "text-gray-500"
                 }`}
                 onClick={() => setActiveSection(section.id)}
@@ -130,8 +130,7 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   <div className="p-4">
                     <p className="text-[15px] text-gray-600 leading-relaxed">
                       Passionate front-end developer with expertise in modern web technologies. I love building
-                      scalable applications and solving complex problems with elegant solutions. When I'm not coding,
-                      you can find me hiking, reading tech blogs, or experimenting with new frameworks.
+                      scalable applications and solving complex problems with elegant solutions. When I'm not coding you can find me playing Video games or experimenting with new frameworks.
                     </p>
                   </div>
                 </div>
@@ -146,21 +145,21 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                       <Mail size={18} className="text-gray-400 mr-3" />
                       <div>
                         <p className="text-[15px] text-gray-600">Email</p>
-                        <p className="text-[15px] text-[#007AFF]">kavyporwal75@gmail.com</p>
+                        <a href="mailto:kavyporwal75@gmail.com" className="text-[15px] text-[#007AFF]">kavyporwal75@gmail.com</a>
                       </div>
                     </div>
                     <div className="flex items-center px-4 py-3 border-b border-[#E5E5EA]">
                       <Phone size={18} className="text-gray-400 mr-3" />
                       <div>
                         <p className="text-[15px] text-gray-600">Phone</p>
-                        <p className="text-[15px] text-[#007AFF]">+91 9691672623</p>
+                        <a href="tel:+91 9691672623" className="text-[15px] text-[#007AFF]">+91 9691672623</a>
                       </div>
                     </div>
                     <div className="flex items-center px-4 py-3">
                       <MapPin size={18} className="text-gray-400 mr-3" />
                       <div>
                         <p className="text-[15px] text-gray-600">Location</p>
-                        <p className="text-[15px]">Mandsaur,MP</p>
+                        <p className="text-[15px]">Mandsaur, MP</p>
                       </div>
                     </div>
                   </div>
@@ -236,7 +235,7 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   </div>
                   <div className="p-4">
                     <div className="flex flex-wrap gap-2">
-                      {["UI/UX Design", "Agile", "Git", "CI/CD", "Testing", "REST APIs", "GraphQL"].map((skill) => (
+                      {["UI/UX Design", "Git", "Fast API", "Streamlit", ].map((skill) => (
                         <span key={skill} className="bg-[#E5E5EA] px-3 py-1 rounded-full text-[13px]">
                           {skill}
                         </span>
@@ -262,16 +261,16 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   <div>
                     <div className="px-4 py-4 border-b border-[#E5E5EA]">
                       <div className="flex justify-between mb-1">
-                        <h4 className="text-[15px] font-semibold">Senior Developer</h4>
-                        <span className="text-[13px] text-gray-500">2020 - Present</span>
+                        <h4 className="text-[15px] font-semibold">Freelancing</h4>
+                        <span className="text-[13px] text-gray-500">2024 - present</span>
                       </div>
-                      <p className="text-[15px] text-gray-500 mb-2">Tech Co</p>
+                      <p className="text-[15px] text-gray-500 mb-2">Web and Python Developer</p>
                       <p className="text-[14px] text-gray-600">
                         Led development of multiple web applications using React and Node.js. Implemented CI/CD
                         pipelines and mentored junior developers.
                       </p>
                     </div>
-                    <div className="px-4 py-4">
+                    {/* <div className="px-4 py-4">
                       <div className="flex justify-between mb-1">
                         <h4 className="text-[15px] font-semibold">Full Stack Developer</h4>
                         <span className="text-[13px] text-gray-500">2018 - 2020</span>
@@ -281,7 +280,7 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                         Built and maintained RESTful APIs, developed front-end interfaces, and collaborated with design
                         team to create responsive web applications.
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -291,12 +290,12 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   </div>
                   <div className="px-4 py-4">
                     <div className="flex justify-between mb-1">
-                      <h4 className="text-[15px] font-semibold">B.S. in Computer Science</h4>
-                      <span className="text-[13px] text-gray-500">2018</span>
+                      <h4 className="text-[15px] font-semibold">B.tech in Computer Science</h4>
+                      <span className="text-[13px] text-gray-500">2024 - 2028</span>
                     </div>
-                    <p className="text-[15px] text-gray-500 mb-2">University of Technology</p>
+                    <p className="text-[15px] text-gray-500 mb-2">Mandsaur University</p>
                     <p className="text-[14px] text-gray-600">
-                      Graduated with honors. Specialized in software engineering and data structures.
+                      Persuing B.tech in Computer Science with specialization of Artificial Intelligence.
                     </p>
                   </div>
                 </div>
@@ -307,11 +306,11 @@ export default function IOSAboutMe({ onClose }: IOSAboutMeProps) {
                   </div>
                   <div>
                     <div className="px-4 py-3 border-b border-[#E5E5EA]">
-                      <p className="text-[15px]">Winner of Hackathon 2022</p>
+                      <p className="text-[15px]">working on it...</p>
                     </div>
-                    <div className="px-4 py-3">
-                      <p className="text-[15px]">Open Source Contributor of the Year 2021</p>
-                    </div>
+                    {/* <div className="px-4 py-3">
+                      <p className="text-[15px]"></p>
+                    </div> */}
                   </div>
                 </div>
               </motion.div>
