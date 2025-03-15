@@ -738,7 +738,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
     <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
       <h2 className="text-2xl font-bold mb-4">Search</h2>
 
-      <div className="relative mb-6">
+      <div className="sticky top-0 z-10 bg-black bg-opacity-90 backdrop-blur-md mb-6 pt-2 pb-4">
         <input
           type="text"
           placeholder="Artists, songs, or albums"
@@ -746,7 +746,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full bg-[#1C1C1E] text-white rounded-lg py-3 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-[#FF2D55]"
         />
-        <Search size={18} className="absolute left-3 top-3 text-gray-500" />
+        <Search size={18} className="absolute left-3 top-5 text-gray-500" />
       </div>
 
       {searchQuery ? (
@@ -808,7 +808,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: 50, opacity: 0 }}
       transition={{ type: "spring", damping: 20 }}
-      className="bg-[#1C1C1E] border-t border-gray-800 p-2"
+      className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-[56px] w-full z-10"
     >
       <div className="flex items-center">
         <motion.div
@@ -849,7 +849,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   return (
-    <div className="h-full w-full bg-black text-white flex flex-col">
+    <div className="h-[812px] w-[375px] bg-black text-white flex flex-col overflow-y-auto">
       {/* Main content */}
       <AnimatePresence mode="wait">
         {activeView === "home" && (
@@ -945,7 +945,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
       {/* Bottom navigation */}
       {activeView !== "player" && (
-        <div className="bg-[#1C1C1E] border-t border-gray-800 p-2">
+        <div className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-0 w-full">
           <div className="flex justify-around">
             <button
               onClick={() => setActiveView("home")}
