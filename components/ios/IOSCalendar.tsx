@@ -36,9 +36,11 @@ export default function IOSCalendar({ onClose }: IOSCalendarProps) {
     today.getFullYear() === currentMonth.getFullYear()
 
   const events = [
-    { day: 15, title: "Meeting with Team", time: "10:00 AM", color: "bg-blue-500" },
-    { day: 20, title: "Doctor Appointment", time: "3:30 PM", color: "bg-green-500" },
-    { day: today.getDate(), title: "Lunch with Sarah", time: "12:30 PM", color: "bg-red-500" },
+    { day: 20, title: "Jamming", time: "6:00 PM", color: "bg-blue-500" },
+    { day: 21, title: "Hackathon starts", time: "9:30 AM", color: "bg-green-500" },
+    { day: 21, title: "Cultural Night", time: "6:30 PM", color: "bg-red-500" },
+    { day: 21, title: "Celebrity Night", time: "7:00 PM", color: "bg-yellow-500" },
+    // { day: today.getDate(), title: "Lunch with Sarah", time: "12:30 PM", color: "bg-red-500" },
   ]
 
   const getEventsForDay = (day: number) => {
