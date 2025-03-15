@@ -122,7 +122,7 @@
          initial={{ y: 100 }}
          animate={{ y: 0 }}
          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-         className="flex items-end gap-2 px-4 py-2 rounded-2xl bg-white/20 backdrop-blur-2xl shadow-lg"
+         className="flex items-end gap-2 px-4 py-2 bg-white/20 backdrop-blur-xl rounded-[28px] shadow-lg"
        >
          <AnimatePresence>
            {dockItems.map((item, index) => (
