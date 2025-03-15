@@ -9,15 +9,11 @@ const dockItems = [
   {
     name: "AboutMe",
     icon: <img src="https://i.ibb.co/LDzGD6QZ/generated-image-1741935068996.webp" alt="AboutMe" className="w-[54px] h-[54px] rounded-[14px]" />,
-    background: "bg-white",
+    background: "bg-transparent",
   },
   {
     name: "Projects",
-    icon: (
-      <div className="w-[54px] h-[54px] rounded-[14px] bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-        <FolderKanban className="w-8 h-8 text-white" strokeWidth={1.5} />
-      </div>
-    ),
+    icon: <img src="/Icon/project.png" alt="projects" className="w-[54px] h-[54px] rounded-[14px]" />,,
     background: "bg-transparent",
   },
   {
@@ -56,29 +52,17 @@ const dockItems = [
   },
   {
     name: "WallpaperApp",
-    icon: (
-      <div className="w-[54px] h-[54px] rounded-[14px] bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
-        <ImageIcon className="w-8 h-8 text-white" strokeWidth={1.5} />
-      </div>
-    ),
+    icon: <img src="/Icon/gallery.jpg" alt="wallpaer" className="w-[54px] h-[54px] rounded-[14px]" />,
     background: "bg-transparent",
   },
   {
     name: "Safari",
-    icon: (
-      <div className="w-[54px] h-[54px] rounded-[14px] bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-        <Compass className="w-8 h-8 text-white" strokeWidth={1.5} />
-      </div>
-    ),
+    icon: <img src="/Icon/safari.png" alt="safari" className="w-[54px] h-[54px] rounded-[14px]" />,
     background: "bg-transparent",
   },
   {
     name: "ContactApp",
-    icon: (
-      <div className="w-[54px] h-[54px] rounded-[14px] bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-        <UserCircle className="w-8 h-8 text-white" strokeWidth={1.5} />
-      </div>
-    ),
+    icon: <img src="/Icon/Contacts.png" alt="contact" className="w-[54px] h-[54px] rounded-[14px]" />,
     background: "bg-transparent",
   },
 ]
@@ -116,7 +100,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="bg-white/20 backdrop-blur-xl rounded-[28px] p-2 h-20 flex justify-around"
+        className="bg-white/20 backdrop-blur-xl rounded-[28px] p-2 h-20 flex justify-between"
       >
         <AnimatePresence>
           {dockItems.map((item, index) => (
