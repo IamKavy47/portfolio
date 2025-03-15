@@ -13,11 +13,11 @@ export default function IOSWallpaperApp({ onClose, onWallpaperChange }: IOSWallp
   const wallpapers = [
     "/ios1.jpg",
     "/ios2.jpg?height=812&width=375",
-    "/placeholder.svg?height=812&width=375&text=Wallpaper+2",
-    "/placeholder.svg?height=812&width=375&text=Wallpaper+3",
-    "/placeholder.svg?height=812&width=375&text=Wallpaper+4",
-    "/placeholder.svg?height=812&width=375&text=Wallpaper+5",
-    "/placeholder.svg?height=812&width=375&text=Wallpaper+6",
+    "/ios3.jpg?height=812&width=375&text=Wallpaper+2",
+    "/ios4.jpg?height=812&width=375&text=Wallpaper+3",
+    "/ios5.png?height=812&width=375&text=Wallpaper+4",
+    "/ios6.jpg?height=812&width=375&text=Wallpaper+5",
+    "/ios7.jpg?height=812&width=375&text=Wallpaper+6",
   ]
 
   const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0])
