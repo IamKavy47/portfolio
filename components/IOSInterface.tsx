@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Calendar, Camera, Clock, Map, Calculator, Users, Layers, User, FolderOpen, Globe, Music, 
-  Signal,Battery,Wifi
+  Signal,Battery,Wifi,Youtube
  } from "lucide-react"
 import IOSProjects from "./ios/IOSProjects"
 import IOSAboutMe from "./ios/IOSAboutMe"
@@ -17,6 +17,7 @@ import IOSContacts from "./ios/IOSContacts"
 import IOSSafari from "./ios/IOSSafari"
 import IOSMusic from "./ios/IOSMusic"
 import BootAnimation from "./BootAnimation"
+import IOSYouTube from "./ios/IOSYouTube"
 
 const apps = [
   {
@@ -59,6 +60,12 @@ const apps = [
     name: "Wallpaper",
     icon: <Layers className="w-7 h-7 text-white" />,
     component: IOSWallpaperApp,
+    background: "bg-gradient-to-b from-purple-500 to-purple-700",
+  },
+  {
+    name: "Youtube",
+    icon: <Youtube className="w-7 h-7 text-white" />,
+    component: IOSYouTube,
     background: "bg-gradient-to-b from-purple-500 to-purple-700",
   },
 ]
