@@ -109,7 +109,7 @@ const dockApps = [
   },
   {
     name: "Music",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="apple-music" className="w-7 h-7">
+    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="apple-music" className="w-[54px] h-[54px] rounded-[14px]">
   <defs>
     <radialGradient id="b" cx="-400.171" cy="-984.067" r="1.587" gradientTransform="matrix(0 31.8923 31.8923 0 31421.78 12852.762)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#7470f9"></stop>
