@@ -13,7 +13,7 @@ const dockItems = [
   },
   {
     name: "Projects",
-    icon: <img src="/Icon/project.png" alt="projects" className="w-[54px] h-[54px] rounded-[14px]" />,,
+    icon: <img src="/Icon/project.png" alt="projects" className="w-[54px] h-[54px] rounded-[14px]" />,
     background: "bg-transparent",
   },
   {
