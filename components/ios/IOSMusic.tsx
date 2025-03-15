@@ -849,7 +849,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   return (
-    <div className="h-[800px] w-[370px] bg-black text-white flex flex-col overflow-y-auto">
+    <div className="h-[800px] w-[363px] bg-black text-white flex flex-col overflow-y-auto">
       {/* Main content */}
       <AnimatePresence mode="wait">
         {activeView === "home" && (
@@ -860,7 +860,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             exit={{ opacity: 0 }}
             className="flex-1 flex flex-col"
           >
-            <div className="p-4 flex items-center justify-between">
+            <div className="p-4 flex items-center sticky justify-between">
               <button onClick={onClose} className="text-white">
                 <ArrowLeft size={24} />
               </button>
