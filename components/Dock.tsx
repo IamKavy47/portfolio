@@ -39,7 +39,7 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
       <motion.div
         style={{
           y,
-          width: width,
+          width: 55,
           height: 55,
         }}
         whileTap={{ scale: 0.95 }}
