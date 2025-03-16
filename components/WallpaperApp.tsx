@@ -31,7 +31,7 @@ const wallpaperCategories = {
     },
     {
       name: "Monterey",
-      url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Rvm3xLBKfVdtA2O7BnymcWAdO6H1Oh.png",
+      url: "/wall/wall1.jpg",
       description: "Abstract patterns",
     },
     {
