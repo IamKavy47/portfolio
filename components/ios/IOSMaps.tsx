@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import {
   ArrowLeft,
@@ -32,7 +30,7 @@ const nearbyPlaces = [
     category: "Coffee Shop",
     address: "201 Powell St",
     distance: "0.1 miles",
-    coordinates: { x: 45, y: 55 },
+    coordinates: { lat: 37.7749, lng: -122.4194 },
     rating: 4.2,
     isOpen: true,
     hours: "Open until 9:00 PM",
@@ -43,7 +41,7 @@ const nearbyPlaces = [
     category: "Restaurant",
     address: "126 O'Farrell St",
     distance: "0.2 miles",
-    coordinates: { x: 65, y: 35 },
+    coordinates: { lat: 37.7746, lng: -122.4172 },
     rating: 4.5,
     isOpen: true,
     hours: "Open until 10:00 PM",
@@ -54,7 +52,7 @@ const nearbyPlaces = [
     category: "Pharmacy",
     address: "456 Powell St",
     distance: "0.3 miles",
-    coordinates: { x: 30, y: 25 },
+    coordinates: { lat: 37.7739, lng: -122.419 },
     rating: 3.8,
     isOpen: true,
     hours: "Open 24 hours",
@@ -65,7 +63,7 @@ const nearbyPlaces = [
     category: "Bank",
     address: "350 Powell St",
     distance: "0.4 miles",
-    coordinates: { x: 70, y: 65 },
+    coordinates: { lat: 37.7752, lng: -122.4188 },
     rating: 4.0,
     isOpen: true,
     hours: "Open until 6:00 PM",
@@ -76,7 +74,7 @@ const nearbyPlaces = [
     category: "Electronics",
     address: "300 Post Street",
     distance: "0.5 miles",
-    coordinates: { x: 55, y: 45 },
+    coordinates: { lat: 37.7735, lng: -122.4056 },
     rating: 4.8,
     isOpen: true,
     hours: "Open until 8:00 PM",
@@ -87,7 +85,7 @@ const nearbyPlaces = [
     category: "Coffee Shop",
     address: "315 Montgomery St",
     distance: "0.6 miles",
-    coordinates: { x: 25, y: 70 },
+    coordinates: { lat: 37.7715, lng: -122.4016 },
     rating: 4.6,
     isOpen: true,
     hours: "Open until 7:00 PM",
@@ -101,28 +99,28 @@ const searchResults = [
     name: "Apple Park",
     address: "One Apple Park Way, Cupertino, CA",
     distance: "5.2 miles",
-    coordinates: { x: 50, y: 50 },
+    coordinates: { lat: 37.3346, lng: -122.009 },
   },
   {
     id: "s2",
     name: "Apple Store",
     address: "300 Post Street, San Francisco, CA",
     distance: "0.8 miles",
-    coordinates: { x: 55, y: 45 },
+    coordinates: { lat: 37.7735, lng: -122.4056 },
   },
   {
     id: "s3",
     name: "Applebee's",
     address: "225 Geary St, San Francisco, CA",
     distance: "1.2 miles",
-    coordinates: { x: 60, y: 40 },
+    coordinates: { lat: 37.7867, lng: -122.4078 },
   },
   {
     id: "s4",
     name: "Apple Fitness+ Studio",
     address: "19345 Stevens Creek Blvd",
     distance: "6.5 miles",
-    coordinates: { x: 45, y: 55 },
+    coordinates: { lat: 37.323, lng: -122.0322 },
   },
 ]
 
@@ -145,16 +143,10 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [showBottomSheet, setShowBottomSheet] = useState(true)
   const [selectedPlace, setSelectedPlace] = useState<(typeof nearbyPlaces)[0] | null>(null)
-  const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 })
-  const [mapZoom, setMapZoom] = useState(1)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 })
-  const [userLocation, setUserLocation] = useState({ x: 50, y: 50 })
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
   const [isCompassMode, setIsCompassMode] = useState(false)
-  const [mapRotation, setMapRotation] = useState(0)
 
-  const mapContainer = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<HTMLIFrameElement>(null)
   const bottomSheetRef = useRef<HTMLDivElement>(null)
 
   // For interactive bottom sheet
@@ -168,55 +160,40 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   const partialPosition = containerHeight - 300 // Showing about 1/3 of the screen
   const expandedPosition = containerHeight - 600 // Showing about 3/4 of the screen
 
-  // Simulated map tiles
-  const [mapTiles, setMapTiles] = useState<{ x: number; y: number; color: string }[]>([])
-
-  // Generate random map tiles
-  useEffect(() => {
-    const tiles = []
-    // Generate buildings
-    for (let i = 0; i < 50; i++) {
-      tiles.push({
-        x: Math.random() * 180 + 10,
-        y: Math.random() * 180 + 10,
-        color: ["#E0E0E0", "#D0D0D0", "#C0C0C0"][Math.floor(Math.random() * 3)],
-      })
-    }
-    // Generate parks
-    for (let i = 0; i < 10; i++) {
-      tiles.push({
-        x: Math.random() * 180 + 10,
-        y: Math.random() * 180 + 10,
-        color: ["#C8FACD", "#B5F5C0", "#A0EBB0"][Math.floor(Math.random() * 3)],
-      })
-    }
-    // Generate water
-    for (let i = 0; i < 5; i++) {
-      tiles.push({
-        x: Math.random() * 180 + 10,
-        y: Math.random() * 180 + 10,
-        color: ["#BAEFFF", "#A0E5FF", "#90DBFF"][Math.floor(Math.random() * 3)],
-      })
-    }
-    setMapTiles(tiles)
-  }, [])
-
   // Set initial sheet position
   useEffect(() => {
     sheetY.set(partialPosition)
   }, [])
 
-  // Simulate compass mode
+  // Get user's location on component mount
   useEffect(() => {
-    if (isCompassMode) {
-      const interval = setInterval(() => {
-        setMapRotation((prev) => (prev + 1) % 360)
-      }, 100)
-      return () => clearInterval(interval)
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          })
+          setLocationPermission("granted")
+        },
+        (error) => {
+          console.error("Error getting location:", error)
+          // Default to San Francisco if location access is denied
+          setUserLocation({ lat: 37.7749, lng: -122.4194 })
+          setLocationPermission("denied")
+        },
+      )
     } else {
-      setMapRotation(0)
+      // Default to San Francisco if geolocation is not supported
+      setUserLocation({ lat: 37.7749, lng: -122.4194 })
+      setLocationPermission("denied")
     }
-  }, [isCompassMode])
+  }, [])
+
+  // Generate map URL based on user location
+  const getMapUrl = (location: { lat: number; lng: number }, zoom = 16) => {
+    return `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.01},${location.lng + 0.01},${location.lat + 0.01}&layer=mapnik&marker=${location.lat},${location.lng}&zoom=${zoom}`
+  }
 
   const handleLocationPermission = (decision: "granted" | "denied") => {
     setLocationPermission(decision)
@@ -225,24 +202,27 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            // Convert actual coordinates to our map's coordinate system
-            // This is a simplified conversion - in a real app you'd use proper mapping
-            setUserLocation({
-              x: 50, // Center of our map
-              y: 50, // Center of our map
-            })
-            console.log("Actual location:", position.coords.latitude, position.coords.longitude)
+            const newLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }
+            setUserLocation(newLocation)
+
+            // Update map to show new location
+            if (mapRef.current) {
+              mapRef.current.src = getMapUrl(newLocation)
+            }
           },
           (error) => {
             console.error("Error getting location:", error)
             // Fallback to default position
-            setUserLocation({ x: 50, y: 50 })
+            setUserLocation({ lat: 37.7749, lng: -122.4194 })
           },
           { enableHighAccuracy: true },
         )
       } else {
         // Fallback for browsers without geolocation
-        setUserLocation({ x: 50, y: 50 })
+        setUserLocation({ lat: 37.7749, lng: -122.4194 })
       }
     }
   }
@@ -266,33 +246,16 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   }
 
   const handleCurrentLocation = () => {
-    // Reset map position to center on user
-    setMapPosition({ x: 0, y: 0 })
-    setMapZoom(1)
-
     // If location permission not granted, prompt for it
     if (locationPermission !== "granted") {
       setLocationPermission("prompt")
-    } else {
-      // Use actual device geolocation API
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            // In a real app, you would convert the actual coordinates to your map's system
-            console.log("Current location:", position.coords.latitude, position.coords.longitude)
-            // For this demo, we'll just center the map
-            setMapPosition({ x: 0, y: 0 })
-          },
-          (error) => {
-            console.error("Error getting current location:", error)
-          },
-          { enableHighAccuracy: true },
-        )
-      }
+    } else if (userLocation && mapRef.current) {
+      // Update the map iframe src to center on user location
+      mapRef.current.src = getMapUrl(userLocation)
     }
   }
 
-  const handlePlaceSelect = (place: (typeof nearbyPlaces)[0]) => {
+  const handlePlaceSelect = (place: any) => {
     setSelectedPlace(place)
     setShowSearchResults(false)
     setShowBottomSheet(true)
@@ -300,62 +263,9 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
     sheetY.set(partialPosition)
 
     // Center map on selected place
-    setMapPosition({
-      x: -place.coordinates.x + 50,
-      y: -place.coordinates.y + 50,
-    })
-  }
-
-  const handleZoomIn = () => {
-    setMapZoom((prev) => Math.min(prev * 1.2, 2))
-  }
-
-  const handleZoomOut = () => {
-    setMapZoom((prev) => Math.max(prev / 1.2, 0.5))
-  }
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (mapRef.current) {
-      setIsDragging(true)
-      setStartDragPosition({
-        x: e.clientX - mapPosition.x,
-        y: e.clientY - mapPosition.y,
-      })
+    if (mapRef.current && place.coordinates) {
+      mapRef.current.src = getMapUrl(place.coordinates)
     }
-  }
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging && mapRef.current) {
-      const newX = e.clientX - startDragPosition.x
-      const newY = e.clientY - startDragPosition.y
-      setMapPosition({ x: newX, y: newY })
-    }
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (mapRef.current && e.touches.length === 1) {
-      setIsDragging(true)
-      setStartDragPosition({
-        x: e.touches[0].clientX - mapPosition.x,
-        y: e.touches[0].clientY - mapPosition.y,
-      })
-    }
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDragging && mapRef.current && e.touches.length === 1) {
-      const newX = e.touches[0].clientX - startDragPosition.x
-      const newY = e.touches[0].clientY - startDragPosition.y
-      setMapPosition({ x: newX, y: newY })
-    }
-  }
-
-  const handleTouchEnd = () => {
-    setIsDragging(false)
   }
 
   // Bottom sheet drag handlers
@@ -485,129 +395,58 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
       </div>
 
       {/* Map container */}
-      <div
-        ref={mapContainer}
-        className="flex-1 relative overflow-hidden"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Custom map */}
-        <div
-          ref={mapRef}
-          className={`absolute w-[200%] h-[200%] transition-transform duration-200 ${isDragging ? "" : "ease-out"}`}
-          style={{
-            transform: `translate(${mapPosition.x}px, ${mapPosition.y}px) scale(${mapZoom}) rotate(${mapRotation}deg)`,
-            backgroundColor: "#E8ECEF",
-          }}
-        >
-          {/* Map grid lines */}
-          <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={`h-${i}`} className="w-full h-px bg-gray-300" style={{ top: `${(i + 1) * 8.33}%` }} />
-            ))}
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={`v-${i}`} className="h-full w-px bg-gray-300" style={{ left: `${(i + 1) * 8.33}%` }} />
-            ))}
+      <div className="flex-1 relative">
+        {userLocation ? (
+          <iframe
+            ref={mapRef}
+            src={getMapUrl(userLocation)}
+            className="w-full h-full border-none"
+            title="Map"
+            allowFullScreen
+          />
+        ) : (
+          <div className="absolute inset-0 bg-blue-50 flex items-center justify-center">
+            <p>Loading map...</p>
           </div>
-
-          {/* Map tiles (buildings, parks, water) */}
-          {mapTiles.map((tile, index) => (
-            <div
-              key={index}
-              className="absolute rounded-md"
-              style={{
-                left: `${tile.x}px`,
-                top: `${tile.y}px`,
-                width: `${Math.random() * 30 + 20}px`,
-                height: `${Math.random() * 30 + 20}px`,
-                backgroundColor: tile.color,
-              }}
-            ></div>
-          ))}
-
-          {/* Roads */}
-          <div
-            className="absolute h-4 bg-[#FFE8B2] rounded-full"
-            style={{ width: "80%", top: "30%", left: "10%", transform: "rotate(15deg)" }}
-          ></div>
-          <div
-            className="absolute h-6 bg-[#FFE8B2] rounded-full"
-            style={{ width: "90%", top: "50%", left: "5%", transform: "rotate(-5deg)" }}
-          ></div>
-          <div
-            className="absolute h-5 bg-[#FFE8B2] rounded-full"
-            style={{ width: "70%", top: "70%", left: "15%", transform: "rotate(20deg)" }}
-          ></div>
-          <div
-            className="absolute w-4 bg-[#FFE8B2] rounded-full"
-            style={{ height: "80%", top: "10%", left: "30%", transform: "rotate(0deg)" }}
-          ></div>
-          <div
-            className="absolute w-5 bg-[#FFE8B2] rounded-full"
-            style={{ height: "70%", top: "15%", left: "60%", transform: "rotate(0deg)" }}
-          ></div>
-          <div
-            className="absolute w-6 bg-[#FFE8B2] rounded-full"
-            style={{ height: "90%", top: "5%", left: "80%", transform: "rotate(0deg)" }}
-          ></div>
-
-          {/* Place markers */}
-          {nearbyPlaces.map((place) => (
-            <div
-              key={place.id}
-              className="absolute cursor-pointer"
-              style={{
-                left: `${place.coordinates.x}%`,
-                top: `${place.coordinates.y}%`,
-                transform: "translate(-50%, -50%)",
-              }}
-              onClick={() => handlePlaceSelect(place)}
-            >
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
-                <MapPin size={16} className="text-[#FF3B30]" />
-              </div>
-              {mapZoom > 1.5 && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-white px-2 py-1 rounded-md shadow-md text-xs whitespace-nowrap">
-                  {place.name}
-                </div>
-              )}
-            </div>
-          ))}
-
-          {/* User location - only show if permission granted */}
-          {locationPermission === "granted" && (
-            <div
-              className="absolute transform -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${userLocation.x}%`, top: `${userLocation.y}%` }}
-            >
-              <div className="relative">
-                <div className="w-6 h-6 bg-[#007AFF] rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="absolute -inset-2 bg-[#007AFF]/20 rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          )}
-        </div>
+        )}
 
         {/* Map controls */}
         <div className="absolute top-4 right-4 flex flex-col space-y-2">
           <motion.button
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
-            onClick={handleZoomIn}
+            onClick={() => {
+              if (mapRef.current) {
+                // Zoom in by updating the map URL
+                const currentSrc = mapRef.current.src
+                const zoomMatch = currentSrc.match(/zoom=(\d+)/)
+                const currentZoom = zoomMatch ? Number.parseInt(zoomMatch[1]) : 16
+                const newZoom = Math.min(currentZoom + 1, 19)
+
+                if (userLocation) {
+                  mapRef.current.src = getMapUrl(userLocation, newZoom)
+                }
+              }
+            }}
           >
             <Plus size={20} className="text-gray-700" />
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
-            onClick={handleZoomOut}
+            onClick={() => {
+              if (mapRef.current) {
+                // Zoom out by updating the map URL
+                const currentSrc = mapRef.current.src
+                const zoomMatch = currentSrc.match(/zoom=(\d+)/)
+                const currentZoom = zoomMatch ? Number.parseInt(zoomMatch[1]) : 16
+                const newZoom = Math.max(currentZoom - 1, 1)
+
+                if (userLocation) {
+                  mapRef.current.src = getMapUrl(userLocation, newZoom)
+                }
+              }
+            }}
           >
             <Minus size={20} className="text-gray-700" />
           </motion.button>
@@ -651,7 +490,7 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
                       key={result.id}
                       whileTap={{ scale: 0.98 }}
                       className="flex items-center p-2 hover:bg-gray-100 rounded-lg"
-                      onClick={() => handlePlaceSelect(result as any)}
+                      onClick={() => handlePlaceSelect(result)}
                     >
                       <div className="w-10 h-10 bg-[#E9E9EB] rounded-lg flex items-center justify-center mr-3">
                         <MapPin size={18} className="text-[#FF3B30]" />
