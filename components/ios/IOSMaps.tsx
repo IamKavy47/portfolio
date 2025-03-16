@@ -221,10 +221,29 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   const handleLocationPermission = (decision: "granted" | "denied") => {
     setLocationPermission(decision)
     if (decision === "granted") {
-      // Simulate getting user location
-      setTimeout(() => {
+      // Use actual device geolocation API
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // Convert actual coordinates to our map's coordinate system
+            // This is a simplified conversion - in a real app you'd use proper mapping
+            setUserLocation({
+              x: 50, // Center of our map
+              y: 50, // Center of our map
+            })
+            console.log("Actual location:", position.coords.latitude, position.coords.longitude)
+          },
+          (error) => {
+            console.error("Error getting location:", error)
+            // Fallback to default position
+            setUserLocation({ x: 50, y: 50 })
+          },
+          { enableHighAccuracy: true },
+        )
+      } else {
+        // Fallback for browsers without geolocation
         setUserLocation({ x: 50, y: 50 })
-      }, 1000)
+      }
     }
   }
 
@@ -254,6 +273,22 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
     // If location permission not granted, prompt for it
     if (locationPermission !== "granted") {
       setLocationPermission("prompt")
+    } else {
+      // Use actual device geolocation API
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // In a real app, you would convert the actual coordinates to your map's system
+            console.log("Current location:", position.coords.latitude, position.coords.longitude)
+            // For this demo, we'll just center the map
+            setMapPosition({ x: 0, y: 0 })
+          },
+          (error) => {
+            console.error("Error getting current location:", error)
+          },
+          { enableHighAccuracy: true },
+        )
+      }
     }
   }
 

@@ -3,29 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import {
-  Search,
-  GitBranch,
-  Bug,
-  Settings,
-  Files,
-  ExpandIcon as Extensions,
-  ChevronRight,
-  ChevronDown,
-  Folder,
-  FileIcon,
-  X,
-  MoreHorizontal,
-  Play,
-  Bell,
-  Users,
-  AlertCircle,
-  Code,
-  RefreshCw,
-  Plus,
-  Save,
-  Star,
-} from "lucide-react"
+import { Search, GitBranch, Bug, Settings, Files, ExpandIcon as Extensions, ChevronRight, ChevronDown, Folder, FileIcon, X, MoreHorizontal, Play, Bell, Users, AlertCircle, Code, RefreshCw, Plus, Save, Star } from 'lucide-react'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -465,26 +443,6 @@ function Window({
       className="flex flex-col border border-[#1e1e1e] shadow-xl rounded-lg overflow-hidden w-full h-full"
       onClick={onFocus}
     >
-      {/* Title bar */}
-      <div className="h-9 bg-[#3c3c3c] flex items-center justify-between px-3 select-none">
-        <div className="flex items-center space-x-2">
-          <div className="flex space-x-2 mr-4">
-            <button
-              onClick={onClose}
-              className="w-3 h-3 rounded-full bg-[#ff5f57] hover:bg-[#ff3b30] flex items-center justify-center"
-            >
-              <X className="w-2 h-2 text-[#800000] opacity-0 hover:opacity-100" />
-            </button>
-            <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:bg-[#ffb400]" />
-            <div className="w-3 h-3 rounded-full bg-[#28c840] hover:bg-[#00b300]" />
-          </div>
-          <span className="text-[#cccccc] text-xs">{title}</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="text-[#cccccc] text-xs">{title}</div>
-        </div>
-      </div>
-
       {/* Content */}
       {children}
     </div>
@@ -1253,10 +1211,11 @@ export default function VSCode({ onClose, onFocus, initialSize = { width: 1200, 
             <span className="hover:bg-[#505050] px-1.5 py-0.5 rounded">Help</span>
           </div>
         </div>
-
-        <div className="flex-1 flex overflow-hidden">
-          {/* Activity Bar */}
-          <div className="w-12 bg-[#333333] flex flex-col items-center py-2">
+      
+      {/* Rest of the VSCode UI */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Activity Bar */}
+        <div className="w-12 bg-[#333333] flex flex-col items-center py-2">
             <TooltipProvider>
               {activityBarItems.map((item) => (
                 <Tooltip key={item.id}>
