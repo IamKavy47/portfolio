@@ -26,7 +26,7 @@ const wallpaperCategories = {
   dynamic: [
     {
       name: "Sequoia",
-      url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Ww1DQ6z0nNFu7dGuWaC8MLVOWnQDOQ.png",
+      url: "/wall/wall5.jpeg",
       description: "Dynamic color waves",
     },
     {
@@ -41,7 +41,7 @@ const wallpaperCategories = {
     },
     {
       name: "Flower",
-      url:"/wall/wall4.jpg"
+      url:"/wall/wall4.jpeg"
     }
   ],
   landscape: [
@@ -51,8 +51,8 @@ const wallpaperCategories = {
       description: "Beautiful coastline view",
     },
     {
-      name: "Redwood Forest",
-      url: "/placeholder.svg?height=400&width=600",
+      name: "Beautiful Landscape",
+      url: "/wall/wall3.jpg?height=400&width=600",
       description: "Majestic redwood trees",
     },
     {
