@@ -79,7 +79,7 @@ interface DockProps {
   openApps: string[];
 }
 
-export default function Dock({ openApp, openApps }: DockProps) {
+export default function Docke({ openApp, openApps }: DockProps) {
   const mouseX = useMotionValue(Infinity);
 
   const dockItems = [
