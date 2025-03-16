@@ -26,8 +26,14 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
     mass: 0.1,
     stiffness: 150,
     damping: 12
-  });
-
+  }
+  const height = useSpring(widthSync, {
+  mass: 0.1,
+  stiffness: 150,
+  damping: 12
+});
+;
+  
   const y = useTransform(width, [55, 100], [0, -15]);
 
   return (
@@ -39,8 +45,8 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
       <motion.div
         style={{
           y,
-          width: 55,
-          height: 55,
+          width: width,
+          height: height,
         }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
