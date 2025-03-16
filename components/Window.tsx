@@ -154,7 +154,7 @@ export default function Window({
         stiffness: 300,
         damping: 30,
       }}
-      className="absolute bg-white rounded-lg shadow-lg overflow-hidden max-w-full max-h-full"
+      className="absolute bg-white rounded-[10px] shadow-lg overflow-hidden max-w-full max-h-full"
       style={{
         zIndex: isMinimized ? 0 : 10,
         width: isMaximized ? "100%" : Math.min(size.width, window.innerWidth - 20),
