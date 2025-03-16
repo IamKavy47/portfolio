@@ -28,7 +28,7 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
     damping: 12
   });
 
-  const y = useTransform(width, [70, 100], [0, -12]);
+  const y = useTransform(width, [55, 100], [0, -12]);
 
   return (
     <motion.div
