@@ -32,13 +32,6 @@ export default function MacOSInterface() {
       }
     })
   }
-
-   const DockWrapper = styled.div`
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    height: 95%;
-  `;
   
   const closeApp = (appName: string) => {
     setOpenApps((prev) => prev.filter((app) => app !== appName))
@@ -85,9 +78,7 @@ export default function MacOSInterface() {
         <ContactApp onClose={() => closeApp("ContactApp")} onFocus={() => focusApp("ContactApp")} />
       )}
       <Docke openApp={toggleApp} openApps={openApps} />
-      <DockWrapper>
-        <Dock />
-      </DockWrapper>
+      <Dock />
     </div>
   )
 }
