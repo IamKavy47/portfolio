@@ -26,7 +26,7 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
     mass: 0.1,
     stiffness: 150,
     damping: 12
-  }
+  },
   const height = useSpring(widthSync, {
   mass: 0.1,
   stiffness: 150,
