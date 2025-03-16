@@ -175,8 +175,8 @@ export default function Dock({ openApp, openApps }: DockProps) {
       background: "bg-white"
     },
     {
-      name: "Aplle Music",
-      icon: <img src="/Icon/itune.jpg" alt="Github" />,
+      name: "Apple Music",
+      icon: <img src="/Icon/Music.png" alt="Music" />,
       background: "bg-white"
     },
 
