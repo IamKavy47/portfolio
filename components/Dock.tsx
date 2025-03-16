@@ -182,7 +182,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
 
     {
       name: "Github",
-      icon: <img src="/Icon/git.jpg" alt="Github" />,
+      icon: <img src="/Icon/git.png" alt="Github" />,
     background: "bg-white"
     }
   ];
