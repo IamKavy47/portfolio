@@ -170,7 +170,7 @@ export default function WallpaperApp({ onClose, onChangeWallpaper, onFocus }: Wa
                       {customWallpapers.map((wallpaper, index) => (
                         <div
                           key={index}
-                          className={`group cursor-pointer rounded-lg overflow-hidden relative ${
+                          className={`group cursor-pointer rounded-[12px] overflow-hidden relative ${
                             selectedWallpaper.url === wallpaper.url
                               ? "ring-2 ring-blue-500"
                               : "hover:ring-2 hover:ring-gray-300"
