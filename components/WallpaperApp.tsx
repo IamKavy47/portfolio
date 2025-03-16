@@ -35,8 +35,8 @@ const wallpaperCategories = {
       description: "Abstract patterns",
     },
     {
-      name: "Sonoma",
-      url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-R6esm5qov8GmwJqCkMTs8ieXPe25oU.png",
+      name: "Aurora",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall6.jpg",
       description: "Colorful gradients",
     },
     {
@@ -56,8 +56,8 @@ const wallpaperCategories = {
       description: "Majestic redwood trees",
     },
     {
-      name: "Desert Valley",
-      url: "/placeholder.svg?height=400&width=600",
+      name: "Mountains",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall7.jpg?height=400&width=600",
       description: "Scenic desert landscape",
     },
   ],
