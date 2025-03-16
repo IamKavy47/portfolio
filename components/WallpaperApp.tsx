@@ -41,13 +41,13 @@ const wallpaperCategories = {
     },
     {
       name: "Flower",
-      url:"/mw1.jpg"
+      url:"/wall/wall4.jpg"
     }
   ],
   landscape: [
     {
       name: "California Coast",
-      url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-O9EP6Cm0C5Wd2npnqjFbZ2BBziWMfI.png",
+      url: "/wall/wall2.jpg",
       description: "Beautiful coastline view",
     },
     {
