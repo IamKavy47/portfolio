@@ -1,62 +1,7 @@
 "use client"
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import styled from "styled-components";
-
-// Styled components
-const DockContainer = styled(motion.div)<{ $themeColor?: string }>`
-  margin: 0 auto;
-  display: flex;
-  height: 4.5rem;
-  align-items: end;
-  gap: 6px;
-  padding: 0 10px;
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
-`;
-
-const DockIcon = styled(motion.div)`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
-const DockLink = styled.a`
-  margin-bottom: -5px;
-`;
-
-const AppIndicator = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const ToolTip = styled(motion.div)`
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 12px;
-  margin-bottom: 5px;
-  white-space: nowrap;
-  pointer-events: none;
-`;
 
 // AppIcon component
 interface AppIconProps {
@@ -97,30 +42,35 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
   const tooltipOpacity = useTransform(width, [50, 60, 70], [0, 0, 1]);
 
   return (
-    <DockIcon ref={ref} style={{ width }}>
+    <motion.div 
+      ref={ref} 
+      style={{ width }}
+      className="relative cursor-pointer flex items-center justify-center"
+    >
       <motion.div 
         style={{ 
           y,
           width: width, 
-          height: width,
-          borderRadius: 12,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
+          height: width
         }}
         onClick={onClick}
         whileTap={{ scale: 0.9 }}
+        className="rounded-xl flex items-center justify-center overflow-hidden"
       >
         {item.icon}
       </motion.div>
       
-      {isOpen && <AppIndicator />}
+      {isOpen && (
+        <div className="absolute -bottom-2 w-1 h-1 bg-white rounded-full left-1/2 transform -translate-x-1/2" />
+      )}
       
-      <ToolTip style={{ opacity: tooltipOpacity }}>
+      <motion.div 
+        style={{ opacity: tooltipOpacity }}
+        className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black/75 text-white px-2 py-1 rounded text-xs mb-1 whitespace-nowrap pointer-events-none"
+      >
         {item.name}
-      </ToolTip>
-    </DockIcon>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -151,8 +101,8 @@ export default function Dock({ openApp, openApps }: DockProps) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-full h-full rounded-lg">
           <defs>
             <linearGradient id="a" x1="59.25" x2="60.76" y1="119.1" y2="-.16" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#d4d4d2"></stop>
-              <stop offset="1" stop-color="#d4d4d2"></stop>
+              <stop offset="0" stopColor="#d4d4d2"></stop>
+              <stop offset="1" stopColor="#d4d4d2"></stop>
             </linearGradient>
           </defs>
           <rect width="120" height="120" fill="url(#a)" rx="26"></rect>
@@ -198,7 +148,8 @@ export default function Dock({ openApp, openApps }: DockProps) {
 
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-      <DockContainer
+      <motion.div
+        className="flex items-end gap-1.5 px-3 py-2 bg-black/25 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: 100, opacity: 0 }}
@@ -214,7 +165,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
             onClick={() => handleOpenApp(item.name)}
           />
         ))}
-      </DockContainer>
+      </motion.div>
       
       {/* Dock reflection */}
       <motion.div
