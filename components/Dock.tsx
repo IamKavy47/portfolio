@@ -20,16 +20,15 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
     return val - bounds.x - bounds.width / 2;
   });
 
-  // Increased max size and smoother scaling
-  const widthSync = useTransform(distance, [-200, 0, 200], [45, 90, 45]);
+  // Adjusted scaling values for more subtle animation
+  const widthSync = useTransform(distance, [-150, 0, 150], [70, 100, 70]);
   const width = useSpring(widthSync, {
     mass: 0.1,
-    stiffness: 180,
-    damping: 15
+    stiffness: 150,
+    damping: 12
   });
 
-  const y = useTransform(width, [45, 90], [0, -20]);
-  const scale = useTransform(width, [45, 90], [1, 1.2]);
+  const y = useTransform(width, [70, 100], [0, -12]);
 
   return (
     <motion.div
@@ -40,11 +39,9 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
       <motion.div
         style={{
           y,
-          scale,
-          width: 45,
-          height: 45
+          width: width,
+          height: width
         }}
-        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
         className={`
@@ -146,7 +143,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
   return (
     <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
       <motion.div
-        className="flex items-end gap-1 px-3 py-2 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20"
+        className="flex items-end gap-2 px-4 py-2 h-[4.5rem] bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: 100, opacity: 0 }}
