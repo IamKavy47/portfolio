@@ -1,16 +1,12 @@
-"use client"
-
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-// AppIcon component
 interface AppIconProps {
   mouseX: any;
   item: {
     name: string;
     icon: React.ReactNode;
     background: string;
-    link?: string;
   };
   isOpen: boolean;
   onClick: () => void;
@@ -18,63 +14,69 @@ interface AppIconProps {
 
 function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
   const ref = useRef<HTMLDivElement>(null);
-  
-  // Calculate distance from mouse cursor to this icon
+
   const distance = useTransform(mouseX, (val: number) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return val - bounds.x - bounds.width / 2;
   });
-  
-  // Transform distance to width
-  const widthSync = useTransform(distance, [-150, 0, 150], [50, 70, 50]);
-  
-  // Add spring physics
+
+  // Increased max size and smoother scaling
+  const widthSync = useTransform(distance, [-200, 0, 200], [45, 90, 45]);
   const width = useSpring(widthSync, {
     mass: 0.1,
-    stiffness: 150,
-    damping: 12,
+    stiffness: 180,
+    damping: 15
   });
-  
-  // Y position based on width
-  const y = useTransform(width, [50, 70], [0, -10]);
-  
-  // Tooltip opacity
-  const tooltipOpacity = useTransform(width, [50, 60, 70], [0, 0, 1]);
+
+  const y = useTransform(width, [45, 90], [0, -20]);
+  const scale = useTransform(width, [45, 90], [1, 1.2]);
 
   return (
-    <motion.div 
-      ref={ref} 
+    <motion.div
+      ref={ref}
       style={{ width }}
-      className="relative cursor-pointer flex items-center justify-center"
+      className="relative flex items-end justify-center"
     >
-      <motion.div 
-        style={{ 
+      <motion.div
+        style={{
           y,
-          width: width, 
-          height: width
+          scale,
+          width: 45,
+          height: 45
         }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onClick}
-        whileTap={{ scale: 0.9 }}
-        className="rounded-xl flex items-center justify-center overflow-hidden"
+        className={`
+          relative 
+          rounded-xl 
+          flex 
+          items-center 
+          justify-center 
+          overflow-hidden
+          shadow-lg
+          ${isOpen ? 'after:absolute after:bottom-[-8px] after:w-1 after:h-1 after:bg-white/50 after:rounded-full' : ''}
+        `}
       >
-        {item.icon}
+        <div className="w-full h-full bg-gradient-to-b from-white/20 to-transparent backdrop-blur">
+          {item.icon}
+        </div>
       </motion.div>
-      
-      {isOpen && (
-        <div className="absolute -bottom-2 w-1 h-1 bg-white rounded-full left-1/2 transform -translate-x-1/2" />
-      )}
-      
-      <motion.div 
-        style={{ opacity: tooltipOpacity }}
-        className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black/75 text-white px-2 py-1 rounded text-xs mb-1 whitespace-nowrap pointer-events-none"
-      >
-        {item.name}
-      </motion.div>
+
+      <motion.div
+        initial={false}
+        animate={{
+          opacity: isOpen ? 1 : 0,
+          scale: isOpen ? 1 : 0.8,
+          y: isOpen ? 0 : 5
+        }}
+        transition={{ duration: 0.2 }}
+        className="absolute -bottom-2 w-1 h-1 bg-white/50 rounded-full"
+      />
     </motion.div>
   );
 }
 
-// Main Dock component
 interface DockProps {
   openApp: (appName: string) => void;
   openApps: string[];
@@ -82,8 +84,7 @@ interface DockProps {
 
 export default function Dock({ openApp, openApps }: DockProps) {
   const mouseX = useMotionValue(Infinity);
-  
-  // Using the same dock items from your original code
+
   const dockItems = [
     {
       name: "AboutMe",
@@ -142,37 +143,36 @@ export default function Dock({ openApp, openApps }: DockProps) {
     },
   ];
 
-  const handleOpenApp = (appName: string) => {
-    openApp(appName);
-  };
-
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
       <motion.div
-        className="flex items-end gap-1.5 px-3 py-2 bg-black/25 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg"
+        className="flex items-end gap-1 px-3 py-2 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        transition={{ 
+          type: "spring",
+          stiffness: 400,
+          damping: 30
+        }}
       >
-        {dockItems.map((item, index) => (
+        {dockItems.map((item) => (
           <AppIcon
             key={item.name}
             item={item}
             mouseX={mouseX}
             isOpen={openApps.includes(item.name)}
-            onClick={() => handleOpenApp(item.name)}
+            onClick={() => openApp(item.name)}
           />
         ))}
       </motion.div>
-      
-      {/* Dock reflection */}
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="mx-auto mt-1 w-3/4 h-4 bg-gradient-to-b from-white/20 to-transparent rounded-full blur-sm"
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="mx-auto mt-1 w-[90%] h-4 bg-gradient-to-b from-white/20 to-transparent rounded-full blur-lg"
       />
     </div>
   );
