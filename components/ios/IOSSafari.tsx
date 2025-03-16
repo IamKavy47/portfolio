@@ -427,7 +427,7 @@ export default function IOSSafari({ onClose }: IOSSafariProps) {
           <div
             className={`relative flex items-center ${
               isAddressBarFocused ? "bg-white border border-[#007AFF]" : "bg-[#E9E9EA]"
-            } rounded-lg px-3 py-2`}
+            } rounded-[10px] px-3 py-2`}
             onClick={handleAddressBarFocus}
           >
             {!isAddressBarFocused && (
