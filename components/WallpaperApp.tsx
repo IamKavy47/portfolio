@@ -41,7 +41,7 @@ const wallpaperCategories = {
     },
     {
       name: "Flower",
-      url:"/mw1.jpg"
+      url:"/wall/wall4.jpg"
     }
   ],
   landscape: [
@@ -57,20 +57,8 @@ const wallpaperCategories = {
     },
     {
       name: "Desert Valley",
-      url: "/placeholder.svg?height=400&width=600",
+      url: "/wall/wall2.jpg?height=400&width=600",
       description: "Scenic desert landscape",
-    },
-  ],
-  cityscape: [
-    {
-      name: "San Francisco",
-      url: "/placeholder.svg?height=400&width=600",
-      description: "City by the bay",
-    },
-    {
-      name: "New York",
-      url: "/placeholder.svg?height=400&width=600",
-      description: "The big apple at night",
     },
   ],
 }
