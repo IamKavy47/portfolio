@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Background from "@/components/Background"
-import Docke from "@/components/Dock"
+import Dock from "@/components/Dock"
 import TopBar from "@/components/TopBar"
 import AboutMe from "@/components/AboutMe"
 import Projects from "@/components/Projects"
@@ -13,7 +13,6 @@ import Calendar from "@/components/Calendar"
 import Browser from "@/components/Browser"
 import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
-import Dock from "@/components/Dock/Dock"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -77,8 +76,7 @@ export default function MacOSInterface() {
       {openApps.includes("ContactApp") && (
         <ContactApp onClose={() => closeApp("ContactApp")} onFocus={() => focusApp("ContactApp")} />
       )}
-      <Docke openApp={toggleApp} openApps={openApps} />
-      <Dock />
+      <Dock openApp={toggleApp} openApps={openApps} />
     </div>
   )
 }
