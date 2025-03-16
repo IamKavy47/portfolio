@@ -21,21 +21,21 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
   });
 
   // Adjusted scaling values for more subtle animation
-  const widthSync = useTransform(distance, [-150, 0, 150], [70, 100, 70]);
+  const widthSync = useTransform(distance, [-300, 0, 300], [55, 75, 55]);
  const width = useSpring(widthSync, {
   mass: 0.1,
-  stiffness: 150,
+  stiffness: 200,
   damping: 12
 });
 
 const height = useSpring(widthSync, {
   mass: 0.1,
-  stiffness: 150,
-  damping: 12
+  stiffness: 200,
+  damping: 6
 });
 
   
-  const y = useTransform(width, [55, 100], [0, -15]);
+  const y = useTransform(width, [55, 100], [0, -20]);
 
   return (
     <motion.div
@@ -150,7 +150,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
   return (
     <div className="fixed bottom-1 left-1/2 transform -translate-x-1/2">
       <motion.div
-        className="flex items-end gap-2 px-4 py-2 h-[5.5rem] bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20"
+        className="flex items-end gap-5 px-4 py-2 h-[4.5rem] bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: 100, opacity: 0 }}
