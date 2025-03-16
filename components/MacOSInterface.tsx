@@ -18,7 +18,7 @@ export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
   const [activeApp, setActiveApp] = useState<string | null>(null)
   const [wallpaper, setWallpaper] = useState(
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Ww1DQ6z0nNFu7dGuWaC8MLVOWnQDOQ.png",
+    "iamkavy47.vercel.app/wall/wall1.jpg",
   )
 
   const toggleApp = (appName: string) => {
