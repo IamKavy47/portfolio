@@ -16,6 +16,7 @@ import {
   Car,
   Clock,
   Star,
+  Compass,
 } from "lucide-react"
 import { motion, AnimatePresence, useMotionValue, type PanInfo } from "framer-motion"
 
@@ -23,7 +24,7 @@ interface IOSMapsProps {
   onClose: () => void
 }
 
-// Sample nearby places data - in a real app, this would come from an API
+// Sample nearby places data
 const nearbyPlaces = [
   {
     id: "1",
@@ -136,6 +137,10 @@ const categories = [
 ]
 
 export default function IOSMaps({ onClose }: IOSMapsProps) {
+  // Location permission state
+  const [locationPermission, setLocationPermission] = useState<"prompt" | "granted" | "denied">("prompt")
+
+  // Map state
   const [searchQuery, setSearchQuery] = useState("")
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [showBottomSheet, setShowBottomSheet] = useState(true)
@@ -144,6 +149,9 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   const [mapZoom, setMapZoom] = useState(1)
   const [isDragging, setIsDragging] = useState(false)
   const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 })
+  const [userLocation, setUserLocation] = useState({ x: 50, y: 50 })
+  const [isCompassMode, setIsCompassMode] = useState(false)
+  const [mapRotation, setMapRotation] = useState(0)
 
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<HTMLDivElement>(null)
@@ -152,20 +160,73 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   // For interactive bottom sheet
   const sheetY = useMotionValue(0)
   const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">("partial")
-  const [sheetHeight, setSheetHeight] = useState(300) // Default height in pixels
   const [isDraggingSheet, setIsDraggingSheet] = useState(false)
-  const [startDragY, setStartDragY] = useState(0)
 
   // Calculate sheet positions based on container height
-  const containerHeight = 812 // Fixed height of our container
+  const containerHeight = 758 // Updated height as requested
   const collapsedPosition = containerHeight - 100 // Just showing the handle
   const partialPosition = containerHeight - 300 // Showing about 1/3 of the screen
   const expandedPosition = containerHeight - 600 // Showing about 3/4 of the screen
 
+  // Simulated map tiles
+  const [mapTiles, setMapTiles] = useState<{ x: number; y: number; color: string }[]>([])
+
+  // Generate random map tiles
   useEffect(() => {
-    // Set initial sheet position
+    const tiles = []
+    // Generate buildings
+    for (let i = 0; i < 50; i++) {
+      tiles.push({
+        x: Math.random() * 180 + 10,
+        y: Math.random() * 180 + 10,
+        color: ["#E0E0E0", "#D0D0D0", "#C0C0C0"][Math.floor(Math.random() * 3)],
+      })
+    }
+    // Generate parks
+    for (let i = 0; i < 10; i++) {
+      tiles.push({
+        x: Math.random() * 180 + 10,
+        y: Math.random() * 180 + 10,
+        color: ["#C8FACD", "#B5F5C0", "#A0EBB0"][Math.floor(Math.random() * 3)],
+      })
+    }
+    // Generate water
+    for (let i = 0; i < 5; i++) {
+      tiles.push({
+        x: Math.random() * 180 + 10,
+        y: Math.random() * 180 + 10,
+        color: ["#BAEFFF", "#A0E5FF", "#90DBFF"][Math.floor(Math.random() * 3)],
+      })
+    }
+    setMapTiles(tiles)
+  }, [])
+
+  // Set initial sheet position
+  useEffect(() => {
     sheetY.set(partialPosition)
   }, [])
+
+  // Simulate compass mode
+  useEffect(() => {
+    if (isCompassMode) {
+      const interval = setInterval(() => {
+        setMapRotation((prev) => (prev + 1) % 360)
+      }, 100)
+      return () => clearInterval(interval)
+    } else {
+      setMapRotation(0)
+    }
+  }, [isCompassMode])
+
+  const handleLocationPermission = (decision: "granted" | "denied") => {
+    setLocationPermission(decision)
+    if (decision === "granted") {
+      // Simulate getting user location
+      setTimeout(() => {
+        setUserLocation({ x: 50, y: 50 })
+      }, 1000)
+    }
+  }
 
   const handleSearchFocus = () => {
     setShowSearchResults(true)
@@ -186,9 +247,14 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   }
 
   const handleCurrentLocation = () => {
-    // Reset map position to center
+    // Reset map position to center on user
     setMapPosition({ x: 0, y: 0 })
     setMapZoom(1)
+
+    // If location permission not granted, prompt for it
+    if (locationPermission !== "granted") {
+      setLocationPermission("prompt")
+    }
   }
 
   const handlePlaceSelect = (place: (typeof nearbyPlaces)[0]) => {
@@ -311,8 +377,49 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
     }
   }
 
+  // Toggle compass mode
+  const toggleCompassMode = () => {
+    setIsCompassMode(!isCompassMode)
+  }
+
+  // Render location permission dialog
+  const renderLocationPermissionDialog = () => (
+    <div className="absolute inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-xl w-[300px] overflow-hidden shadow-xl">
+        <div className="p-4 bg-[#F2F2F7]">
+          <div className="w-12 h-12 bg-[#007AFF] rounded-full mx-auto mb-3 flex items-center justify-center">
+            <MapPin size={24} className="text-white" />
+          </div>
+          <h3 className="text-lg font-semibold text-center">Allow "Maps" to use your location?</h3>
+        </div>
+
+        <div className="p-4 space-y-2 text-sm text-gray-600">
+          <p>
+            Your current location will be displayed on the map and used for directions, nearby search results, and
+            estimated travel times.
+          </p>
+        </div>
+
+        <div className="border-t border-gray-200">
+          <button
+            className="w-full p-3 text-[#007AFF] font-medium text-center border-b border-gray-200"
+            onClick={() => handleLocationPermission("granted")}
+          >
+            Allow While Using App
+          </button>
+          <button
+            className="w-full p-3 text-[#007AFF] font-medium text-center"
+            onClick={() => handleLocationPermission("denied")}
+          >
+            Don't Allow
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="h-[812px] w-[375px] bg-white flex flex-col overflow-hidden relative">
+    <div className="h-[758px] w-[350px] bg-white flex flex-col overflow-hidden relative">
       {/* Search bar */}
       <div className="bg-white p-4 flex items-center justify-between z-10 shadow-sm">
         <button onClick={onClose} className="text-[#007AFF]">
@@ -359,11 +466,7 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
           ref={mapRef}
           className={`absolute w-[200%] h-[200%] transition-transform duration-200 ${isDragging ? "" : "ease-out"}`}
           style={{
-            transform: `translate(${mapPosition.x}px, ${mapPosition.y}px) scale(${mapZoom})`,
-            backgroundImage: "url('/placeholder.svg?height=1600&width=1600')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            transform: `translate(${mapPosition.x}px, ${mapPosition.y}px) scale(${mapZoom}) rotate(${mapRotation}deg)`,
             backgroundColor: "#E8ECEF",
           }}
         >
@@ -376,6 +479,21 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
               <div key={`v-${i}`} className="h-full w-px bg-gray-300" style={{ left: `${(i + 1) * 8.33}%` }} />
             ))}
           </div>
+
+          {/* Map tiles (buildings, parks, water) */}
+          {mapTiles.map((tile, index) => (
+            <div
+              key={index}
+              className="absolute rounded-md"
+              style={{
+                left: `${tile.x}px`,
+                top: `${tile.y}px`,
+                width: `${Math.random() * 30 + 20}px`,
+                height: `${Math.random() * 30 + 20}px`,
+                backgroundColor: tile.color,
+              }}
+            ></div>
+          ))}
 
           {/* Roads */}
           <div
@@ -403,16 +521,6 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             style={{ height: "90%", top: "5%", left: "80%", transform: "rotate(0deg)" }}
           ></div>
 
-          {/* Parks and water */}
-          <div
-            className="absolute rounded-full bg-[#C8FACD]"
-            style={{ width: "30%", height: "20%", top: "25%", left: "35%" }}
-          ></div>
-          <div
-            className="absolute rounded-full bg-[#BAEFFF]"
-            style={{ width: "25%", height: "25%", top: "60%", left: "65%" }}
-          ></div>
-
           {/* Place markers */}
           {nearbyPlaces.map((place) => (
             <div
@@ -436,15 +544,20 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             </div>
           ))}
 
-          {/* User location */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="relative">
-              <div className="w-6 h-6 bg-[#007AFF] rounded-full flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+          {/* User location - only show if permission granted */}
+          {locationPermission === "granted" && (
+            <div
+              className="absolute transform -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${userLocation.x}%`, top: `${userLocation.y}%` }}
+            >
+              <div className="relative">
+                <div className="w-6 h-6 bg-[#007AFF] rounded-full flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div className="absolute -inset-2 bg-[#007AFF]/20 rounded-full animate-pulse"></div>
               </div>
-              <div className="absolute -inset-2 bg-[#007AFF]/20 rounded-full animate-pulse"></div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Map controls */}
@@ -464,6 +577,15 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             <Minus size={20} className="text-gray-700" />
           </motion.button>
         </div>
+
+        {/* Compass button */}
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={toggleCompassMode}
+          className={`absolute bottom-32 left-4 bg-white rounded-full p-3 shadow-lg ${isCompassMode ? "bg-[#007AFF]" : "bg-white"}`}
+        >
+          <Compass size={24} className={isCompassMode ? "text-white" : "text-[#007AFF]"} />
+        </motion.button>
 
         {/* Current location button */}
         <motion.button
@@ -649,6 +771,9 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Location permission dialog */}
+      {locationPermission === "prompt" && renderLocationPermissionDialog()}
     </div>
   )
 }
