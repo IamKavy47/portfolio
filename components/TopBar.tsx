@@ -101,7 +101,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
             {isMenuOpen && (
-              <div className="absolute top-full left-0 mt-1 w-56 py-1 bg-white/40 backdrop-blur-lg rounded-[12px] shadow-lg">
+              <div className="absolute top-full left-0 mt-2 w-56 py-1 bg-white/40 backdrop-blur-lg border-white-20 rounded-[12px] shadow-lg">
                 {menuItems.map((item, index) => (
                   <div
                     key={index}
