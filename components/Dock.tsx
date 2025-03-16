@@ -28,7 +28,7 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
     damping: 12
   });
 
-  const y = useTransform(width, [55, 100], [0, -12]);
+  const y = useTransform(width, [55, 100], [0, -15]);
 
   return (
     <motion.div
@@ -39,8 +39,8 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
       <motion.div
         style={{
           y,
-          width: 55,
-          height: 55
+          width: width,
+          height: height,
         }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
