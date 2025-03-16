@@ -26,69 +26,47 @@ interface IOSMapsProps {
 const nearbyPlaces = [
   {
     id: "1",
-    name: "Starbucks Coffee",
-    category: "Coffee Shop",
-    address: "201 Powell St",
-    distance: "0.1 miles",
-    coordinates: { lat: 37.7749, lng: -122.4194 },
-    rating: 4.2,
-    isOpen: true,
-    hours: "Open until 9:00 PM",
-  },
-  {
-    id: "2",
-    name: "Chipotle Mexican Grill",
-    category: "Restaurant",
-    address: "126 O'Farrell St",
-    distance: "0.2 miles",
-    coordinates: { lat: 37.7746, lng: -122.4172 },
+    name: "Pashupatinath Temple Mandsaur",
+    category: "Hindu Temple",
+    address: "334F+649, Pashupatinath Mandir Road, Mandsaur",
+    distance: "",
+    coordinates: { lat: 24.0559, lng: 75.0728 },
     rating: 4.5,
     isOpen: true,
     hours: "Open until 10:00 PM",
   },
   {
-    id: "3",
-    name: "Walgreens",
-    category: "Pharmacy",
-    address: "456 Powell St",
-    distance: "0.3 miles",
-    coordinates: { lat: 37.7739, lng: -122.419 },
-    rating: 3.8,
+    id: "2",
+    name: "Shri Mahakaleshwar Jyotirlinga Temple",
+    category: "Hindu Temple",
+    address: "Jaisinghpura, Ujjain",
+    distance: "",
+    coordinates: { lat: 23.1829, lng: 75.7682 },
+    rating: 4.8,
     isOpen: true,
-    hours: "Open 24 hours",
+    hours: "Open until 10:00 PM",
+  },
+  {
+    id: "3",
+    name: "Mandsaur University",
+    category: "University",
+    address: "Daulatpura",
+    distance: "",
+    coordinates: { lat: 24.0747, lng: 75.0304 },
+    rating: 4.2,
+    isOpen: true,
+    hours: "9:00 AM - 5:00 PM",
   },
   {
     id: "4",
-    name: "Chase Bank",
-    category: "Bank",
-    address: "350 Powell St",
-    distance: "0.4 miles",
-    coordinates: { lat: 37.7752, lng: -122.4188 },
-    rating: 4.0,
-    isOpen: true,
-    hours: "Open until 6:00 PM",
-  },
-  {
-    id: "5",
-    name: "Apple Store",
-    category: "Electronics",
-    address: "300 Post Street",
-    distance: "0.5 miles",
-    coordinates: { lat: 37.7735, lng: -122.4056 },
-    rating: 4.8,
+    name: "Apple Park",
+    category: "Headquater",
+    address: "Cupertino, California",
+    distance: "",
+    coordinates: { lat: 37.3346, lng: -122.0091 },
+    rating: 4.2,
     isOpen: true,
     hours: "Open until 8:00 PM",
-  },
-  {
-    id: "6",
-    name: "Blue Bottle Coffee",
-    category: "Coffee Shop",
-    address: "315 Montgomery St",
-    distance: "0.6 miles",
-    coordinates: { lat: 37.7715, lng: -122.4016 },
-    rating: 4.6,
-    isOpen: true,
-    hours: "Open until 7:00 PM",
   },
 ]
 
@@ -96,31 +74,31 @@ const nearbyPlaces = [
 const searchResults = [
   {
     id: "s1",
-    name: "Apple Park",
-    address: "One Apple Park Way, Cupertino, CA",
-    distance: "5.2 miles",
-    coordinates: { lat: 37.3346, lng: -122.009 },
+    name: "Mahankal Temple",
+    address: "Jaisinghpura, Ujjain",
+    distance: "",
+    coordinates: { lat: 23.1829, lng: 75.7682 },
   },
   {
     id: "s2",
-    name: "Apple Store",
-    address: "300 Post Street, San Francisco, CA",
-    distance: "0.8 miles",
-    coordinates: { lat: 37.7735, lng: -122.4056 },
+    name: "Pashupatinath Temple Mandsaur",
+    address: "334F+649, Pashupatinath Mandir Road, Mandsaur",
+    distance: "",
+    coordinates: { lat: 24.0559, lng: 75.0728 },
   },
   {
     id: "s3",
-    name: "Applebee's",
-    address: "225 Geary St, San Francisco, CA",
-    distance: "1.2 miles",
-    coordinates: { lat: 37.7867, lng: -122.4078 },
+    name: "Apple Park",
+    address: "One Apple Park Way, Cupertino, CA",
+    distance: "",
+    coordinates: { lat: 37.3346, lng: -122.009 },
   },
   {
     id: "s4",
-    name: "Apple Fitness+ Studio",
-    address: "19345 Stevens Creek Blvd",
-    distance: "6.5 miles",
-    coordinates: { lat: 37.323, lng: -122.0322 },
+    name: "Mandsaur University",
+    address: "Daulatpura , Mandsaur",
+    distance: "",
+    coordinates: { lat: 24.0747, lng: 75.0304 },
   },
 ]
 
@@ -393,7 +371,7 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   )
 
   return (
-    <div className="h-[758px] w-[350px] bg-white flex flex-col overflow-hidden relative">
+    <div className="h-[758px] w-[340px] bg-white flex flex-col overflow-hidden relative">
       {/* Search bar */}
       <div className="bg-white p-4 flex items-center justify-between z-10 shadow-sm">
         <button onClick={onClose} className="text-[#007AFF]">
@@ -404,7 +382,7 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             <input
               type="text"
               placeholder="Search Maps"
-              className="w-full bg-[#EEEEEF] rounded-lg py-2 px-10 text-sm focus:outline-none"
+              className="w-full bg-[#EEEEEF] rounded-[10px] py-2 px-10 text-sm focus:outline-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={handleSearchFocus}
@@ -600,20 +578,20 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
                   <div className="flex space-x-3">
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 bg-[#007AFF] text-white py-3 rounded-lg font-medium flex items-center justify-center"
+                      className="flex-1 bg-[#007AFF] text-white py-3 rounded-[10px] font-medium flex items-center justify-center"
                     >
                       <Car size={18} className="mr-2" />
                       Directions
                     </motion.button>
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 bg-gray-100 py-3 rounded-lg font-medium"
+                      className="flex-1 bg-gray-100 py-3 rounded-[10px] font-medium"
                     >
                       Call
                     </motion.button>
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 bg-gray-100 py-3 rounded-lg font-medium"
+                      className="flex-1 bg-gray-100 py-3 rounded-[10px] font-medium"
                     >
                       Website
                     </motion.button>
@@ -622,9 +600,9 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
                   <div className="pt-4">
                     <h4 className="text-lg font-medium mb-3">Photos</h4>
                     <div className="grid grid-cols-3 gap-2">
-                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
-                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
-                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
+                      <div className="aspect-square bg-gray-200 rounded-[10px]"></div>
+                      <div className="aspect-square bg-gray-200 rounded-[10px]"></div>
+                      <div className="aspect-square bg-gray-200 rounded-[10px]"></div>
                     </div>
                   </div>
                 </div>
