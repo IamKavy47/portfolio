@@ -75,18 +75,18 @@ export default function Background({ wallpaper, onOpenApp }: BackgroundProps) {
     >
       {contextMenu && (
         <div
-          className="absolute bg-white/80 backdrop-blur-md shadow-lg rounded-lg overflow-hidden text-sm"
+          className="absolute bg-white/30 backdrop-blur-lg shadow-2xl rounded-[5px] overflow-hidden text-sm"
           style={{ left: contextMenu.x, top: contextMenu.y }}
         >
           <button
-            className="block w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
+            className="block w-[100%] px-4 hover:rounded-[5px] py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
             onClick={() => handleCreateItem("folder")}
             disabled={!!folder}
           >
             New Folder
           </button>
           <button
-            className="block w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
+            className="block hover:rounded-[5px] w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
             onClick={() => handleCreateItem("file")}
             disabled={!!file}
           >
@@ -94,7 +94,7 @@ export default function Background({ wallpaper, onOpenApp }: BackgroundProps) {
           </button>
           <hr className="border-gray-200" />
           <button
-            className="block w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
+            className="block hover:rounded-[5px] w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
             onClick={toggleViewMode}
           >
             {viewMode === "grid" ? (
@@ -108,7 +108,7 @@ export default function Background({ wallpaper, onOpenApp }: BackgroundProps) {
             )}
           </button>
           <button
-            className="block w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
+            className="block hover:rounded-[5px] w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
             onClick={toggleSortOrder}
           >
             {sortOrder === "asc" ? (
@@ -123,7 +123,7 @@ export default function Background({ wallpaper, onOpenApp }: BackgroundProps) {
           </button>
           <hr className="border-gray-200" />
           <button
-            className="block w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
+            className="block hover:rounded-[5px] w-full px-4 py-2 text-left hover:bg-blue-500 hover:text-white transition-colors"
             onClick={() => onOpenApp("WallpaperApp")}
           >
             Change Wallpaper
@@ -132,7 +132,7 @@ export default function Background({ wallpaper, onOpenApp }: BackgroundProps) {
       )}
       {itemContextMenu && (
         <div
-          className="absolute bg-white/80 backdrop-blur-md shadow-lg rounded-lg overflow-hidden text-sm"
+          className="absolute bg-white/30 backdrop-blur-lg shadow-lg rounded-[5px] overflow-hidden text-sm"
           style={{ left: itemContextMenu.x, top: itemContextMenu.y }}
         >
           <button

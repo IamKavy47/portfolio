@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Window from "./Window"
+import Window from "./Windoww"
 
 interface CalculatorProps {
   onClose: () => void

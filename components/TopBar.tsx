@@ -3,6 +3,7 @@
 // Previous imports remain the same...
 import { useState, useEffect, useRef } from "react"
 import { FaApple, FaWifi, FaBatteryFull, FaSearch, FaVolumeUp } from "react-icons/fa"
+import { BsToggles } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion"
 
 interface TopBarProps {
@@ -73,6 +74,22 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
     { name: "Shut Down", action: () => {} },
   ]
 
+  const [todayInfo, setTodayInfo] = useState("");
+
+  useEffect(() => {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const now = new Date();
+  const day = days[now.getDay()];
+  const month = months[now.getMonth()];
+  const date = now.getDate();
+
+  setTodayInfo(`${day} ${month} ${date}`);
+}, []);
+
+
+
   const apps = [
     { name: "AboutMe", type: "System" },
     { name: "Projects", type: "Development" },
@@ -92,7 +109,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 h-[30px] px-2 flex items-center justify-between bg-white/40 backdrop-blur-lg text-black z-50">
+      <div className="fixed top-0 left-0 right-0 h-[30px] px-2 flex items-center justify-between bg-white/30 backdrop-blur-sm text-black z-50">
         {/* Previous top bar content remains the same... */}
         <div className="flex items-center space-x-4 text-sm">
           <div className="relative">
@@ -126,7 +143,6 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
           <span className="cursor-pointer">Help</span>
         </div>
         <div className="flex items-center space-x-4 text-sm">
-          <FaWifi className="w-4 h-4" />
           <div className="flex items-center gap-1">
             <FaSearch 
               className="w-4 h-4 cursor-pointer" 
@@ -134,9 +150,9 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
             />
             <span className="text-xs text-gray-500">{shortcutSymbol} Space</span>
           </div>
-          <FaVolumeUp className="w-4 h-4" />
-          <FaBatteryFull className="w-4 h-4" />
-          <span>{currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+          <BsToggles className="w-4 h-4"/>
+          <span className="">{todayInfo}</span>
+          <span>{currentTime.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit" })}</span>
         </div>
       </div>
 
@@ -168,6 +184,7 @@ export default function TopBar({ activeApp, onOpenApp }: TopBarProps) {
                     autoFocus
                   />
                 </div>
+                
                 {searchQuery && (
                   <div className="max-h-[400px] overflow-auto p-2">
                     {filteredApps.map((app) => (

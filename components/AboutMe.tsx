@@ -97,7 +97,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
   }
 
   return (
-    <Window title="About Me" onClose={onClose} onFocus={onFocus} initialSize={{ width: 600, height: 500 }}>
+    <Window title="About This Mac" onClose={onClose} onFocus={onFocus} initialSize={{ width: 600, height: 500 }}>
       {content}
     </Window>
   )
