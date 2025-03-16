@@ -145,6 +145,8 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   const [selectedPlace, setSelectedPlace] = useState<(typeof nearbyPlaces)[0] | null>(null)
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
   const [isCompassMode, setIsCompassMode] = useState(false)
+  // Add a mapType state to track current view type
+  const [mapType, setMapType] = useState<"standard" | "satellite">("standard")
 
   const mapRef = useRef<HTMLIFrameElement>(null)
   const bottomSheetRef = useRef<HTMLDivElement>(null)
@@ -192,7 +194,13 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
 
   // Generate map URL based on user location
   const getMapUrl = (location: { lat: number; lng: number }, zoom = 16) => {
-    return `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.01},${location.lng + 0.01},${location.lat + 0.01}&layer=mapnik&marker=${location.lat},${location.lng}&zoom=${zoom}`
+    if (mapType === "satellite") {
+      // Use Esri's satellite imagery through OpenStreetMap
+      return `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.01},${location.lng + 0.01},${location.lat + 0.01}&layer=hot&marker=${location.lat},${location.lng}&zoom=${zoom}`
+    } else {
+      // Standard map view
+      return `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.01},${location.lng + 0.01},${location.lat + 0.01}&layer=mapnik&marker=${location.lat},${location.lng}&zoom=${zoom}`
+    }
   }
 
   const handleLocationPermission = (decision: "granted" | "denied") => {
@@ -250,8 +258,13 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
     if (locationPermission !== "granted") {
       setLocationPermission("prompt")
     } else if (userLocation && mapRef.current) {
+      // Get current zoom level if possible
+      const currentSrc = mapRef.current.src
+      const zoomMatch = currentSrc.match(/zoom=(\d+)/)
+      const currentZoom = zoomMatch ? Number.parseInt(zoomMatch[1]) : 16
+
       // Update the map iframe src to center on user location
-      mapRef.current.src = getMapUrl(userLocation)
+      mapRef.current.src = getMapUrl(userLocation, currentZoom)
     }
   }
 
@@ -264,7 +277,12 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
 
     // Center map on selected place
     if (mapRef.current && place.coordinates) {
-      mapRef.current.src = getMapUrl(place.coordinates)
+      // Get current zoom level if possible
+      const currentSrc = mapRef.current.src
+      const zoomMatch = currentSrc.match(/zoom=(\d+)/)
+      const currentZoom = zoomMatch ? Number.parseInt(zoomMatch[1]) : 16
+
+      mapRef.current.src = getMapUrl(place.coordinates, currentZoom)
     }
   }
 
@@ -325,6 +343,17 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   // Toggle compass mode
   const toggleCompassMode = () => {
     setIsCompassMode(!isCompassMode)
+  }
+
+  // Add a function to toggle map type
+  const toggleMapType = () => {
+    const newType = mapType === "standard" ? "satellite" : "standard"
+    setMapType(newType)
+
+    // Update the map if we have a location
+    if (userLocation && mapRef.current) {
+      mapRef.current.src = getMapUrl(userLocation)
+    }
   }
 
   // Render location permission dialog
@@ -449,6 +478,13 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             }}
           >
             <Minus size={20} className="text-gray-700" />
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
+            onClick={toggleMapType}
+          >
+            <span className="text-xs font-bold">{mapType === "standard" ? "Map" : "Sat"}</span>
           </motion.button>
         </div>
 
