@@ -40,7 +40,7 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
         style={{
           y,
           width: width,
-          height: height,
+          height: 55,
         }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
