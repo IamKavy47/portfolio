@@ -1,41 +1,170 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, Search, MapPin, Navigation, Compass, Plus, Minus, ChevronRight, X, Menu } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import {
+  ArrowLeft,
+  Search,
+  MapPin,
+  Navigation,
+  Plus,
+  Minus,
+  ChevronRight,
+  X,
+  Menu,
+  Car,
+  Clock,
+  Star,
+} from "lucide-react"
+import { motion, AnimatePresence, useMotionValue, type PanInfo } from "framer-motion"
 
 interface IOSMapsProps {
   onClose: () => void
 }
 
+// Sample nearby places data - in a real app, this would come from an API
+const nearbyPlaces = [
+  {
+    id: "1",
+    name: "Starbucks Coffee",
+    category: "Coffee Shop",
+    address: "201 Powell St",
+    distance: "0.1 miles",
+    coordinates: { x: 45, y: 55 },
+    rating: 4.2,
+    isOpen: true,
+    hours: "Open until 9:00 PM",
+  },
+  {
+    id: "2",
+    name: "Chipotle Mexican Grill",
+    category: "Restaurant",
+    address: "126 O'Farrell St",
+    distance: "0.2 miles",
+    coordinates: { x: 65, y: 35 },
+    rating: 4.5,
+    isOpen: true,
+    hours: "Open until 10:00 PM",
+  },
+  {
+    id: "3",
+    name: "Walgreens",
+    category: "Pharmacy",
+    address: "456 Powell St",
+    distance: "0.3 miles",
+    coordinates: { x: 30, y: 25 },
+    rating: 3.8,
+    isOpen: true,
+    hours: "Open 24 hours",
+  },
+  {
+    id: "4",
+    name: "Chase Bank",
+    category: "Bank",
+    address: "350 Powell St",
+    distance: "0.4 miles",
+    coordinates: { x: 70, y: 65 },
+    rating: 4.0,
+    isOpen: true,
+    hours: "Open until 6:00 PM",
+  },
+  {
+    id: "5",
+    name: "Apple Store",
+    category: "Electronics",
+    address: "300 Post Street",
+    distance: "0.5 miles",
+    coordinates: { x: 55, y: 45 },
+    rating: 4.8,
+    isOpen: true,
+    hours: "Open until 8:00 PM",
+  },
+  {
+    id: "6",
+    name: "Blue Bottle Coffee",
+    category: "Coffee Shop",
+    address: "315 Montgomery St",
+    distance: "0.6 miles",
+    coordinates: { x: 25, y: 70 },
+    rating: 4.6,
+    isOpen: true,
+    hours: "Open until 7:00 PM",
+  },
+]
+
+// Sample search results
+const searchResults = [
+  {
+    id: "s1",
+    name: "Apple Park",
+    address: "One Apple Park Way, Cupertino, CA",
+    distance: "5.2 miles",
+    coordinates: { x: 50, y: 50 },
+  },
+  {
+    id: "s2",
+    name: "Apple Store",
+    address: "300 Post Street, San Francisco, CA",
+    distance: "0.8 miles",
+    coordinates: { x: 55, y: 45 },
+  },
+  {
+    id: "s3",
+    name: "Applebee's",
+    address: "225 Geary St, San Francisco, CA",
+    distance: "1.2 miles",
+    coordinates: { x: 60, y: 40 },
+  },
+  {
+    id: "s4",
+    name: "Apple Fitness+ Studio",
+    address: "19345 Stevens Creek Blvd",
+    distance: "6.5 miles",
+    coordinates: { x: 45, y: 55 },
+  },
+]
+
+// Categories for quick selection
+const categories = [
+  { id: "c1", name: "Food", icon: "🍔" },
+  { id: "c2", name: "Coffee", icon: "☕" },
+  { id: "c3", name: "Shopping", icon: "🛍️" },
+  { id: "c4", name: "Gas", icon: "⛽" },
+  { id: "c5", name: "Hotels", icon: "🏨" },
+  { id: "c6", name: "Attractions", icon: "🎭" },
+]
+
 export default function IOSMaps({ onClose }: IOSMapsProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [showBottomSheet, setShowBottomSheet] = useState(true)
-  const [bottomSheetHeight, setBottomSheetHeight] = useState("25%")
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
-  const mapRef = useRef<HTMLIFrameElement>(null)
+  const [selectedPlace, setSelectedPlace] = useState<(typeof nearbyPlaces)[0] | null>(null)
+  const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 })
+  const [mapZoom, setMapZoom] = useState(1)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 })
 
-  // Get user's location on component mount
+  const mapContainer = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<HTMLDivElement>(null)
+  const bottomSheetRef = useRef<HTMLDivElement>(null)
+
+  // For interactive bottom sheet
+  const sheetY = useMotionValue(0)
+  const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">("partial")
+  const [sheetHeight, setSheetHeight] = useState(300) // Default height in pixels
+  const [isDraggingSheet, setIsDraggingSheet] = useState(false)
+  const [startDragY, setStartDragY] = useState(0)
+
+  // Calculate sheet positions based on container height
+  const containerHeight = 812 // Fixed height of our container
+  const collapsedPosition = containerHeight - 100 // Just showing the handle
+  const partialPosition = containerHeight - 300 // Showing about 1/3 of the screen
+  const expandedPosition = containerHeight - 600 // Showing about 3/4 of the screen
+
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          })
-        },
-        (error) => {
-          console.error("Error getting location:", error)
-          // Default to San Francisco if location access is denied
-          setUserLocation({ lat: 37.7749, lng: -122.4194 })
-        },
-      )
-    } else {
-      // Default to San Francisco if geolocation is not supported
-      setUserLocation({ lat: 37.7749, lng: -122.4194 })
-    }
+    // Set initial sheet position
+    sheetY.set(partialPosition)
   }, [])
 
   const handleSearchFocus = () => {
@@ -57,48 +186,136 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
   }
 
   const handleCurrentLocation = () => {
-    if (userLocation && mapRef.current) {
-      // Update the map iframe src to center on user location
-      const iframe = mapRef.current
-      const src = `https://www.openstreetmap.org/export/embed.html?bbox=${userLocation.lng - 0.01},${userLocation.lat - 0.01},${userLocation.lng + 0.01},${userLocation.lat + 0.01}&layer=mapnik&marker=${userLocation.lat},${userLocation.lng}`
-      iframe.src = src
+    // Reset map position to center
+    setMapPosition({ x: 0, y: 0 })
+    setMapZoom(1)
+  }
+
+  const handlePlaceSelect = (place: (typeof nearbyPlaces)[0]) => {
+    setSelectedPlace(place)
+    setShowSearchResults(false)
+    setShowBottomSheet(true)
+    setSheetState("partial")
+    sheetY.set(partialPosition)
+
+    // Center map on selected place
+    setMapPosition({
+      x: -place.coordinates.x + 50,
+      y: -place.coordinates.y + 50,
+    })
+  }
+
+  const handleZoomIn = () => {
+    setMapZoom((prev) => Math.min(prev * 1.2, 2))
+  }
+
+  const handleZoomOut = () => {
+    setMapZoom((prev) => Math.max(prev / 1.2, 0.5))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (mapRef.current) {
+      setIsDragging(true)
+      setStartDragPosition({
+        x: e.clientX - mapPosition.x,
+        y: e.clientY - mapPosition.y,
+      })
     }
   }
 
-  const toggleBottomSheet = () => {
-    if (bottomSheetHeight === "25%") {
-      setBottomSheetHeight("75%")
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && mapRef.current) {
+      const newX = e.clientX - startDragPosition.x
+      const newY = e.clientY - startDragPosition.y
+      setMapPosition({ x: newX, y: newY })
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (mapRef.current && e.touches.length === 1) {
+      setIsDragging(true)
+      setStartDragPosition({
+        x: e.touches[0].clientX - mapPosition.x,
+        y: e.touches[0].clientY - mapPosition.y,
+      })
+    }
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && mapRef.current && e.touches.length === 1) {
+      const newX = e.touches[0].clientX - startDragPosition.x
+      const newY = e.touches[0].clientY - startDragPosition.y
+      setMapPosition({ x: newX, y: newY })
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
+
+  // Bottom sheet drag handlers
+  const handleSheetDragStart = () => {
+    setIsDraggingSheet(true)
+  }
+
+  const handleSheetDragEnd = (e: MouseEvent, info: PanInfo) => {
+    setIsDraggingSheet(false)
+
+    const currentY = sheetY.get()
+
+    // Determine which position to snap to based on velocity and position
+    if (info.velocity.y > 500) {
+      // Fast downward swipe - collapse
+      sheetY.set(collapsedPosition)
+      setSheetState("collapsed")
+    } else if (info.velocity.y < -500) {
+      // Fast upward swipe - expand
+      sheetY.set(expandedPosition)
+      setSheetState("expanded")
     } else {
-      setBottomSheetHeight("25%")
+      // Based on position
+      const distToCollapsed = Math.abs(currentY - collapsedPosition)
+      const distToPartial = Math.abs(currentY - partialPosition)
+      const distToExpanded = Math.abs(currentY - expandedPosition)
+
+      const minDist = Math.min(distToCollapsed, distToPartial, distToExpanded)
+
+      if (minDist === distToCollapsed) {
+        sheetY.set(collapsedPosition)
+        setSheetState("collapsed")
+      } else if (minDist === distToPartial) {
+        sheetY.set(partialPosition)
+        setSheetState("partial")
+      } else {
+        sheetY.set(expandedPosition)
+        setSheetState("expanded")
+      }
     }
   }
 
-  // Sample search results
-  const searchResults = [
-    { name: "Apple Park", address: "One Apple Park Way, Cupertino, CA", distance: "5.2 miles" },
-    { name: "Apple Store", address: "300 Post Street, San Francisco, CA", distance: "0.8 miles" },
-    { name: "Applebee's", address: "225 Geary St, San Francisco, CA", distance: "1.2 miles" },
-    { name: "Apple Fitness+ Studio", address: "19345 Stevens Creek Blvd", distance: "6.5 miles" },
-  ]
-
-  // Sample nearby places
-  const nearbyPlaces = [
-    { name: "Starbucks Coffee", category: "Coffee Shop", address: "201 Powell St", distance: "0.1 miles" },
-    { name: "Chipotle Mexican Grill", category: "Restaurant", address: "126 O'Farrell St", distance: "0.2 miles" },
-    { name: "Walgreens", category: "Pharmacy", address: "456 Powell St", distance: "0.3 miles" },
-    { name: "Chase Bank", category: "Bank", address: "350 Powell St", distance: "0.4 miles" },
-  ]
-
-  // Generate map URL based on user location
-  const mapUrl = userLocation
-    ? `https://www.openstreetmap.org/export/embed.html?bbox=${userLocation.lng - 0.01},${userLocation.lat - 0.01},${userLocation.lng + 0.01},${userLocation.lat + 0.01}&layer=mapnik&marker=${userLocation.lat},${userLocation.lng}`
-    : "https://www.openstreetmap.org/export/embed.html?bbox=-122.4394,37.7549,-122.3994,37.7949&layer=mapnik"
+  // Toggle bottom sheet state
+  const toggleBottomSheet = () => {
+    if (sheetState === "collapsed") {
+      sheetY.set(partialPosition)
+      setSheetState("partial")
+    } else if (sheetState === "partial") {
+      sheetY.set(expandedPosition)
+      setSheetState("expanded")
+    } else {
+      sheetY.set(partialPosition)
+      setSheetState("partial")
+    }
+  }
 
   return (
     <div className="h-[812px] w-[375px] bg-white flex flex-col overflow-hidden relative">
       {/* Search bar */}
       <div className="bg-white p-4 flex items-center justify-between z-10 shadow-sm">
-        <button onClick={onClose} className="text-blue-500">
+        <button onClick={onClose} className="text-[#007AFF]">
           <ArrowLeft size={24} />
         </button>
         <div className="flex-1 mx-3">
@@ -120,40 +337,131 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
             )}
           </div>
         </div>
-        <button className="text-blue-500">
+        <button className="text-[#007AFF]">
           <Menu size={24} />
         </button>
       </div>
 
       {/* Map container */}
-      <div className="flex-1 relative">
-        {userLocation ? (
-          <iframe ref={mapRef} src={mapUrl} className="w-full h-full border-none" title="Map" allowFullScreen />
-        ) : (
-          <div className="absolute inset-0 bg-blue-50 flex items-center justify-center">
-            <p>Loading map...</p>
+      <div
+        ref={mapContainer}
+        className="flex-1 relative overflow-hidden"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Custom map */}
+        <div
+          ref={mapRef}
+          className={`absolute w-[200%] h-[200%] transition-transform duration-200 ${isDragging ? "" : "ease-out"}`}
+          style={{
+            transform: `translate(${mapPosition.x}px, ${mapPosition.y}px) scale(${mapZoom})`,
+            backgroundImage: "url('/placeholder.svg?height=1600&width=1600')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "#E8ECEF",
+          }}
+        >
+          {/* Map grid lines */}
+          <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={`h-${i}`} className="w-full h-px bg-gray-300" style={{ top: `${(i + 1) * 8.33}%` }} />
+            ))}
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={`v-${i}`} className="h-full w-px bg-gray-300" style={{ left: `${(i + 1) * 8.33}%` }} />
+            ))}
           </div>
-        )}
+
+          {/* Roads */}
+          <div
+            className="absolute h-4 bg-[#FFE8B2] rounded-full"
+            style={{ width: "80%", top: "30%", left: "10%", transform: "rotate(15deg)" }}
+          ></div>
+          <div
+            className="absolute h-6 bg-[#FFE8B2] rounded-full"
+            style={{ width: "90%", top: "50%", left: "5%", transform: "rotate(-5deg)" }}
+          ></div>
+          <div
+            className="absolute h-5 bg-[#FFE8B2] rounded-full"
+            style={{ width: "70%", top: "70%", left: "15%", transform: "rotate(20deg)" }}
+          ></div>
+          <div
+            className="absolute w-4 bg-[#FFE8B2] rounded-full"
+            style={{ height: "80%", top: "10%", left: "30%", transform: "rotate(0deg)" }}
+          ></div>
+          <div
+            className="absolute w-5 bg-[#FFE8B2] rounded-full"
+            style={{ height: "70%", top: "15%", left: "60%", transform: "rotate(0deg)" }}
+          ></div>
+          <div
+            className="absolute w-6 bg-[#FFE8B2] rounded-full"
+            style={{ height: "90%", top: "5%", left: "80%", transform: "rotate(0deg)" }}
+          ></div>
+
+          {/* Parks and water */}
+          <div
+            className="absolute rounded-full bg-[#C8FACD]"
+            style={{ width: "30%", height: "20%", top: "25%", left: "35%" }}
+          ></div>
+          <div
+            className="absolute rounded-full bg-[#BAEFFF]"
+            style={{ width: "25%", height: "25%", top: "60%", left: "65%" }}
+          ></div>
+
+          {/* Place markers */}
+          {nearbyPlaces.map((place) => (
+            <div
+              key={place.id}
+              className="absolute cursor-pointer"
+              style={{
+                left: `${place.coordinates.x}%`,
+                top: `${place.coordinates.y}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+              onClick={() => handlePlaceSelect(place)}
+            >
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                <MapPin size={16} className="text-[#FF3B30]" />
+              </div>
+              {mapZoom > 1.5 && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-white px-2 py-1 rounded-md shadow-md text-xs whitespace-nowrap">
+                  {place.name}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* User location */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="relative">
+              <div className="w-6 h-6 bg-[#007AFF] rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              <div className="absolute -inset-2 bg-[#007AFF]/20 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
 
         {/* Map controls */}
         <div className="absolute top-4 right-4 flex flex-col space-y-2">
           <motion.button
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
+            onClick={handleZoomIn}
           >
             <Plus size={20} className="text-gray-700" />
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
+            onClick={handleZoomOut}
           >
             <Minus size={20} className="text-gray-700" />
-          </motion.button>
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
-          >
-            <Compass size={20} className="text-gray-700" />
           </motion.button>
         </div>
 
@@ -163,7 +471,7 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
           onClick={handleCurrentLocation}
           className="absolute bottom-32 right-4 bg-white rounded-full p-3 shadow-lg"
         >
-          <Navigation size={24} className="text-blue-500" />
+          <Navigation size={24} className="text-[#007AFF]" />
         </motion.button>
       </div>
 
@@ -181,14 +489,15 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
               <div className="space-y-3">
                 {searchResults
                   .filter((result) => !searchQuery || result.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                  .map((result, index) => (
+                  .map((result) => (
                     <motion.div
-                      key={index}
+                      key={result.id}
                       whileTap={{ scale: 0.98 }}
                       className="flex items-center p-2 hover:bg-gray-100 rounded-lg"
+                      onClick={() => handlePlaceSelect(result as any)}
                     >
                       <div className="w-10 h-10 bg-[#E9E9EB] rounded-lg flex items-center justify-center mr-3">
-                        <MapPin size={18} className="text-red-500" />
+                        <MapPin size={18} className="text-[#FF3B30]" />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium">{result.name}</div>
@@ -203,44 +512,140 @@ export default function IOSMaps({ onClose }: IOSMapsProps) {
         )}
       </AnimatePresence>
 
-      {/* Bottom sheet with nearby places */}
+      {/* Bottom sheet with nearby places - using Framer Motion for interactive dragging */}
       <AnimatePresence>
         {showBottomSheet && (
           <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 20 }}
-            style={{ height: bottomSheetHeight }}
-            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-lg z-10"
+            ref={bottomSheetRef}
+            drag="y"
+            dragConstraints={{ top: expandedPosition, bottom: collapsedPosition }}
+            dragElastic={0.1}
+            dragMomentum={false}
+            onDragStart={handleSheetDragStart}
+            onDragEnd={handleSheetDragEnd}
+            initial={{ y: partialPosition }}
+            animate={{ y: sheetY.get() }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="absolute left-0 right-0 bg-white rounded-t-xl shadow-lg z-10"
+            style={{
+              height: containerHeight,
+              top: 0,
+            }}
           >
             <div className="p-2 flex justify-center" onClick={toggleBottomSheet}>
               <div className="w-10 h-1 bg-gray-300 rounded-full"></div>
             </div>
-            <div className="px-4 pb-4 overflow-y-auto h-full">
-              <h3 className="text-xl font-semibold mb-4">Around You</h3>
-              <div className="space-y-4">
-                {nearbyPlaces.map((place, index) => (
-                  <motion.div
-                    key={index}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center p-2 hover:bg-gray-100 rounded-lg"
-                  >
-                    <div className="w-12 h-12 bg-[#E9E9EB] rounded-lg flex items-center justify-center mr-3">
-                      <MapPin size={20} className="text-red-500" />
+
+            {selectedPlace ? (
+              <div className="px-4 pb-4 overflow-y-auto" style={{ height: containerHeight - 20 }}>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-xl font-semibold">{selectedPlace.name}</h3>
+                    <button onClick={() => setSelectedPlace(null)} className="text-[#007AFF]">
+                      <X size={20} />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center text-sm">
+                      <Star size={14} className="text-yellow-500 mr-1" />
+                      <span>{selectedPlace.rating}</span>
                     </div>
-                    <div className="flex-1">
-                      <div className="font-medium">{place.name}</div>
-                      <div className="text-sm text-gray-500">{place.category}</div>
-                      <div className="text-xs text-gray-400">
-                        {place.distance} • {place.address}
-                      </div>
+                    <span className="text-gray-400">•</span>
+                    <div className="text-sm text-gray-600">{selectedPlace.category}</div>
+                    <span className="text-gray-400">•</span>
+                    <div className="text-sm text-green-600 flex items-center">
+                      <Clock size={14} className="mr-1" />
+                      {selectedPlace.hours}
                     </div>
-                    <ChevronRight size={18} className="text-gray-400" />
-                  </motion.div>
-                ))}
+                  </div>
+
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <div className="text-sm text-gray-500">{selectedPlace.address}</div>
+                    <div className="text-sm text-gray-500 mt-1">{selectedPlace.distance} away</div>
+                  </div>
+
+                  <div className="flex space-x-3">
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 bg-[#007AFF] text-white py-3 rounded-lg font-medium flex items-center justify-center"
+                    >
+                      <Car size={18} className="mr-2" />
+                      Directions
+                    </motion.button>
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 bg-gray-100 py-3 rounded-lg font-medium"
+                    >
+                      Call
+                    </motion.button>
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 bg-gray-100 py-3 rounded-lg font-medium"
+                    >
+                      Website
+                    </motion.button>
+                  </div>
+
+                  <div className="pt-4">
+                    <h4 className="text-lg font-medium mb-3">Photos</h4>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
+                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
+                      <div className="aspect-square bg-gray-200 rounded-lg"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="px-4 pb-4 overflow-y-auto" style={{ height: containerHeight - 20 }}>
+                <h3 className="text-xl font-semibold mb-4">Around You</h3>
+
+                {/* Categories */}
+                <div className="mb-6 overflow-x-auto">
+                  <div className="flex space-x-4 pb-2">
+                    {categories.map((category) => (
+                      <div key={category.id} className="flex flex-col items-center">
+                        <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                          <span className="text-2xl">{category.icon}</span>
+                        </div>
+                        <span className="text-xs">{category.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {nearbyPlaces.map((place) => (
+                    <motion.div
+                      key={place.id}
+                      whileTap={{ scale: 0.98 }}
+                      className="flex items-center p-2 hover:bg-gray-50 rounded-lg"
+                      onClick={() => handlePlaceSelect(place)}
+                    >
+                      <div className="w-12 h-12 bg-[#E9E9EB] rounded-lg flex items-center justify-center mr-3">
+                        <MapPin size={20} className="text-[#FF3B30]" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium">{place.name}</div>
+                        <div className="flex items-center text-xs text-gray-500 mt-0.5">
+                          <Star size={12} className="text-yellow-500 mr-1" />
+                          <span>{place.rating}</span>
+                          <span className="mx-1">•</span>
+                          <span>{place.category}</span>
+                        </div>
+                        <div className="flex items-center text-xs text-gray-400 mt-0.5">
+                          <span>{place.distance}</span>
+                          <span className="mx-1">•</span>
+                          <span>{place.address}</span>
+                        </div>
+                      </div>
+                      <ChevronRight size={18} className="text-gray-400" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
