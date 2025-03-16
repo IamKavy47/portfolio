@@ -105,8 +105,8 @@ export default function Window({
   const toggleMaximize = () => {
     setIsMaximized(!isMaximized)
     if (!isMaximized) {
-      setSize({ width: window.innerWidth, height: window.innerHeight - 40 })
-      setPosition({ x: 0, y: 40 })
+      setSize({ width: window.innerWidth, height: window.innerHeight - 30 }) // Take full space except 30px from top
+      setPosition({ x: 0, y: 30 })
     } else {
       setSize(initialSize)
       setPosition(initialPosition)
@@ -116,7 +116,7 @@ export default function Window({
   useEffect(() => {
     const handleResize = () => {
       if (isMaximized) {
-        setSize({ width: window.innerWidth, height: window.innerHeight - 40 })
+        setSize({ width: window.innerWidth, height: window.innerHeight - 30 }) // Dynamically update on resize
       }
     }
 
@@ -142,24 +142,21 @@ export default function Window({
       animate={{
         scale: isMinimized ? 0.5 : 1,
         opacity: isMinimized ? 0 : 1,
-        y: isMinimized ? 100 : 0,
+        y: isMinimized ? 100 : position.y,
         width: isMaximized ? "100vw" : size.width,
-        height: isMaximized ? "calc(100vh - 40px)" : size.height,
+        height: isMaximized ? "calc(100vh - 30px)" : size.height,
         x: isMaximized ? 0 : position.x,
-        y: isMaximized ? 40 : position.y,
-        transition: { type: "spring", stiffness: 300, damping: 30 },
       }}
       transition={{
         type: "spring",
         stiffness: 300,
         damping: 30,
       }}
-      className="absolute bg-white rounded-[10px] shadow-lg overflow-hidden max-w-full max-h-full"
+      className="absolute z-40 bg-white rounded-[10px] shadow-lg overflow-hidden max-w-full max-h-full"
       style={{
         zIndex: isMinimized ? 0 : 10,
         width: isMaximized ? "100%" : Math.min(size.width, window.innerWidth - 20),
-        height: isMaximized ? "calc(100% - 40px)" : Math.min(size.height, window.innerHeight - 60),
-        cursor: resizeDirection.current ? `${resizeDirection.current}-resize` : "auto",
+        height: isMaximized ? "calc(100% - 30px)" : Math.min(size.height, window.innerHeight - 60),
       }}
     >
       <div
@@ -168,50 +165,14 @@ export default function Window({
       >
         <div className="flex space-x-2">
           <button onClick={onClose} className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
-          <button
-            onClick={() => setIsMinimized(true)}
-            className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"
-          />
-          <button
-            onClick={toggleMaximize}
-            className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
-          />
+          <button onClick={() => setIsMinimized(true)} className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
+          <button onClick={toggleMaximize} className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
         </div>
         <h2 className="text-sm font-medium absolute left-1/2 transform -translate-x-1/2">{title}</h2>
       </div>
       <div className="relative" style={{ height: "calc(100% - 32px)", overflow: "hidden" }}>
         {children}
       </div>
-      {!isMaximized && (
-        <>
-          <div
-            className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
-            onMouseDown={(e) => handleResize(e, "bottom-right")}
-            onTouchStart={(e) => handleResize(e, "bottom-right")}
-          />
-          <div
-            className="absolute bottom-0 left-0 right-4 h-2 cursor-s-resize"
-            onMouseDown={(e) => handleResize(e, "bottom")}
-            onTouchStart={(e) => handleResize(e, "bottom")}
-          />
-          <div
-            className="absolute top-8 bottom-4 right-0 w-2 cursor-e-resize"
-            onMouseDown={(e) => handleResize(e, "right")}
-            onTouchStart={(e) => handleResize(e, "right")}
-          />
-          <div
-            className="absolute top-8 left-0 bottom-4 w-2 cursor-w-resize"
-            onMouseDown={(e) => handleResize(e, "left")}
-            onTouchStart={(e) => handleResize(e, "left")}
-          />
-          <div
-            className="absolute top-8 left-0 right-0 h-2 cursor-n-resize"
-            onMouseDown={(e) => handleResize(e, "top")}
-            onTouchStart={(e) => handleResize(e, "top")}
-          />
-        </>
-      )}
     </motion.div>
   )
 }
-

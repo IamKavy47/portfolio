@@ -90,7 +90,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
   }
 
   return (
-    <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+    <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
       <motion.div
         ref={dockRef}
         initial={{ y: 100 }}
