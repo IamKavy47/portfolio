@@ -26,12 +26,12 @@ const wallpaperCategories = {
   dynamic: [
     {
       name: "Sequoia",
-      url: "/wall/wall5.jpeg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall5.jpeg",
       description: "Dynamic color waves",
     },
     {
       name: "Monterey",
-      url: "/wall/wall1.jpg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall1.jpg",
       description: "Abstract patterns",
     },
     {
@@ -41,18 +41,18 @@ const wallpaperCategories = {
     },
     {
       name: "Flower",
-      url:"/wall/wall4.jpeg"
+      url:"https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall4.jpg"
     }
   ],
   landscape: [
     {
       name: "California Coast",
-      url: "/wall/wall2.jpg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall2.jpg",
       description: "Beautiful coastline view",
     },
     {
       name: "Beautiful Landscape",
-      url: "/wall/wall3.jpg?height=400&width=600",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall3.jpg?height=400&width=600",
       description: "Majestic redwood trees",
     },
     {
