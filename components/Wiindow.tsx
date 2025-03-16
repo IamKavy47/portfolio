@@ -160,7 +160,7 @@ export default function Window({
       }}
     >
       <div
-        className="bg-gray-200 px-4 py-2 flex justify-between items-center cursor-move select-none"
+        className="bg-white/60 border-r-[541.5px] border-white px-4 py-2 flex justify-between items-center cursor-move select-none"
         onPointerDown={(e) => dragControls.start(e)}
       >
         <div className="flex space-x-2">
