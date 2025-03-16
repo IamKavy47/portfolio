@@ -62,7 +62,7 @@ const height = useSpring(widthSync, {
           ${isOpen ? 'after:absolute after:bottom-[-8px] after:w-1 after:h-1 after:bg-white/50 after:rounded-full' : ''}
         `}
       >
-        <div className="w-full h-full bg-gradient-to-b from-white/20 to-transparent backdrop-blur">
+        <div className="w-full h-full bg-transparent backdrop-blur">
           {item.icon}
         </div>
       </motion.div>
@@ -92,7 +92,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
   const dockItems = [
     {
       name: "AboutMe",
-      icon: <img src="https://i.ibb.co/LDzGD6QZ/generated-image-1741935068996.webp" alt="AboutMe" className="w-full h-full object-cover rounded-lg" />,
+      icon: <img src="/Icon/finder.png" alt="AboutMe" className="w-55 h-55 object-cover rounded-lg" />,
       background: "bg-transparent",
     },
     {
@@ -127,7 +127,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
     },
     {
       name: "VSCode",
-      icon: <img src="/Icon/code.png" alt="VS Code" className="w-full h-full object-cover" />,
+      icon: <img src="/Icon/code.png" alt="VS Code" className="w- h-full object-cover" />,
       background: "bg-transparent",
     },
     {
@@ -145,6 +145,27 @@ export default function Dock({ openApp, openApps }: DockProps) {
       icon: <img src="/Icon/Contacts.png" alt="contact" className="w-full h-full object-cover rounded-lg" />,
       background: "bg-transparent",
     },
+    {
+      name: "Instagram",
+      icon: <img src="/Icon/ig.jpg" alt="Instagram" className="w-full h-full object-cover rounded-lg" />,
+      background: "bg-transparent",
+    },
+    {
+      name: "Youtube",
+      icon: <img src="/Icon/yt.png" alt="Github" />,
+      background: "bg-white"
+    },
+    {
+      name: "Aplle Music",
+      icon: <img src="/Icon/itune.jpg" alt="Github" />,
+      background: "bg-white"
+    },
+
+    {
+      name: "Github",
+      icon: <img src="/Icon/git.jpg" alt="Github" />,
+    background: "bg-white"
+    }
   ];
 
   return (
