@@ -22,17 +22,18 @@ function AppIcon({ mouseX, item, isOpen, onClick }: AppIconProps) {
 
   // Adjusted scaling values for more subtle animation
   const widthSync = useTransform(distance, [-150, 0, 150], [70, 100, 70]);
-  const width = useSpring(widthSync, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12
-  },
-  const height = useSpring(widthSync, {
+ const width = useSpring(widthSync, {
   mass: 0.1,
   stiffness: 150,
   damping: 12
 });
-;
+
+const height = useSpring(widthSync, {
+  mass: 0.1,
+  stiffness: 150,
+  damping: 12
+});
+
   
   const y = useTransform(width, [55, 100], [0, -15]);
 
