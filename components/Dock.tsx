@@ -96,6 +96,11 @@ export default function Dock({ openApp, openApps }: DockProps) {
       background: "bg-transparent",
     },
     {
+      name: "Launchpad",
+      icon: <img src="/Icon/launchpad.png" alt="Launchpad" className="w-55 h-55 object-cover rounded-lg" />,
+      background: "bg-transparent",
+    },
+    {
       name: "Calculator",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-full h-full rounded-lg">
