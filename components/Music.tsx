@@ -67,15 +67,15 @@ export default function Music({ onClose, onFocus }: MusicProps) {
     {
       id: 1,
       title: "Phonk",
-      description: "My Favourite phonks",
-      cover: "/placeholder.svg?height=400&width=400&text=Today's+Hits",
+      description: "Some phonks",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
           title: "Woops",
           artist: "Bounty Hunter Woops (TECHNO)",
           album: "",
-          cover: "/placeholder.svg?height=400&width=400&text=Woops",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/woops.jpeg?height=400&width=400&text=Woops",
           duration: 259,
           file: "/woop.mp3", // This is a path that should be valid in your project
         },

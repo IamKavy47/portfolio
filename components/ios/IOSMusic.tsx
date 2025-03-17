@@ -70,7 +70,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 1,
       title: "Phonk",
       description: "My Favourite phonks",
-      cover: "/placeholder.svg?height=400&width=400&text=Today's+Hits",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
