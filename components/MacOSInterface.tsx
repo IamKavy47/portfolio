@@ -82,7 +82,7 @@ export default function MacOSInterface() {
         <Youtube onClose={() => closeApp("Youtube")} onFocus={()=> focusApp("Youtube")} />
       )}
       {openApps.includes("Music") && (
-        <Youtube onClose={() => closeApp("Music")} onFocus={()=> focusApp("Music")} />
+        <Music onClose={() => closeApp("Music")} onFocus={()=> focusApp("Music")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
