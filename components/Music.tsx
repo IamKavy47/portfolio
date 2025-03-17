@@ -103,14 +103,14 @@ export default function Music({ onClose, onFocus }: MusicProps) {
       id: 2,
       title: "Yo Yo Honey Singh",
       description: "Some Honey Singh's Songs..",
-      cover: "/placeholder.svg?height=400&width=400&text=Chill+Vibes",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
       songs: [
         {
           id: 4,
           title: "Millionaire",
           artist: "YOYO Honey Singh",
           album: "Glory",
-          cover: "/placeholder.svg?height=400&width=400&text=Sunset+Dreams",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
           duration: 209,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.mp3",
         },
