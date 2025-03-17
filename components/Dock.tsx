@@ -96,11 +96,6 @@ export default function Dock({ openApp, openApps }: DockProps) {
       background: "bg-transparent",
     },
     {
-      name: "Projects",
-      icon: <img src="/Icon/project.png" alt="projects" className="w-full h-full object-cover rounded-lg" />,
-      background: "bg-transparent",
-    },
-    {
       name: "Calculator",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" id="calculator" className="w-full h-full rounded-lg">
@@ -155,13 +150,22 @@ export default function Dock({ openApp, openApps }: DockProps) {
       background: "bg-transparent",
     },
     {
-      name: "Safari",
-      icon: <img src="/Icon/safari.png" alt="safari" className="w-full h-full object-cover rounded-lg" />,
-      background: "bg-transparent",
+      name: "Message",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-cover rounded-lg" viewBox="0 0 120 120" id="ios-message">
+      <defs>
+        <linearGradient id="a" x1="60" x2="60" y2="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#5cf777"></stop>
+          <stop offset="1" stop-color="#0dbc29"></stop>
+        </linearGradient>
+      </defs>
+      <rect width="120" height="120" fill="url(#a)" rx="26"></rect>
+      <path fill="#fefefe" d="M60.51 21.51c-24.3 0-44 16.12-44 36 0 12.64 8 23.75 20 30.17a2 2 0 0 1 1 2.46 18 18 0 0 1-5.55 7.3 1 1 0 0 0 .81 1.76 35.84 35.84 0 0 0 14.54-6 3.92 3.92 0 0 1 3.07-.71 53.51 53.51 0 0 0 10.15 1c24.3 0 44-16.12 44-36S84.81 21.51 60.51 21.51Z"></path>
+    </svg>,
+    background: "",
     },
     {
-      name: "ContactApp",
-      icon: <img src="/Icon/Contacts.png" alt="contact" className="w-full h-full object-cover rounded-lg" />,
+      name: "Safari",
+      icon: <img src="/Icon/safari.png" alt="safari" className="w-full h-full object-cover rounded-lg" />,
       background: "bg-transparent",
     },
     {
@@ -177,6 +181,11 @@ export default function Dock({ openApp, openApps }: DockProps) {
     {
       name: "Music",
       icon: <img src="/Icon/Music.png" alt="Music" />,
+      background: "bg-white"
+    },
+    {
+      name: "Weather",
+      icon: <img src="/Icon/weather.jpg" alt="Weather" />,
       background: "bg-white"
     },
 
