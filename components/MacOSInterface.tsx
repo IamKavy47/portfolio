@@ -14,6 +14,7 @@ import Browser from "@/components/Browser"
 import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
 import Youtube from "@/components/youtube"
+import Music from "./Music"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -79,6 +80,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Youtube") && (
         <Youtube onClose={() => closeApp("Youtube")} onFocus={()=> focusApp("Youtube")} />
+      )}
+      {openApps.includes("Music") && (
+        <Youtube onClose={() => closeApp("Music")} onFocus={()=> focusApp("Music")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
