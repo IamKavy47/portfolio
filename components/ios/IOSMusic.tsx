@@ -105,18 +105,18 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
     },
     {
       id: 2,
-      title: "Chill Vibes",
-      description: "Relax and unwind with these smooth tracks",
+      title: "Yo Yo Honey Singh",
+      description: "Some Honey Singh's Songs..",
       cover: "/placeholder.svg?height=400&width=400&text=Chill+Vibes",
       songs: [
         {
           id: 4,
-          title: "Sunset Dreams",
-          artist: "Lofi Collective",
-          album: "Evening Sessions",
+          title: "Millionaire",
+          artist: "YOYO Honey Singh",
+          album: "Glory",
           cover: "/placeholder.svg?height=400&width=400&text=Sunset+Dreams",
-          duration: 195,
-          file: "/woop.mp3",
+          duration: 209,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.mp3",
         },
         {
           id: 5,
