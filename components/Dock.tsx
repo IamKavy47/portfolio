@@ -171,7 +171,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
     },
     {
       name: "Youtube",
-      icon: <img src="/Icon/yt.png" alt="Github" />,
+      icon: <img src="/Icon/yt.png" alt="Youtube" />,
       background: "bg-white"
     },
     {

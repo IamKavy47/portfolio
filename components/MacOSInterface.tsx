@@ -13,6 +13,7 @@ import Calendar from "@/components/Calendar"
 import Browser from "@/components/Browser"
 import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
+import Youtube from "@/components/youtube"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -75,6 +76,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("ContactApp") && (
         <ContactApp onClose={() => closeApp("ContactApp")} onFocus={() => focusApp("ContactApp")} />
+      )}
+      {openApps.includes("Youtube") && (
+        <Youtube onClose={() => closeApp("Youtube")} onFocus={()=> focusApp("Youtube")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
