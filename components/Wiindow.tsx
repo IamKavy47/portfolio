@@ -159,17 +159,30 @@ export default function Window({
         height: isMaximized ? "calc(100% - 30px)" : Math.min(size.height, window.innerHeight - 60),
       }}
     >
-      <div
-        className="bg-white/60 px-4 py-2 flex justify-between items-center cursor-move select-none"
-        onPointerDown={(e) => dragControls.start(e)}
-      >
-        <div className="flex space-x-2">
-          <button onClick={onClose} className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
-          <button onClick={() => setIsMinimized(true)} className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
-          <button onClick={toggleMaximize} className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+      {/* Split titlebar into two sections */}
+      <div className="flex cursor-move select-none">
+        {/* Left section of titlebar with fixed width */}
+        <div 
+          className="w-64 bg-white/60 backdrop-blur-sm border-b border-gray-300 px-4 py-2 flex items-center" 
+          onPointerDown={(e) => dragControls.start(e)}
+        >
+          <div className="flex space-x-2">
+            <button onClick={onClose} className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
+            <button onClick={() => setIsMinimized(true)} className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
+            <button onClick={toggleMaximize} className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+          </div>
         </div>
-        <h2 className="text-sm font-medium absolute left-1/2 transform -translate-x-1/2">{title}</h2>
+        
+        {/* Right section of titlebar */}
+        <div 
+          className="flex-1 bg-white border-r-[20%] border-white border-b border-gray-300 px-4 py-2 flex justify-center items-center"
+          onPointerDown={(e) => dragControls.start(e)}
+        >
+          <h2 className="text-sm font-medium">{title}</h2>
+        </div>
       </div>
+      
+      {/* Main content area */}
       <div className="relative bg-transparent" style={{ height: "calc(100% - 32px)", overflow: "hidden" }}>
         {children}
       </div>
