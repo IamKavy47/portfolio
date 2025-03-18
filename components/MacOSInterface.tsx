@@ -15,6 +15,7 @@ import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
 import Youtube from "@/components/youtube"
 import Music from "./Music"
+import Launchpad from "./Launchpad"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -83,6 +84,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Music") && (
         <Music onClose={() => closeApp("Music")} onFocus={()=> focusApp("Music")} />
+      )}
+      {openApps.includes("Launchpad") && (
+        <Launchpad onClose={() => closeApp("Launchpad")} onFocus={()=> focusApp("Launchpad")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
