@@ -81,7 +81,7 @@ export default function Music({ onClose, onFocus }: MusicProps) {
         },
         {
           id: 2,
-          title: "Matsuka",
+          title: "Matushka",
           artist: "satirin",
           album: "",
           cover: "/placeholder.svg?height=400&width=400&text=Urban+Rhythm",
