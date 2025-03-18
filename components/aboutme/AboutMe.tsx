@@ -1,8 +1,36 @@
+"use client"
+
+import type React from "react"
+
 import { useDeviceDetect } from "@/hooks/useDeviceDetect"
 import Window from "./Window"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Code, Briefcase, GraduationCap, Award, User, Phone, Twitter, Github, Linkedin, FolderOpen } from "lucide-react"
+import {
+  Code,
+  Briefcase,
+  GraduationCap,
+  Award,
+  User,
+  Phone,
+  Twitter,
+  Github,
+  Linkedin,
+  FolderOpen,
+  Mail,
+  Send,
+  Eye,
+  ExternalLink,
+  Monitor,
+  ShoppingCart,
+  Check,
+  Trophy,
+  Target,
+  BookOpen,
+  Server,
+  Gauge,
+  Download,
+} from "lucide-react"
 import { useState } from "react"
 
 interface AboutMeProps {
@@ -15,13 +43,11 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
   const [activeSection, setActiveSection] = useState("about")
 
   // Simple sidebar item component
-  const SidebarItem = ({ id, label, icon }: { id: string, label: string, icon: React.ReactNode }) => (
-    <button 
+  const SidebarItem = ({ id, label, icon }: { id: string; label: string; icon: React.ReactNode }) => (
+    <button
       onClick={() => setActiveSection(id)}
       className={`flex items-center w-full px-4 py-2 mb-1 rounded-[8px] transition-all duration-200 ${
-        activeSection === id 
-          ? "bg-black/20 rounded-[10px] text-black font-medium" 
-          : "hover:bg-black/10 text-black"
+        activeSection === id ? "bg-black/20 rounded-[10px] text-black font-medium" : "hover:bg-black/10 text-black"
       }`}
     >
       {icon && <span className="mr-3">{icon}</span>}
@@ -31,111 +57,440 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
 
   // Content sections
   const aboutContent = (
-    <div className="space-y-4">
-      <div className="flex flex-col items-center mb-6">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-          <Image src="/kavy.jpeg" alt="Kavy Porwal" width={128} height={128} className="object-cover" />
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-col md:flex-row items-center gap-6">
+        <div className="relative group">
+          <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-lg transition-transform duration-300 group-hover:scale-105">
+            <Image src="/kavy.jpeg" alt="Kavy Porwal" width={144} height={144} className="object-cover" />
+          </div>
+          <div className="absolute -bottom-2 -right-2 bg-blue-500 text-white rounded-full p-2 shadow-md transition-transform duration-300 group-hover:scale-110">
+            <Code size={18} />
+          </div>
         </div>
-        <h1 className="text-3xl font-bold mb-2">Kavy Porwal</h1>
-        <h2 className="text-xl text-gray-600">Frontend Developer</h2>
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Kavy Porwal
+          </h1>
+          <h2 className="text-xl text-gray-600 mb-3">Frontend Developer</h2>
+          <div className="flex flex-wrap justify-center md:justify-start gap-2">
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">React</span>
+            <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium">Next.js</span>
+            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">TypeScript</span>
+          </div>
+        </div>
       </div>
-      <p className="text-gray-700">
-        I'm a passionate frontend developer focused on creating beautiful and functional user interfaces using modern web technologies.
-      </p>
+      <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 shadow-sm">
+        <p className="text-gray-700 leading-relaxed">
+          I'm a passionate frontend developer focused on creating beautiful and functional user interfaces using modern
+          web technologies. I love turning complex problems into simple, beautiful, and intuitive designs.
+        </p>
+        <div className="mt-4 flex gap-3">
+          <Button variant="outline" className="rounded-full border-blue-300 hover:bg-blue-50 transition-all">
+            <User className="mr-2 h-4 w-4" /> More About Me
+          </Button>
+          <Button className="rounded-full bg-blue-500 hover:bg-blue-600 transition-all">
+            <FolderOpen className="mr-2 h-4 w-4" /> View Projects
+          </Button>
+        </div>
+      </div>
     </div>
   )
 
   const skillsContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Technical Skills</h3>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow-sm">
-          <h4 className="font-medium mb-2">Frontend</h4>
+    <div className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Technical Skills
+      </h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-all">
+          <h4 className="font-medium mb-3 flex items-center text-blue-700">
+            <Code className="mr-2 h-5 w-5" /> Frontend
+          </h4>
           <div className="flex flex-wrap gap-2">
             {["React", "Next.js", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"].map((skill) => (
-              <span key={skill} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">
+              <span
+                key={skill}
+                className="bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all hover:translate-y-[-2px]"
+              >
                 {skill}
               </span>
             ))}
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm">
-          <h4 className="font-medium mb-2">Backend</h4>
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-xl border border-purple-100 shadow-sm hover:shadow-md transition-all">
+          <h4 className="font-medium mb-3 flex items-center text-purple-700">
+            <Server className="mr-2 h-5 w-5" /> Backend
+          </h4>
           <div className="flex flex-wrap gap-2">
-            {["Node.js", "Express", "Python", "RESTful APIs"].map((skill) => (
-              <span key={skill} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">
+            {["Node.js", "Python"].map((skill) => (
+              <span
+                key={skill}
+                className="bg-white text-purple-800 px-3 py-1 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all hover:translate-y-[-2px]"
+              >
                 {skill}
               </span>
             ))}
           </div>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-5 rounded-xl border border-gray-200 shadow-sm">
+        <h4 className="font-medium mb-3 flex items-center text-gray-700">
+          <Gauge className="mr-2 h-5 w-5" /> Proficiency
+        </h4>
+        <div className="space-y-4">
+          {[
+            { name: "Python", level: 85 },
+            { name: "React", level: 75 },
+            { name: "TypeScript", level: 75 },
+            { name: "Next.js", level: 70 },
+            { name: "CSS/Tailwind", level: 85 },
+          ].map((skill) => (
+            <div key={skill.name} className="space-y-1">
+              <div className="flex justify-between text-sm">
+                <span>{skill.name}</span>
+                <span className="text-gray-500">{skill.level}%</span>
+              </div>
+              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
+                  style={{ width: `${skill.level}%` }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   )
 
   const experienceContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Professional Experience</h3>
-      <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-        <h4 className="font-medium">Error 404</h4>
-        <p className="text-sm text-gray-600">No Experience Found.</p>
-        <p className="text-sm text-gray-600 mt-2">
-          Currently seeking opportunities to apply my skills and grow as a developer.
-        </p>
+    <div className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Professional Experience
+      </h3>
+
+      <div className="relative border-l-2 border-blue-200 pl-6 pb-6 ml-3">
+        <div className="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1 border-2 border-white" />
+        <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+          <div className="flex justify-between items-start">
+            <h4 className="font-medium text-lg">Looking for Opportunities</h4>
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-[5px] text-xs font-medium">Present</span>
+          </div>
+          <p className="text-gray-600 mt-1">Open to Work</p>
+          <p className="text-gray-700 mt-3">
+            Currently seeking opportunities to apply my frontend development skills and grow as a developer. I'm
+            passionate about creating intuitive user interfaces and delivering exceptional user experiences.
+          </p>
+          <div className="mt-4">
+            <a href="#contact" className="rounded-full bg-blue w-10 h-5 text-blue-600 border-blue-200 hover:text-blue-500">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 bg-gray-50 p-5 rounded-xl border border-gray-100 shadow-sm">
+        <h4 className="font-medium flex items-center text-gray-700">
+          <Briefcase className="mr-2 h-5 w-5" /> What I'm Looking For
+        </h4>
+        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="bg-white p-3 rounded-[12px] border border-gray-100">
+            <span className="text-blue-600 font-medium">Frontend Development</span>
+            <p className="text-sm text-gray-600 mt-1">Building responsive and accessible web applications</p>
+          </div>
+          <div className="bg-white p-3 rounded-[12px] border border-gray-100">
+            <span className="text-purple-600 font-medium">Machine Learning </span>
+            <p className="text-sm text-gray-600 mt-1">Building machine learning projects to solve real world problems.</p>
+          </div>
+        </div>
       </div>
     </div>
   )
 
   const educationContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Education</h3>
-      <div className="bg-white p-4 rounded-lg shadow-sm">
-        <h4 className="font-medium">B.tech in Computer Science</h4>
-        <p className="text-sm text-gray-600">Mandsaur University, 2024-2028</p>
-        <p className="text-sm text-gray-700 mt-2">
-          Focusing on modern web development technologies and computer science fundamentals.
-        </p>
+    <div className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Education
+      </h3>
+
+      <div className="relative border-l-2 border-blue-200 pl-6 pb-6 ml-3">
+        <div className="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1 border-2 border-white" />
+        <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+          <div className="flex justify-between items-start">
+            <h4 className="font-medium text-lg">B.Tech in Computer Science</h4>
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs font-medium">2024-2028</span>
+          </div>
+          <p className="text-gray-600 mt-1">Mandsaur University</p>
+          <div className="mt-4 space-y-3">
+            <div className="bg-gray-50 p-3 rounded-[12px] border border-gray-100">
+              <h5 className="text-sm font-medium text-gray-700">Key Courses</h5>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-[5px] text-xs">Machine Learning</span>
+                <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-[5px] text-xs">Web Development</span>
+                <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-[5px] text-xs">Datastructure</span>
+              </div>
+            </div>
+            <p className="text-gray-700">
+              Focusing on modern web development technologies and computer science fundamentals. Actively participating
+              in coding competitions and hackathons.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-blue-100 shadow-sm">
+        <h4 className="font-medium flex items-center text-blue-700">
+          <BookOpen className="mr-2 h-5 w-5" /> Self-Learning Journey
+        </h4>
+        <div className="mt-3 space-y-3">
+          <div className="bg-white p-3 rounded-lg border border-blue-100">
+            <span className="text-blue-600 font-medium">Learning Computer Vision</span>
+            <p className="text-sm text-gray-600 mt-1">Currently iam learning Computer Vision from online resources.</p>
+          </div>
+          <div className="bg-white p-3 rounded-lg border border-blue-100">
+            <span className="text-blue-600 font-medium">Frontend Development</span>
+            <p className="text-sm text-gray-600 mt-1">Nextjs, TypeScript, Tailwind CSS.</p>
+          </div>
+        </div>
       </div>
     </div>
   )
 
   const achievementsContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Achievements</h3>
-      <div className="bg-white p-4 rounded-lg shadow-sm">
-        <p className="text-gray-600 italic">Loading...</p>
+    <div className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Achievements
+      </h3>
+
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
+          <Award className="h-8 w-8 text-yellow-500 mb-3" />
+          <h4 className="font-medium text-lg">Hackathon Finalist</h4>
+          <p className="text-gray-700 mt-2">
+            Reached the finals in the university hackathon with an innovative web application.
+          </p>
+        </div>
+
+        <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-blue-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
+          <Trophy className="h-8 w-8 text-blue-500 mb-3" />
+          <h4 className="font-medium text-lg">Coding Competition</h4>
+          <p className="text-gray-700 mt-2">Secured 3rd position in the regional coding competition.</p>
+        </div>
+      </div> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
+          <Award className="h-8 w-8 text-yellow-500 mb-3" />
+          <h4 className="font-medium text-lg">Currently don't have big Achievments</h4>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-xl border border-purple-100 shadow-sm">
+        <h4 className="font-medium flex items-center text-purple-700 mb-3">
+          <Target className="mr-2 h-5 w-5" /> Goals for 2025
+        </h4>
+        <div className="space-y-3">
+          <div className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-purple-100 border-2 border-purple-300 flex items-center justify-center mt-0.5">
+              <Check className="h-3 w-3 text-purple-500" />
+            </div>
+            <div>
+              <h5 className="font-medium text-gray-800">Contribute to Open Source</h5>
+              <p className="text-sm text-gray-600">Make meaningful contributions to React and Next.js ecosystem</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-purple-100 border-2 border-purple-300 flex items-center justify-center mt-0.5">
+              <Check className="h-3 w-3 text-purple-500" />
+            </div>
+            <div>
+              <h5 className="font-medium text-gray-800">Build Portfolio Projects</h5>
+              <p className="text-sm text-gray-600">Create 5 high-quality projects showcasing different skills</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-purple-100 border-2 border-purple-300 flex items-center justify-center mt-0.5">
+              <Check className="h-3 w-3 text-purple-500" />
+            </div>
+            <div>
+              <h5 className="font-medium text-gray-800">Master TypeScript</h5>
+              <p className="text-sm text-gray-600">Deepen knowledge of advanced TypeScript patterns</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
 
   const projectsContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Projects</h3>
-      <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-        <h4 className="font-medium">Personal Portfolio</h4>
-        <p className="text-sm text-gray-700">
-          A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI.
-        </p>
+    <div className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Projects
+      </h3>
+
+      <div className="grid grid-cols-1 gap-6">
+        <div className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
+          <div className="h-40 bg-gradient-to-r from-blue-400 to-indigo-500 relative overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Monitor className="h-16 w-16 text-white/80" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
+              <h4 className="text-white font-medium">Personal Portfolio</h4>
+              <div className="flex gap-2">
+                <a href="github.com/iamkavy47/portfolio" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
+                  <Github className="h-4 w-4 text-white" />
+                </a>
+                <a href="iamkavy47.vercel.app" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
+                  <ExternalLink className="h-4 w-4 text-white" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="p-5">
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">Next.js</span>
+              <span className="bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">Tailwind CSS</span>
+              <span className="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">
+                TypeScript
+              </span>
+            </div>
+            <p className="text-gray-700">
+              A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI. The site
+              includes interactive elements and smooth animations.
+            </p>
+            <div className="mt-4 flex justify-between items-center">
+              <Button variant="outline" size="sm" className="rounded-full">
+                <Eye className="mr-2 h-3.5 w-3.5" /> View Details
+              </Button>
+              <span className="text-xs text-gray-500">March 2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
+          <div className="h-40 bg-gradient-to-r from-purple-400 to-pink-500 relative overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ShoppingCart className="h-16 w-16 text-white/80" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
+              <h4 className="text-white font-medium">Codestorm Website </h4>
+              <div className="flex gap-2">
+                <a href="#" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
+                  <Github className="h-4 w-4 text-white" />
+                </a>
+                <a href="mufests.com" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
+                  <ExternalLink className="h-4 w-4 text-white" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="p-5">
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md text-xs font-medium">Nextjs</span>
+              <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded-md text-xs font-medium">Typescript</span>
+              <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-md text-xs font-medium">Aceternity UI</span>
+            </div>
+            <p className="text-gray-700">
+              Codestorm is an National level 36 hours Hackathon conducted by Chancellor Brigade in Mandsaur University. I have used Next js, Typescript , and aceternity ui.
+            </p>
+            <div className="mt-4 flex justify-between items-center">
+              <Button variant="outline" size="sm" className="rounded-full">
+                <Eye className="mr-2 h-3.5 w-3.5" /> View Details
+              </Button>
+              <span className="text-xs text-gray-500">February 2024</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
 
   const contactContent = (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-      <div className="bg-white p-4 rounded-lg shadow-sm">
-        <div className="flex items-center mb-2">
-          <Phone className="w-4 h-4 mr-2" />
-          <span>+91-9991672623</span>
+    <div id="cm" className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Contact Information</h3>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 group">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+              <Phone className="h-5 w-5 text-blue-600" />
+            </div>
+            <div>
+              <h4 className="text-sm text-gray-500 font-medium">Phone</h4>
+              <a href="tel:+9191672623" className="text-gray-800 hover:text-blue-600 transition-colors">+91-91672623</a>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center">
-          <Code className="w-4 h-4 mr-2" />
-          <span>kavyporwal75@gmail.com</span>
+        
+        <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 group">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+              <Mail className="h-5 w-5 text-blue-600" />
+            </div>
+            <div>
+              <h4 className="text-sm text-gray-500 font-medium">Email</h4>
+              <a href="mailto:kavyporwal75@gmail.com" className="text-gray-800 hover:text-blue-600 transition-colors">kavyporwal75@gmail.com</a>
+            </div>
+          </div>
         </div>
-        <div className="mt-4">
-          <Button className="bg-blue-500 rounded-3xl text-white" variant="default">
-            Download Resume
+      </div>
+      
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100 shadow-sm">
+        <h4 className="font-medium text-blue-700 mb-4">Send Me a Message</h4>
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm font-medium text-gray-700">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Your name"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Your email"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="message" className="text-sm font-medium text-gray-700">Message</label>
+            <textarea 
+              id="message" 
+              rows={4} 
+              className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Your message"
+            ></textarea>
+          </div>
+          <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white rounded-[10px] transition-colors">
+            <Send className="mr-2 h-4 w-4" /> Send Message
           </Button>
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center">
+        <Button className="bg-blue-500 rounded-full text-white px-6" variant="default">
+          <Download className="mr-2 h-4 w-4" /> Download Resume
+        </Button>
+        <div className="mt-4 flex gap-4">
+          <a href="https://twitter.com/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+            <Twitter className="h-5 w-5 text-gray-700" />
+          </a>
+          <a href="https://github.com/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+            <Github className="h-5 w-5 text-gray-700" />
+          </a>
+          <a href="https://linkedin.com/in/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+            <Linkedin className="h-5 w-5 text-gray-700" />
+          </a>
         </div>
       </div>
     </div>
@@ -144,14 +499,22 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
   // Content renderer
   const renderContent = () => {
     switch (activeSection) {
-      case "about": return aboutContent;
-      case "skills": return skillsContent;
-      case "experience": return experienceContent;
-      case "education": return educationContent;
-      case "achievements": return achievementsContent;
-      case "projects": return projectsContent;
-      case "contact": return contactContent;
-      default: return aboutContent;
+      case "about":
+        return aboutContent
+      case "skills":
+        return skillsContent
+      case "experience":
+        return experienceContent
+      case "education":
+        return educationContent
+      case "achievements":
+        return achievementsContent
+      case "projects":
+        return projectsContent
+      case "contact":
+        return contactContent
+      default:
+        return aboutContent
     }
   }
 
@@ -160,12 +523,14 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
     return (
       <div className="ios-app h-full">
         <div className="ios-header">
-          <button className="ios-back-button" onClick={onClose}>Back</button>
+          <button className="ios-back-button" onClick={onClose}>
+            Back
+          </button>
           <h1 className="text-xl font-semibold">About Me</h1>
           <div className="w-16"></div>
         </div>
         <div className="flex h-full">
-          <div className="w-1/3 h-full overflow-y-auto" style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
+          <div className="w-1/3 h-full overflow-y-auto" style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}>
             <div className="p-2">
               <SidebarItem id="about" label="About" icon={<User size={18} />} />
               <SidebarItem id="skills" label="Skills" icon={<Code size={18} />} />
@@ -176,9 +541,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
               <SidebarItem id="contact" label="Contact" icon={<Phone size={18} />} />
             </div>
           </div>
-          <div className="flex-1 bg-white p-4 overflow-y-auto">
-            {renderContent()}
-          </div>
+          <div className="flex-1 bg-white p-4 overflow-y-auto">{renderContent()}</div>
         </div>
       </div>
     )
@@ -186,12 +549,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
 
   // Desktop layout with Window
   return (
-    <Window 
-      title="About This Mac" 
-      onClose={onClose} 
-      onFocus={onFocus} 
-      initialSize={{ width: 800, height: 500 }}
-    >
+    <Window title="About This Mac" onClose={onClose} onFocus={onFocus} initialSize={{ width: 800, height: 500 }}>
       <style jsx global>{`
         .sidebar {
           background-color: rgba(255, 255, 255, 0.6);
@@ -199,7 +557,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           -webkit-backdrop-filter: blur(8px);
         }
       `}</style>
-      
+
       <div className="flex h-full">
         {/* Left sidebar - using inline style for transparency since Tailwind might be overridden */}
         <div className="sidebar w-64 border-r border-white/60 h-full overflow-y-auto p-3">
@@ -210,7 +568,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           <SidebarItem id="achievements" label="Achievements" icon={<Award size={18} />} />
           <SidebarItem id="projects" label="Projects" icon={<FolderOpen size={18} />} />
           <SidebarItem id="contact" label="Contact Me" icon={<Phone size={18} />} />
-          
+
           <div className="mt-auto pt-4 border-t border-black/10">
             <h4 className="text-sm px-3 mb-2">Social Links</h4>
             <div className="flex justify-around px-3">
@@ -226,12 +584,11 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
             </div>
           </div>
         </div>
-        
+
         {/* Right content area */}
-        <div className="flex-1 bg-white p-6 overflow-y-auto">
-          {renderContent()}
-        </div>
+        <div className="flex-1 bg-white p-6 overflow-y-auto">{renderContent()}</div>
       </div>
     </Window>
   )
 }
+
