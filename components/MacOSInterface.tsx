@@ -8,14 +8,15 @@ import AboutMe from "@/components/aboutme/AboutMe"
 import Projects from "@/components/Projects"
 import Calculator from "@/components/calculator/Calculator"
 import VSCode from "@/components/vs/VSCode"
-import WallpaperApp from "@/components/WallpaperApp"
+import WallpaperApp from "@/components/Wallpaper/WallpaperApp"
 import Calendar from "@/components/Calendar"
-import Browser from "@/components/Browser"
+import Browser from "@/components/Safari/Browser"
 import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
-import Youtube from "@/components/youtube"
-import Music from "./Music"
+import Youtube from "@/components/Youtube/youtube"
+import Music from "./Music/Music"
 import Launchpad from "./Launchpad"
+import MessagesApp from "./Message/Message"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -87,6 +88,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Launchpad") && (
         <Launchpad onClose={() => closeApp("Launchpad")} onFocus={()=> focusApp("Launchpad")} />
+      )}
+      {openApps.includes("Message") && (
+        <MessagesApp onClose={() => closeApp("Message")} onFocus={()=> focusApp("Message")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>

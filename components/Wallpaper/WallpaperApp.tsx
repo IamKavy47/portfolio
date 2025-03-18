@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Plus, Search } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
-import UploadDialog from "./UploadDialog"
+import UploadDialog from "../UploadDialog"
 import { useInView } from "react-intersection-observer"
 
 interface WallpaperAppProps {
