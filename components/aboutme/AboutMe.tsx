@@ -1,5 +1,5 @@
 import { useDeviceDetect } from "@/hooks/useDeviceDetect"
-import Window from "./Wiindow"
+import Window from "./Window"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Code, Briefcase, GraduationCap, Award, User, Phone, Twitter, Github, Linkedin, FolderOpen } from "lucide-react"
