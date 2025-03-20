@@ -849,7 +849,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   return (
-    <div className="h-[758px] w-[350px] bg-white text-black flex flex-col overflow-y-auto pb-[120px]">
+    <div className="h-[758px] w-[350px] bg-white text-black flex flex-col overflow-y-auto">
       {/* Main content */}
       <AnimatePresence mode="wait">
         {activeView === "home" && (
