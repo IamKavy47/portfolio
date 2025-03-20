@@ -567,4 +567,3 @@ ${conversation.contactName}:`
     </Window>
   )
 }
-
