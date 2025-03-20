@@ -203,7 +203,7 @@ const initialConversations: Conversation[] = [
 ]
 
 // API key should be stored in environment variables in a real app
-const API_KEY = "YOUR_API_KEY" // Replace with your actual API key
+const API_KEY = "AIzaSyB9uxgaMi1lbceCTnUNQ5Uj-H7X6_r6zps" // Replace with your actual API key
 
 export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
   const [conversations, setConversations] = useState<Conversation[]>(initialConversations)
