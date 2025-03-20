@@ -1,13 +1,21 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
-export default function Launchpad() {
+interface LaunchpadProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default function Launchpad({ isOpen, onClose }: LaunchpadProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedAppIndex, setSelectedAppIndex] = useState(-1)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Sample app data - you would replace this with your actual apps
   const apps = [
@@ -36,9 +44,33 @@ export default function Launchpad() {
   // Filter apps based on search query
   const filteredApps = apps.filter((app) => app.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
-  // Auto-focus search input when component mounts
+  // Auto-focus search input when component mounts or becomes visible
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        searchInputRef.current?.focus()
+      }, 100)
+    } else {
+      clearSearch()
+    }
+  }, [isOpen])
+
+  // Handle keyboard events
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Open Launchpad with F4
+      if (e.key === "F4") {
+        e.preventDefault()
+        if (!isOpen) {
+          // This would be handled by the parent component
+          // but we can expose this functionality
+          document.dispatchEvent(new CustomEvent("open-launchpad"))
+        }
+      }
+
+      // Only process other keyboard events if Launchpad is open
+      if (!isOpen) return
+
       // If user starts typing, focus the search input
       if (e.key.length === 1 && e.key.match(/[a-z0-9]/i) && !e.metaKey && !e.ctrlKey) {
         if (document.activeElement !== searchInputRef.current) {
@@ -63,13 +95,13 @@ export default function Launchpad() {
       // Close Launchpad on Escape
       if (e.key === "Escape") {
         clearSearch()
-        // You would add your close Launchpad logic here
+        onClose()
       }
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [searchQuery, selectedAppIndex, filteredApps])
+  }, [searchQuery, selectedAppIndex, filteredApps, isOpen, onClose])
 
   const clearSearch = () => {
     setSearchQuery("")
@@ -80,10 +112,25 @@ export default function Launchpad() {
     console.log(`Opening app: ${app.name}`)
     // You would add your app opening logic here
     clearSearch()
+    onClose()
   }
 
+  // Handle click on blank space
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only close if the click was directly on the container (not on its children)
+    if (e.target === containerRef.current) {
+      onClose()
+    }
+  }
+
+  if (!isOpen) return null
+
   return (
-    <div className="fixed inset-x-0 top-6 bottom-0 flex flex-col items-center justify-start pt-10 bg-black/20 backdrop-blur-md">
+    <div
+      ref={containerRef}
+      className="fixed inset-0 flex flex-col items-center justify-start pt-10 bg-black/20 backdrop-blur-md z-50 animate-in fade-in duration-200"
+      onClick={handleContainerClick}
+    >
       <div className="w-full max-w-4xl px-4 flex flex-col items-center">
         {/* Search bar */}
         <div className="relative w-64 mb-8">
@@ -108,11 +155,11 @@ export default function Launchpad() {
         </div>
 
         {/* Apps grid */}
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-x-6 gap-y-8 w-full">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-x-6 gap-y-8 w-full max-h-[calc(100vh-150px)] overflow-y-auto pb-8">
           {filteredApps.map((app, index) => (
             <div
               key={app.id}
-              className={`flex flex-col items-center group cursor-pointer ${
+              className={`flex flex-col items-center group cursor-pointer transition-transform duration-200 ${
                 index === selectedAppIndex ? "scale-110" : ""
               }`}
               onClick={() => handleAppClick(app)}
