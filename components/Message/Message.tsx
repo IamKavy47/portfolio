@@ -5,13 +5,14 @@ import Window from "./Window"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Search, Plus, Paperclip, Image, Smile, Mic, Send } from 'lucide-react'
+import { Search, Plus, Paperclip, Image, Smile, Mic, Send, Loader2 } from "lucide-react"
 
 interface Message {
   id: number
   text: string
   sender: "user" | "contact"
   timestamp: Date
+  isLoading?: boolean
 }
 
 interface Conversation {
@@ -23,6 +24,7 @@ interface Conversation {
   unread: number
   messages: Message[]
   isOnline: boolean
+  context?: string // AI context for this conversation
 }
 
 interface MessagesAppProps {
@@ -39,6 +41,8 @@ const initialConversations: Conversation[] = [
     lastMessageTime: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
     unread: 2,
     isOnline: true,
+    context:
+      "You are Arjun Sharma, a software developer who works with the user on a project. You're friendly and professional. The user and you have a meeting scheduled for tomorrow.",
     messages: [
       {
         id: 1,
@@ -66,7 +70,7 @@ const initialConversations: Conversation[] = [
       },
       {
         id: 5,
-        text: "Great! Are we meeting tomorrow?",
+        text: "Are we meeting tomorrow?",
         sender: "contact",
         timestamp: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
       },
@@ -80,6 +84,8 @@ const initialConversations: Conversation[] = [
     lastMessageTime: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
     unread: 0,
     isOnline: true,
+    context:
+      "You are Priya Patel, a marketing specialist who works with the user. You're enthusiastic and detail-oriented. You recently reviewed a presentation the user made.",
     messages: [
       {
         id: 1,
@@ -109,6 +115,8 @@ const initialConversations: Conversation[] = [
     lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
     unread: 0,
     isOnline: false,
+    context:
+      "You are Vikram Malhotra, an old friend of the user. You're casual and friendly. You haven't spoken to the user in a while and want to catch up.",
     messages: [
       {
         id: 1,
@@ -138,6 +146,8 @@ const initialConversations: Conversation[] = [
     lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
     unread: 0,
     isOnline: false,
+    context:
+      "You are Neha Gupta, a colleague who recently asked the user for help with something. You're grateful and professional.",
     messages: [
       {
         id: 1,
@@ -167,6 +177,8 @@ const initialConversations: Conversation[] = [
     lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 48), // 2 days ago
     unread: 0,
     isOnline: true,
+    context:
+      "You are Raj Kapoor, a movie enthusiast and friend of the user. You're passionate about films and love discussing them. You recently watched a new movie and want to share your thoughts.",
     messages: [
       {
         id: 1,
@@ -190,108 +202,190 @@ const initialConversations: Conversation[] = [
   },
 ]
 
+// API key should be stored in environment variables in a real app
+const API_KEY = "YOUR_API_KEY" // Replace with your actual API key
+
 export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
   const [conversations, setConversations] = useState<Conversation[]>(initialConversations)
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(conversations[0])
   const [searchQuery, setSearchQuery] = useState("")
   const [newMessage, setNewMessage] = useState("")
+  const [isGenerating, setIsGenerating] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  
+
   const filteredConversations = conversations.filter((conversation) =>
-    conversation.contactName.toLowerCase().includes(searchQuery.toLowerCase())
+    conversation.contactName.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   const formatTime = (date: Date) => {
     const now = new Date()
     const diff = now.getTime() - date.getTime()
     const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-    
+
     if (days > 0) {
       return days === 1 ? "Yesterday" : date.toLocaleDateString()
     }
-    
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
   }
 
-  const handleSendMessage = () => {
+  const generateAIResponse = async (conversation: Conversation, userMessage: string) => {
+    try {
+      // Dynamically import the Google Generative AI SDK
+      const { GoogleGenerativeAI } = await import("@google/generative-ai")
+
+      // Initialize the API with your API key
+      const genAI = new GoogleGenerativeAI(API_KEY)
+
+      // Get the generative model
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" })
+
+      // Create a conversation history for context
+      const lastMessages = conversation.messages.slice(-5) // Get last 5 messages for context
+      let conversationHistory = lastMessages
+        .map((msg) => `${msg.sender === "user" ? "User" : conversation.contactName}: ${msg.text}`)
+        .join("\n")
+
+      // Add the new user message
+      conversationHistory += `\nUser: ${userMessage}`
+
+      // Create the prompt with context and conversation history
+      const prompt = `${conversation.context || ""}
+      
+The following is a conversation between the user and ${conversation.contactName}.
+${conversationHistory}
+
+${conversation.contactName}:`
+
+      // Generate content based on the prompt
+      const result = await model.generateContent(prompt)
+      const response = result.response.text()
+
+      // Return a cleaned response (remove any name prefixes if the AI included them)
+      return response.replace(/^(.*?):\s*/g, "")
+    } catch (error) {
+      console.error("Error generating AI response:", error)
+      return "Sorry, I couldn't respond right now. Let's talk later."
+    }
+  }
+
+  const handleSendMessage = async () => {
     if (!newMessage.trim() || !selectedConversation) return
 
+    // Add user message
+    const userMessageObj: Message = {
+      id: selectedConversation.messages.length + 1,
+      text: newMessage,
+      sender: "user",
+      timestamp: new Date(),
+    }
+
+    // Update conversations with user message
     const updatedConversations = conversations.map((conversation) => {
       if (conversation.id === selectedConversation.id) {
-        const newMessageObj: Message = {
-          id: conversation.messages.length + 1,
-          text: newMessage,
-          sender: "user",
-          timestamp: new Date(),
-        }
-        
         return {
           ...conversation,
           lastMessage: newMessage,
           lastMessageTime: new Date(),
-          messages: [...conversation.messages, newMessageObj],
+          messages: [...conversation.messages, userMessageObj],
         }
       }
       return conversation
     })
 
     setConversations(updatedConversations)
-    setSelectedConversation(
-      updatedConversations.find((c) => c.id === selectedConversation.id) || null
-    )
+    setSelectedConversation(updatedConversations.find((c) => c.id === selectedConversation.id) || null)
     setNewMessage("")
 
-    // Simulate a reply after a random delay
-    setTimeout(() => {
-      const replies = [
-        "That sounds good!",
-        "I'll get back to you on that.",
-        "Thanks for letting me know.",
-        "Great idea!",
-        "Let me think about it.",
-        "Perfect!",
-        "I agree with you.",
-        "Can we discuss this further?",
-      ]
-      
-      const randomReply = replies[Math.floor(Math.random() * replies.length)]
-      
-      setConversations((prevConversations) => 
+    // Add loading message
+    const loadingMessageObj: Message = {
+      id: selectedConversation.messages.length + 2,
+      text: "...",
+      sender: "contact",
+      timestamp: new Date(),
+      isLoading: true,
+    }
+
+    setConversations((prevConversations) =>
+      prevConversations.map((conversation) => {
+        if (conversation.id === selectedConversation.id) {
+          return {
+            ...conversation,
+            messages: [...conversation.messages, userMessageObj, loadingMessageObj],
+          }
+        }
+        return conversation
+      }),
+    )
+
+    setIsGenerating(true)
+
+    try {
+      // Generate AI response
+      const aiResponse = await generateAIResponse(selectedConversation, newMessage)
+
+      // Replace loading message with AI response
+      setConversations((prevConversations) =>
         prevConversations.map((conversation) => {
           if (conversation.id === selectedConversation.id) {
-            const replyMessage: Message = {
-              id: conversation.messages.length + 2,
-              text: randomReply,
+            const updatedMessages = conversation.messages.filter((msg) => !msg.isLoading)
+            const aiMessageObj: Message = {
+              id: updatedMessages.length + 1,
+              text: aiResponse,
               sender: "contact",
               timestamp: new Date(),
             }
-            
+
             return {
               ...conversation,
-              lastMessage: randomReply,
+              lastMessage: aiResponse,
               lastMessageTime: new Date(),
-              messages: [...conversation.messages, replyMessage],
+              messages: [...updatedMessages, aiMessageObj],
             }
           }
           return conversation
-        })
+        }),
       )
-      
+
+      // Update selected conversation
       setSelectedConversation((prev) => {
         if (!prev) return null
         const updated = conversations.find((c) => c.id === prev.id)
         return updated || prev
       })
-    }, 1000 + Math.random() * 2000) // Random delay between 1-3 seconds
+    } catch (error) {
+      console.error("Error in AI response:", error)
+
+      // Replace loading message with error message
+      setConversations((prevConversations) =>
+        prevConversations.map((conversation) => {
+          if (conversation.id === selectedConversation.id) {
+            const updatedMessages = conversation.messages.filter((msg) => !msg.isLoading)
+            const errorMessageObj: Message = {
+              id: updatedMessages.length + 1,
+              text: "Sorry, I couldn't respond right now. Let's talk later.",
+              sender: "contact",
+              timestamp: new Date(),
+            }
+
+            return {
+              ...conversation,
+              lastMessage: errorMessageObj.text,
+              lastMessageTime: new Date(),
+              messages: [...updatedMessages, errorMessageObj],
+            }
+          }
+          return conversation
+        }),
+      )
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   const handleSelectConversation = (conversation: Conversation) => {
     // Mark as read when selecting
-    setConversations(
-      conversations.map((c) => 
-        c.id === conversation.id ? { ...c, unread: 0 } : c
-      )
-    )
+    setConversations(conversations.map((c) => (c.id === conversation.id ? { ...c, unread: 0 } : c)))
     setSelectedConversation(conversation)
   }
 
@@ -379,9 +473,7 @@ export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold">{selectedConversation.contactName}</h3>
-                  <p className="text-xs text-gray-500">
-                    {selectedConversation.isOnline ? "Active Now" : "Offline"}
-                  </p>
+                  <p className="text-xs text-gray-500">{selectedConversation.isOnline ? "Active Now" : "Offline"}</p>
                 </div>
               </div>
 
@@ -400,10 +492,20 @@ export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
                             : "bg-gray-200 text-gray-800 rounded-tl-none"
                         }`}
                       >
-                        <p>{message.text}</p>
-                        <p className={`text-xs mt-1 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
-                          {formatTime(message.timestamp)}
-                        </p>
+                        {message.isLoading ? (
+                          <div className="flex items-center justify-center py-1">
+                            <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
+                          </div>
+                        ) : (
+                          <>
+                            <p>{message.text}</p>
+                            <p
+                              className={`text-xs mt-1 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}
+                            >
+                              {formatTime(message.timestamp)}
+                            </p>
+                          </>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -435,6 +537,7 @@ export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
                         handleSendMessage()
                       }
                     }}
+                    disabled={isGenerating}
                   />
                   <Button variant="ghost" size="icon" className="rounded-full h-8 w-8">
                     <Smile className="h-5 w-5 text-gray-500" />
@@ -447,9 +550,9 @@ export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
                     size="icon"
                     className="rounded-full h-8 w-8 text-blue-500"
                     onClick={handleSendMessage}
-                    disabled={!newMessage.trim()}
+                    disabled={!newMessage.trim() || isGenerating}
                   >
-                    <Send className="h-5 w-5" />
+                    {isGenerating ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
                   </Button>
                 </div>
               </div>
@@ -464,3 +567,4 @@ export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
     </Window>
   )
 }
+
