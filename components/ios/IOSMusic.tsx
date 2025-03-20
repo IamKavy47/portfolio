@@ -70,60 +70,62 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 1,
       title: "Phonk",
       description: "My Favourite phonks",
-      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
+      cover: "/placeholder.svg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
           title: "Woops",
           artist: "Bounty Hunter Woops (TECHNO)",
-          album: "",
-          cover: "/woop.jpg?height=400&width=400&text=Woops",
-          duration: 259,
+          album: "Chill Sessions",
+          cover: "/placeholder.svg?height=400&width=400&text=Woops",
+          duration: 250,
           file: "/woop.mp3", // This is a path that should be valid in your project
         },
-         {
+        {
           id: 2,
-          title: "Matushka",
-          artist: "satirin",
-          album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/matushka.jpg?height=400&width=400&text=Urban+Rhythm",
-          duration: 146,
-          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/M%F0%9D%9A%8A%F0%9D%9A%9D%F0%9D%9A%9E%F0%9D%9A%9C%F0%9D%9A%91%F0%9D%9A%94%F0%9D%9A%8A%20%20U%F0%9D%9A%95%F0%9D%9A%9D%F0%9D%9A%9B%F0%9D%9A%8A%F0%9D%9A%8F%F0%9D%9A%9E%F0%9D%9A%97%F0%9D%9A%94.mp3",
+          title: "Urban Rhythm",
+          artist: "City Beats",
+          album: "Downtown",
+          cover: "/placeholder.svg?height=400&width=400&text=Urban+Rhythm",
+          duration: 210,
+          // Fixed: Use a fallback audio that is more likely to exist in public folder
+          file: "/woop.mp3",
         },
         {
           id: 3,
-          title: "Aura",
-          artist: "Ogryzek",
-          album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/aura.jpg?height=400&width=400&text=Ocean+Waves",
-          duration: 120,
-          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/Ogryzek%20-%20AURA%20%28Official%20Visualiser%29.mp3",
+          title: "Ocean Waves",
+          artist: "Nature Sounds",
+          album: "Relaxation",
+          cover: "/placeholder.svg?height=400&width=400&text=Ocean+Waves",
+          duration: 240,
+          // Fixed: Use a fallback audio that is more likely to exist in public folder
+          file: "/woop.mp3",
         },
       ],
     },
     {
       id: 2,
-      title: "Yo Yo Honey Singh",
-      description: "Some Honey Singh's Songs..",
-      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
+      title: "Chill Vibes",
+      description: "Relax and unwind with these smooth tracks",
+      cover: "/placeholder.svg?height=400&width=400&text=Chill+Vibes",
       songs: [
         {
           id: 4,
-          title: "Millionaire",
-          artist: "YOYO Honey Singh",
-          album: "Glory",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
-          duration: 209,
-          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.mp3",
+          title: "Sunset Dreams",
+          artist: "Lofi Collective",
+          album: "Evening Sessions",
+          cover: "/placeholder.svg?height=400&width=400&text=Sunset+Dreams",
+          duration: 195,
+          file: "/woop.mp3",
         },
         {
           id: 5,
-          title: "Goliyan",
-          artist: "YOYO Honey Singh and Diljit Dosanjh",
-          album: "International Villager",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/iv.jpeg?height=400&width=400&text=Rainy+Day",
-          duration: 190,
-          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/Goliyan",
+          title: "Rainy Day",
+          artist: "Ambient Works",
+          album: "Weather Moods",
+          cover: "/placeholder.svg?height=400&width=400&text=Rainy+Day",
+          duration: 225,
+          file: "/woop.mp3",
         },
       ],
     },
@@ -408,7 +410,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
   // Render helpers
   const renderHomeView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
       <h2 className="text-2xl font-bold mb-6">Listen Now</h2>
 
       <div className="mb-8">
@@ -452,7 +454,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                 key={song.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleSearchSongSelect(song)}
-                className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+                className="flex items-center bg-[#F2F2F7] p-3 rounded-lg"
               >
                 <img
                   src={song.cover || "/placeholder.svg"}
@@ -474,16 +476,16 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderPlayerView = () => (
-    <div className="flex-1 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-[#1E1E1E] to-black">
+    <div className="flex-1 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-[#F8F8F8] to-white">
       <div className="w-full flex items-center justify-between mb-8">
-        <button onClick={() => setActiveView("home")} className="text-white">
+        <button onClick={() => setActiveView("home")} className="text-black">
           <ArrowLeft size={24} />
         </button>
         <div className="text-center">
           <div className="text-xs opacity-70">Now Playing</div>
           <div className="text-sm font-medium">{currentPlaylist.title}</div>
         </div>
-        <button className="text-white">
+        <button className="text-black">
           <MoreHorizontal size={24} />
         </button>
       </div>
@@ -518,9 +520,9 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           max={duration || currentSong.duration}
           value={currentTime}
           onChange={handleSeek}
-          className="w-full h-1 bg-gray-600 rounded-full appearance-none cursor-pointer"
+          className="w-full h-1 bg-gray-300 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #FF2D55 ${(currentTime / (duration || currentSong.duration)) * 100}%, rgba(255,255,255,0.3) 0%)`,
+            background: `linear-gradient(to right, #FF2D55 ${(currentTime / (duration || currentSong.duration)) * 100}%, rgba(0,0,0,0.1) 0%)`,
           }}
         />
       </div>
@@ -534,7 +536,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
         </button>
 
         <div className="flex items-center space-x-6">
-          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePrevious} className="text-white">
+          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePrevious} className="text-black">
             <SkipBack size={28} />
           </motion.button>
 
@@ -546,7 +548,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             {isPlaying ? <Pause size={28} /> : <Play size={28} className="ml-1" />}
           </motion.button>
 
-          <motion.button whileTap={{ scale: 0.95 }} onClick={handleNext} className="text-white">
+          <motion.button whileTap={{ scale: 0.95 }} onClick={handleNext} className="text-black">
             <SkipForward size={28} />
           </motion.button>
         </div>
@@ -568,9 +570,9 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           step={0.01}
           value={volume}
           onChange={handleVolumeChange}
-          className="w-full h-1 bg-gray-600 rounded-full appearance-none cursor-pointer"
+          className="w-full h-1 bg-gray-300 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, white ${volume * 100}%, rgba(255,255,255,0.3) 0%)`,
+            background: `linear-gradient(to right, #FF2D55 ${volume * 100}%, rgba(0,0,0,0.1) 0%)`,
           }}
         />
       </div>
@@ -578,9 +580,9 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderPlaylistView = () => (
-    <div className="flex-1 overflow-y-auto bg-black">
-      <div className="sticky top-0 z-10 bg-black bg-opacity-90 backdrop-blur-md p-4 flex items-center">
-        <button onClick={() => setActiveView("home")} className="text-white mr-4">
+    <div className="flex-1 overflow-y-auto bg-white">
+      <div className="sticky top-0 z-10 bg-white bg-opacity-90 backdrop-blur-md p-4 flex items-center">
+        <button onClick={() => setActiveView("home")} className="text-black mr-4">
           <ArrowLeft size={24} />
         </button>
         <h2 className="text-xl font-bold">{currentPlaylist.title}</h2>
@@ -620,7 +622,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               setIsPlaying(true)
               setActiveView("player")
             }}
-            className="bg-[#1C1C1E] text-white px-6 py-2 rounded-full font-medium text-sm"
+            className="bg-[#E5E5EA] text-black px-6 py-2 rounded-full font-medium text-sm"
           >
             Shuffle
           </motion.button>
@@ -638,8 +640,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               }}
               className={`flex items-center p-3 rounded-lg ${
                 currentSongIndex === index && currentPlaylistIndex === currentPlaylistIndex
-                  ? "bg-[#1C1C1E]"
-                  : "hover:bg-[#1C1C1E]"
+                  ? "bg-[#F2F2F7]"
+                  : "hover:bg-[#F2F2F7]"
               }`}
             >
               <div className="w-8 text-center mr-3 text-sm text-gray-400">{index + 1}</div>
@@ -670,11 +672,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderLibraryView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
       <h2 className="text-2xl font-bold mb-6">Library</h2>
 
       <div className="space-y-4 mb-8">
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-[#F2F2F7] rounded-lg">
           <div className="flex items-center">
             <ListMusic size={20} className="text-[#FF2D55] mr-3" />
             <span className="font-medium">Playlists</span>
@@ -682,7 +684,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-[#F2F2F7] rounded-lg">
           <div className="flex items-center">
             <Music size={20} className="text-[#FF2D55] mr-3" />
             <span className="font-medium">Artists</span>
@@ -690,7 +692,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-[#F2F2F7] rounded-lg">
           <div className="flex items-center">
             <Radio size={20} className="text-[#FF2D55] mr-3" />
             <span className="font-medium">Albums</span>
@@ -698,7 +700,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-[#F2F2F7] rounded-lg">
           <div className="flex items-center">
             <Clock size={20} className="text-[#FF2D55] mr-3" />
             <span className="font-medium">Recently Added</span>
@@ -714,7 +716,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             key={playlist.id}
             whileTap={{ scale: 0.98 }}
             onClick={() => handlePlaylistSelect(index)}
-            className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+            className="flex items-center bg-[#F2F2F7] p-3 rounded-lg"
           >
             <img
               src={playlist.cover || "/placeholder.svg"}
@@ -733,18 +735,18 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderSearchView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
       <h2 className="text-2xl font-bold mb-4">Search</h2>
 
-      <div className="sticky top-0 z-10 bg-black bg-opacity-90 backdrop-blur-md mb-6 pt-2 pb-4">
+      <div className="relative mb-6">
         <input
           type="text"
           placeholder="Artists, songs, or albums"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-[#1C1C1E] text-white rounded-lg py-3 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-[#FF2D55]"
+          className="w-full bg-[#F2F2F7] text-black rounded-lg py-3 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-[#FF2D55]"
         />
-        <Search size={18} className="absolute left-3 top-5 text-gray-500" />
+        <Search size={18} className="absolute left-3 top-3 text-gray-500" />
       </div>
 
       {searchQuery ? (
@@ -757,7 +759,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                   key={song.id}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleSearchSongSelect(song)}
-                  className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+                  className="flex items-center bg-[#F2F2F7] p-3 rounded-lg"
                 >
                   <img
                     src={song.cover || "/placeholder.svg"}
@@ -806,7 +808,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: 50, opacity: 0 }}
       transition={{ type: "spring", damping: 20 }}
-      className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-[56px] w-full z-10"
+      className="bg-[#F2F2F7] border-t border-gray-200 p-2 fixed bottom-[56px] left-0 right-0 w-full z-10"
     >
       <div className="flex items-center">
         <motion.div
@@ -820,8 +822,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="w-10 h-10 rounded-md mr-3 object-cover"
           />
           <div className="flex-1 min-w-0">
-            <h4 className="font-medium text-sm truncate">{currentSong.title}</h4>
-            <p className="text-xs text-gray-400 truncate">{currentSong.artist}</p>
+            <h4 className="font-medium text-sm truncate text-black">{currentSong.title}</h4>
+            <p className="text-xs text-gray-500 truncate">{currentSong.artist}</p>
           </div>
         </motion.div>
 
@@ -847,7 +849,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   return (
-    <div className="h-[758px] w-[350px] bg-black text-white flex flex-col overflow-y-auto">
+    <div className="h-[758px] w-[350px] bg-white text-black flex flex-col overflow-y-auto pb-[120px]">
       {/* Main content */}
       <AnimatePresence mode="wait">
         {activeView === "home" && (
@@ -858,12 +860,12 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             exit={{ opacity: 0 }}
             className="flex-1 flex flex-col"
           >
-            <div className="p-4 flex items-center sticky justify-between">
-              <button onClick={onClose} className="text-white">
+            <div className="p-4 flex items-center sticky top-0 z-20 bg-white justify-between">
+              <button onClick={onClose} className="text-black">
                 <ArrowLeft size={24} />
               </button>
               <h1 className="text-lg font-semibold">Apple Music</h1>
-              <button className="text-white">
+              <button className="text-black">
                 <MoreHorizontal size={24} />
               </button>
             </div>
@@ -904,11 +906,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="flex-1 flex flex-col"
           >
             <div className="p-4 flex items-center justify-between">
-              <button onClick={onClose} className="text-white">
+              <button onClick={onClose} className="text-black">
                 <ArrowLeft size={24} />
               </button>
               <h1 className="text-lg font-semibold">Library</h1>
-              <button className="text-white">
+              <button className="text-black">
                 <MoreHorizontal size={24} />
               </button>
             </div>
@@ -924,14 +926,16 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             exit={{ opacity: 0 }}
             className="flex-1 flex flex-col"
           >
-            <div className="p-4 flex items-center justify-between">
-              <button onClick={onClose} className="text-white">
-                <ArrowLeft size={24} />
-              </button>
-              <h1 className="text-lg font-semibold">Search</h1>
-              <button className="text-white">
-                <MoreHorizontal size={24} />
-              </button>
+            <div className="sticky top-0 z-10 bg-white bg-opacity-90 backdrop-blur-md mb-6 pt-2 pb-4">
+              <div className="p-4 flex items-center justify-between">
+                <button onClick={onClose} className="text-black">
+                  <ArrowLeft size={24} />
+                </button>
+                <h1 className="text-lg font-semibold">Search</h1>
+                <button className="text-black">
+                  <MoreHorizontal size={24} />
+                </button>
+              </div>
             </div>
             {renderSearchView()}
           </motion.div>
@@ -943,7 +947,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
       {/* Bottom navigation */}
       {activeView !== "player" && (
-        <div className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-0 w-full">
+        <div className="bg-[#F2F2F7] border-t border-gray-200 p-2 fixed bottom-0 left-0 right-0 w-full z-10">
           <div className="flex justify-around">
             <button
               onClick={() => setActiveView("home")}
