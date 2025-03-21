@@ -158,10 +158,10 @@ const wallpaperCategories = {
       description: "Scenic desert landscape",
     },
   ],
-  Other: [
+  cityspace: [
     {
       name: "Sonoma",
-      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall8-kz9cGEw3O9z2HgvLGRVsAHbOpobnY9.webp?height=400&width=600",
+      url: "/placeholder.svg?height=400&width=600",
       description: "",
     },
     {
