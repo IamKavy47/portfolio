@@ -158,11 +158,11 @@ const wallpaperCategories = {
       description: "Scenic desert landscape",
     },
   ],
-  cityscape: [
+  Other: [
     {
-      name: "San Francisco",
-      url: "/placeholder.svg?height=400&width=600",
-      description: "City by the bay",
+      name: "Sonoma",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall8-kz9cGEw3O9z2HgvLGRVsAHbOpobnY9.webp?height=400&width=600",
+      description: "",
     },
     {
       name: "New York",
