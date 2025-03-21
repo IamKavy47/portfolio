@@ -158,21 +158,16 @@ const wallpaperCategories = {
       description: "Scenic desert landscape",
     },
   ],
-  Other: [
+  cityscape: [
     {
-      name: "Sequoia",
-      url: "https://images.squarespace-cdn.com/content/v1/5e949a92e17d55230cd1d44f/133438c4-c56b-4458-b96d-c6e6b961661e/Seq1x1.png?height=400&width=600",
-      description: "",
+      name: "San Francisco",
+      url: "/placeholder.svg?height=400&width=600",
+      description: "City by the bay",
     },
     {
-      name: "Abstract",
-      url: "https://c4.wallpaperflare.com/wallpaper/139/333/120/mac-os-x-macbook-abstract-3d-abstract-digital-hd-wallpaper-preview.jpg?height=400&width=600",
-      description: "",
-    },
-    {
-      name: "Sonoma",
-      url: "https://9to5mac.com/wp-content/uploads/sites/6/2023/06/15-inch-MacBook-Air-wallpaper-1.jpeg?quality=82&strip=all?height=400&width=600",
-      description: "",
+      name: "New York",
+      url: "/placeholder.svg?height=400&width=600",
+      description: "The big apple at night",
     },
   ],
 }
@@ -381,4 +376,3 @@ export default function WallpaperApp({ onClose, onChangeWallpaper, onFocus }: Wa
     </Window>
   )
 }
-
