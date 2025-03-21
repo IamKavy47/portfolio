@@ -86,9 +86,7 @@ export default function MacOSInterface() {
       {openApps.includes("Music") && (
         <Music onClose={() => closeApp("Music")} onFocus={()=> focusApp("Music")} />
       )}
-      {openApps.includes("Launchpad") && (
-        <Launchpad onClose={() => closeApp("Launchpad")} onFocus={()=> focusApp("Launchpad")} />
-      )}
+      
       {openApps.includes("Message") && (
         <MessagesApp onClose={() => closeApp("Message")} onFocus={()=> focusApp("Message")} />
       )}
