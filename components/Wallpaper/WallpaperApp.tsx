@@ -133,7 +133,7 @@ const wallpaperCategories = {
     },
     {
       name: "Aurora",
-      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall9.jpg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall6.jpg",
       description: "Colorful gradients",
     },
     {
@@ -158,16 +158,16 @@ const wallpaperCategories = {
       description: "Scenic desert landscape",
     },
   ],
-  cityspace: [
+  cityscape: [
     {
-      name: "Sonoma",
+      name: "San Francisco",
       url: "/placeholder.svg?height=400&width=600",
-      description: "other",
+      description: "City by the bay",
     },
     {
-      name: "Abstractk",
+      name: "New York",
       url: "/placeholder.svg?height=400&width=600",
-      description: "other",
+      description: "The big apple at night",
     },
   ],
 }
