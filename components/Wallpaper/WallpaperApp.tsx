@@ -133,7 +133,7 @@ const wallpaperCategories = {
     },
     {
       name: "Aurora",
-      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall6.jpg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall9.jpg",
       description: "Colorful gradients",
     },
     {
@@ -162,12 +162,12 @@ const wallpaperCategories = {
     {
       name: "Sonoma",
       url: "/placeholder.svg?height=400&width=600",
-      description: "",
+      description: "other",
     },
     {
       name: "Abstractk",
-      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall9.jpg?height=400&width=600",
-      description: "",
+      url: "/placeholder.svg?height=400&width=600",
+      description: "other",
     },
   ],
 }
