@@ -165,9 +165,9 @@ const wallpaperCategories = {
       description: "",
     },
     {
-      name: "New York",
-      url: "/placeholder.svg?height=400&width=600",
-      description: "The big apple at night",
+      name: "Abstractk",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall9.jpg?height=400&width=600",
+      description: "",
     },
   ],
 }
