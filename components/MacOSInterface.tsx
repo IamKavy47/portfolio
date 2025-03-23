@@ -17,6 +17,7 @@ import Youtube from "@/components/Youtube/youtube"
 import Music from "./Music/Music"
 import MacLaunchpad from "./Launchpad"
 import MessagesApp from "./Message/Message"
+import Weather from "./weather/page"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -92,6 +93,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Launchpad") && (
         <MacLaunchpad onClose={() => closeApp("Launchpad")} onFocus={()=> focusApp("Launchpad")} />
+      )}
+      {openApps.includes("Weather") && (
+        <Weather onClose={() => closeApp("Weather")} onFocus={()=> focusApp("Weather")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
