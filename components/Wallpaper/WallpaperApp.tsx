@@ -122,7 +122,7 @@ const wallpaperCategories = {
   custom: [] as Wallpaper[],
   dynamic: [
     {
-      name: "Sequoia",
+      name: "Big sur",
       url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall5.jpeg",
       description: "Dynamic color waves",
     },
@@ -133,7 +133,7 @@ const wallpaperCategories = {
     },
     {
       name: "Aurora",
-      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall6.jpg",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall9.jpg",
       description: "Colorful gradients",
     },
     {
@@ -160,13 +160,13 @@ const wallpaperCategories = {
   ],
   cityscape: [
     {
-      name: "San Francisco",
-      url: "/placeholder.svg?height=400&width=600",
+      name: "Sequio",
+      url: "/wall/wall6.png?height=400&width=600",
       description: "City by the bay",
     },
     {
-      name: "New York",
-      url: "/placeholder.svg?height=400&width=600",
+      name: "",
+      url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall8-kz9cGEw3O9z2HgvLGRVsAHbOpobnY9.webp",
       description: "The big apple at night",
     },
   ],
