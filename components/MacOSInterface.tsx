@@ -15,7 +15,7 @@ import Finder from "@/components/Finder"
 import ContactApp from "@/components/ContactApp"
 import Youtube from "@/components/Youtube/youtube"
 import Music from "./Music/Music"
-import Launchpad from "./Launchpad"
+import MacLaunchpad from "./Launchpad"
 import MessagesApp from "./Message/Message"
 
 export default function MacOSInterface() {
@@ -89,6 +89,9 @@ export default function MacOSInterface() {
       
       {openApps.includes("Message") && (
         <MessagesApp onClose={() => closeApp("Message")} onFocus={()=> focusApp("Message")} />
+      )}
+      {openApps.includes("Launchpad") && (
+        <MacLaunchpad onClose={() => closeApp("Launchpad")} onFocus={()=> focusApp("Launchpad")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>

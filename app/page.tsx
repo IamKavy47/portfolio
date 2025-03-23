@@ -6,6 +6,7 @@ import { useDeviceDetect } from "@/hooks/useDeviceDetect"
 import MacOSInterface from "@/components/MacOSInterface"
 import IOSInterface from "@/components/IOSInterface"
 import BootAnimation from "@/components/BootAnimation"
+import Launchpad from "@/components/Launchpad"
 
 export default function Home() {
   const [isBooting, setIsBooting] = useState(true)
