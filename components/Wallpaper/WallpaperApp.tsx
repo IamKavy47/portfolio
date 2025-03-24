@@ -169,6 +169,11 @@ const wallpaperCategories = {
       url: "https://reriyznm2homh55q.public.blob.vercel-storage.com/wallpaper/wall8-kz9cGEw3O9z2HgvLGRVsAHbOpobnY9.webp",
       description: "The big apple at night",
     },
+    {
+      name: "",
+      url: "/wall/wall7.svg",
+      description: "",
+    },
   ],
 }
 
