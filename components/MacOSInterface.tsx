@@ -19,6 +19,7 @@ import MacLaunchpad from "./Launchpad"
 import MessagesApp from "./Message/Message"
 import Weather from "./weather/page"
 import Instagram from "./instagram/page"
+import Github from "./github/page"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -100,6 +101,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Instagram") && (
         <Instagram onClose={() => closeApp("Instagram")} onFocus={()=> focusApp("Instagram")} />
+      )}
+      {openApps.includes("Github") && (
+        <Github onClose={() => closeApp("Github")} onFocus={()=> focusApp("Github")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>
