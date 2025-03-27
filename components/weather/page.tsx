@@ -441,7 +441,7 @@ export default function Weather({ onClose, onFocus }: WeatherProps) {
       title="Weather"
       onClose={onClose}
       onFocus={onFocus}
-      initialSize={{ width: 800, height: 600 }}
+      initialSize={{ width: 902, height: 600 }}
       toolbar={
         <div className="flex items-center space-x-2">
           <button onClick={() => setShowSidebar(!showSidebar)} className="p-1 rounded hover:bg-black/5 text-gray-600">
@@ -483,7 +483,7 @@ export default function Weather({ onClose, onFocus }: WeatherProps) {
       <div className="flex h-full">
         {/* Sidebar */}
         {showSidebar && (
-          <div className="w-64 border-r border-gray-200 bg-gray-50 overflow-y-auto">
+          <div className="w-64 border-r border-gray-200 bg-gray-50 overflow-auto">
             <div className="p-3">
               <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Locations</h3>
               <div className="space-y-1">
@@ -510,16 +510,16 @@ export default function Weather({ onClose, onFocus }: WeatherProps) {
         )}
 
         {/* Main content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 relative">
           {activeTab === "weather" ? (
-            <div className={`h-full ${getBackgroundGradient()}`}>
+            <div className={`absolute inset-0 ${getBackgroundGradient()} overflow-auto`}>
               {/* Search overlay */}
               {showSearch && (
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="absolute inset-0 bg-white z-10 p-4"
+                  className="absolute inset-0 bg-white z-10 p-4 overflow-auto"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-gray-800">Search Locations</h2>
@@ -575,7 +575,7 @@ export default function Weather({ onClose, onFocus }: WeatherProps) {
                   </div>
                 </div>
               ) : weatherData ? (
-                <div className="p-4 text-white h-full overflow-y-auto">
+                <div className="p-4 text-white">
                   {/* Current weather */}
                   <div className="mb-6 text-center">
                     <div className="flex items-center justify-center mb-1">
@@ -717,7 +717,7 @@ export default function Weather({ onClose, onFocus }: WeatherProps) {
               )}
             </div>
           ) : (
-            <div className="h-full bg-gray-100 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
               <div className="text-center">
                 <div className="text-5xl mb-4">🗺️</div>
                 <p className="text-gray-600">Weather Map View</p>

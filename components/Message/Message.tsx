@@ -32,173 +32,67 @@ interface MessagesAppProps {
   onFocus: () => void
 }
 
+// Empty conversations with just context information
 const initialConversations: Conversation[] = [
   {
     id: 1,
     contactName: "Arjun Sharma",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Are we meeting tomorrow?",
-    lastMessageTime: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
-    unread: 2,
+    lastMessage: "Start a conversation",
+    lastMessageTime: new Date(),
+    unread: 0,
     isOnline: true,
     context:
-      "You are Arjun Sharma, a software developer who works with the user on a project. You're friendly and professional. The user and you have a meeting scheduled for tomorrow.",
-    messages: [
-      {
-        id: 1,
-        text: "Hey, how are you doing?",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
-      },
-      {
-        id: 2,
-        text: "I'm good, thanks! How about you?",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 minutes ago
-      },
-      {
-        id: 3,
-        text: "Doing well. Just wanted to check about our project.",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 20), // 20 minutes ago
-      },
-      {
-        id: 4,
-        text: "Yes, I've been working on it. Should be done by Friday.",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
-      },
-      {
-        id: 5,
-        text: "Are we meeting tomorrow?",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
-      },
-    ],
+      "You are Arjun Sharma, a software developer who works with the user on a project. You're friendly and professional.",
+    messages: [],
   },
   {
     id: 2,
     contactName: "Priya Patel",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "The presentation looks great!",
-    lastMessageTime: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
+    lastMessage: "Start a conversation",
+    lastMessageTime: new Date(),
     unread: 0,
     isOnline: true,
     context:
-      "You are Priya Patel, a marketing specialist who works with the user. You're enthusiastic and detail-oriented. You recently reviewed a presentation the user made.",
-    messages: [
-      {
-        id: 1,
-        text: "Hi, I just reviewed the presentation",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 70), // 70 minutes ago
-      },
-      {
-        id: 2,
-        text: "What do you think?",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 65), // 65 minutes ago
-      },
-      {
-        id: 3,
-        text: "The presentation looks great!",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60), // 60 minutes ago
-      },
-    ],
+      "You are Priya Patel, a marketing specialist who works with the user. You're enthusiastic and detail-oriented.",
+    messages: [],
   },
   {
     id: 3,
     contactName: "Vikram Malhotra",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Let's catch up soon",
-    lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
+    lastMessage: "Start a conversation",
+    lastMessageTime: new Date(),
     unread: 0,
     isOnline: false,
     context:
       "You are Vikram Malhotra, an old friend of the user. You're casual and friendly. You haven't spoken to the user in a while and want to catch up.",
-    messages: [
-      {
-        id: 1,
-        text: "It's been a while since we talked",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
-      },
-      {
-        id: 2,
-        text: "Yes, it has been. How have you been?",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3.5), // 3.5 hours ago
-      },
-      {
-        id: 3,
-        text: "Let's catch up soon",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
-      },
-    ],
+    messages: [],
   },
   {
     id: 4,
     contactName: "Neha Gupta",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Thanks for your help!",
-    lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
+    lastMessage: "Start a conversation",
+    lastMessageTime: new Date(),
     unread: 0,
     isOnline: false,
     context:
       "You are Neha Gupta, a colleague who recently asked the user for help with something. You're grateful and professional.",
-    messages: [
-      {
-        id: 1,
-        text: "I was wondering if you could help me with something",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 25), // 25 hours ago
-      },
-      {
-        id: 2,
-        text: "Sure, what do you need?",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24.5), // 24.5 hours ago
-      },
-      {
-        id: 3,
-        text: "Thanks for your help!",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), // 24 hours ago
-      },
-    ],
+    messages: [],
   },
   {
     id: 5,
     contactName: "Raj Kapoor",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "The movie was amazing!",
-    lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 48), // 2 days ago
+    lastMessage: "Start a conversation",
+    lastMessageTime: new Date(),
     unread: 0,
     isOnline: true,
     context:
-      "You are Raj Kapoor, a movie enthusiast and friend of the user. You're passionate about films and love discussing them. You recently watched a new movie and want to share your thoughts.",
-    messages: [
-      {
-        id: 1,
-        text: "Did you watch that new movie?",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 50), // 50 hours ago
-      },
-      {
-        id: 2,
-        text: "Yes, I did!",
-        sender: "user",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 49), // 49 hours ago
-      },
-      {
-        id: 3,
-        text: "The movie was amazing!",
-        sender: "contact",
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48), // 48 hours ago
-      },
-    ],
+      "You are Raj Kapoor, a movie enthusiast and friend of the user. You're passionate about films and love discussing them.",
+    messages: [],
   },
 ]
 
@@ -207,11 +101,15 @@ const API_KEY = "AIzaSyB9uxgaMi1lbceCTnUNQ5Uj-H7X6_r6zps" // Replace with your a
 
 export default function MessagesApp({ onClose, onFocus }: MessagesAppProps) {
   const [conversations, setConversations] = useState<Conversation[]>(initialConversations)
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(conversations[0])
+  const [selectedConversationId, setSelectedConversationId] = useState<number>(conversations[0].id)
   const [searchQuery, setSearchQuery] = useState("")
   const [newMessage, setNewMessage] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Get the selected conversation from the state using the ID
+  // This ensures we always have the latest version of the conversation
+  const selectedConversation = conversations.find((c) => c.id === selectedConversationId) || conversations[0]
 
   const filteredConversations = conversations.filter((conversation) =>
     conversation.contactName.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -272,121 +170,121 @@ ${conversation.contactName}:`
   const handleSendMessage = async () => {
     if (!newMessage.trim() || !selectedConversation) return
 
-    // Add user message
+    // Create a copy of the current conversations array
+    const currentConversations = [...conversations]
+
+    // Find the index of the selected conversation
+    const conversationIndex = currentConversations.findIndex((c) => c.id === selectedConversationId)
+    if (conversationIndex === -1) return
+
+    // Get the next message ID
+    const nextMessageId =
+      selectedConversation.messages.length > 0 ? Math.max(...selectedConversation.messages.map((m) => m.id)) + 1 : 1
+
+    // Create the user message object
     const userMessageObj: Message = {
-      id: selectedConversation.messages.length + 1,
+      id: nextMessageId,
       text: newMessage,
       sender: "user",
       timestamp: new Date(),
     }
 
-    // Update conversations with user message
-    const updatedConversations = conversations.map((conversation) => {
-      if (conversation.id === selectedConversation.id) {
-        return {
-          ...conversation,
-          lastMessage: newMessage,
-          lastMessageTime: new Date(),
-          messages: [...conversation.messages, userMessageObj],
-        }
-      }
-      return conversation
-    })
-
-    setConversations(updatedConversations)
-    setSelectedConversation(updatedConversations.find((c) => c.id === selectedConversation.id) || null)
-    setNewMessage("")
-
-    // Add loading message
+    // Create a loading message object
     const loadingMessageObj: Message = {
-      id: selectedConversation.messages.length + 2,
+      id: nextMessageId + 1,
       text: "...",
       sender: "contact",
       timestamp: new Date(),
       isLoading: true,
     }
 
-    setConversations((prevConversations) =>
-      prevConversations.map((conversation) => {
-        if (conversation.id === selectedConversation.id) {
-          return {
-            ...conversation,
-            messages: [...conversation.messages, userMessageObj, loadingMessageObj],
-          }
-        }
-        return conversation
-      }),
-    )
+    // Update the selected conversation with the user message and loading message
+    const updatedConversation = {
+      ...selectedConversation,
+      lastMessage: newMessage,
+      lastMessageTime: new Date(),
+      messages: [...selectedConversation.messages, userMessageObj, loadingMessageObj],
+    }
 
+    // Update the conversations array
+    currentConversations[conversationIndex] = updatedConversation
+
+    // Update state
+    setConversations(currentConversations)
+    setNewMessage("")
     setIsGenerating(true)
 
     try {
       // Generate AI response
-      const aiResponse = await generateAIResponse(selectedConversation, newMessage)
+      const aiResponse = await generateAIResponse(updatedConversation, newMessage)
 
-      // Replace loading message with AI response
-      setConversations((prevConversations) =>
-        prevConversations.map((conversation) => {
-          if (conversation.id === selectedConversation.id) {
-            const updatedMessages = conversation.messages.filter((msg) => !msg.isLoading)
-            const aiMessageObj: Message = {
-              id: updatedMessages.length + 1,
-              text: aiResponse,
-              sender: "contact",
-              timestamp: new Date(),
-            }
+      // Get the latest state of conversations
+      setConversations((prevConversations) => {
+        // Find the index again using the latest state
+        const idx = prevConversations.findIndex((c) => c.id === selectedConversationId)
+        if (idx === -1) return prevConversations
 
-            return {
-              ...conversation,
-              lastMessage: aiResponse,
-              lastMessageTime: new Date(),
-              messages: [...updatedMessages, aiMessageObj],
-            }
-          }
-          return conversation
-        }),
-      )
+        // Get the current conversation
+        const currentConv = prevConversations[idx]
 
-      // Update selected conversation
-      setSelectedConversation((prev) => {
-        if (!prev) return null
-        const updated = conversations.find((c) => c.id === prev.id)
-        return updated || prev
+        // Filter out loading messages
+        const messagesWithoutLoading = currentConv.messages.filter((msg) => !msg.isLoading)
+
+        // Create the AI message
+        const aiMessageObj: Message = {
+          id: messagesWithoutLoading.length > 0 ? Math.max(...messagesWithoutLoading.map((m) => m.id)) + 1 : 1,
+          text: aiResponse,
+          sender: "contact",
+          timestamp: new Date(),
+        }
+
+        // Create the updated conversation
+        const updatedConv = {
+          ...currentConv,
+          lastMessage: aiResponse,
+          lastMessageTime: new Date(),
+          messages: [...messagesWithoutLoading, aiMessageObj],
+        }
+
+        // Return the updated conversations array
+        return [...prevConversations.slice(0, idx), updatedConv, ...prevConversations.slice(idx + 1)]
       })
     } catch (error) {
       console.error("Error in AI response:", error)
 
-      // Replace loading message with error message
-      setConversations((prevConversations) =>
-        prevConversations.map((conversation) => {
-          if (conversation.id === selectedConversation.id) {
-            const updatedMessages = conversation.messages.filter((msg) => !msg.isLoading)
-            const errorMessageObj: Message = {
-              id: updatedMessages.length + 1,
-              text: "Sorry, I couldn't respond right now. Let's talk later.",
-              sender: "contact",
-              timestamp: new Date(),
-            }
+      // Handle error by updating state
+      setConversations((prevConversations) => {
+        const idx = prevConversations.findIndex((c) => c.id === selectedConversationId)
+        if (idx === -1) return prevConversations
 
-            return {
-              ...conversation,
-              lastMessage: errorMessageObj.text,
-              lastMessageTime: new Date(),
-              messages: [...updatedMessages, errorMessageObj],
-            }
-          }
-          return conversation
-        }),
-      )
+        const currentConv = prevConversations[idx]
+        const messagesWithoutLoading = currentConv.messages.filter((msg) => !msg.isLoading)
+
+        const errorMessageObj: Message = {
+          id: messagesWithoutLoading.length > 0 ? Math.max(...messagesWithoutLoading.map((m) => m.id)) + 1 : 1,
+          text: "Sorry, I couldn't respond right now. Let's talk later.",
+          sender: "contact",
+          timestamp: new Date(),
+        }
+
+        const updatedConv = {
+          ...currentConv,
+          lastMessage: errorMessageObj.text,
+          lastMessageTime: new Date(),
+          messages: [...messagesWithoutLoading, errorMessageObj],
+        }
+
+        return [...prevConversations.slice(0, idx), updatedConv, ...prevConversations.slice(idx + 1)]
+      })
     } finally {
       setIsGenerating(false)
     }
   }
 
-  const handleSelectConversation = (conversation: Conversation) => {
+  const handleSelectConversation = (conversationId: number) => {
     // Mark as read when selecting
-    setConversations(conversations.map((c) => (c.id === conversation.id ? { ...c, unread: 0 } : c)))
-    setSelectedConversation(conversation)
+    setConversations(conversations.map((c) => (c.id === conversationId ? { ...c, unread: 0 } : c)))
+    setSelectedConversationId(conversationId)
   }
 
   // Scroll to bottom when messages change
@@ -416,9 +314,9 @@ ${conversation.contactName}:`
               <div
                 key={conversation.id}
                 className={`p-3 cursor-pointer hover:bg-gray-100 flex items-start ${
-                  selectedConversation?.id === conversation.id ? "bg-blue-50" : ""
+                  selectedConversationId === conversation.id ? "bg-blue-50" : ""
                 }`}
-                onClick={() => handleSelectConversation(conversation)}
+                onClick={() => handleSelectConversation(conversation.id)}
               >
                 <div className="relative mr-3">
                   <img
@@ -434,7 +332,7 @@ ${conversation.contactName}:`
                   <div className="flex justify-between items-baseline">
                     <h3 className="font-semibold truncate">{conversation.contactName}</h3>
                     <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
-                      {formatTime(conversation.lastMessageTime)}
+                      {conversation.messages.length > 0 ? formatTime(conversation.lastMessageTime) : ""}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 truncate">{conversation.lastMessage}</p>
@@ -480,35 +378,41 @@ ${conversation.contactName}:`
               {/* Messages */}
               <ScrollArea className="flex-1 p-4">
                 <div className="space-y-3">
-                  {selectedConversation.messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
-                    >
-                      <div
-                        className={`max-w-[70%] px-4 py-2 rounded-2xl ${
-                          message.sender === "user"
-                            ? "bg-blue-500 text-white rounded-tr-none"
-                            : "bg-gray-200 text-gray-800 rounded-tl-none"
-                        }`}
-                      >
-                        {message.isLoading ? (
-                          <div className="flex items-center justify-center py-1">
-                            <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
-                          </div>
-                        ) : (
-                          <>
-                            <p>{message.text}</p>
-                            <p
-                              className={`text-xs mt-1 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}
-                            >
-                              {formatTime(message.timestamp)}
-                            </p>
-                          </>
-                        )}
-                      </div>
+                  {selectedConversation.messages.length === 0 ? (
+                    <div className="flex justify-center items-center h-32 text-gray-400 text-sm">
+                      <p>No messages yet. Start a conversation!</p>
                     </div>
-                  ))}
+                  ) : (
+                    selectedConversation.messages.map((message) => (
+                      <div
+                        key={message.id}
+                        className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`max-w-[70%] px-4 py-2 rounded-2xl ${
+                            message.sender === "user"
+                              ? "bg-blue-500 text-white rounded-tr-none"
+                              : "bg-gray-200 text-gray-800 rounded-tl-none"
+                          }`}
+                        >
+                          {message.isLoading ? (
+                            <div className="flex items-center justify-center py-1">
+                              <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
+                            </div>
+                          ) : (
+                            <>
+                              <p>{message.text}</p>
+                              <p
+                                className={`text-xs mt-1 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}
+                              >
+                                {formatTime(message.timestamp)}
+                              </p>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
               </ScrollArea>
@@ -567,3 +471,4 @@ ${conversation.contactName}:`
     </Window>
   )
 }
+
