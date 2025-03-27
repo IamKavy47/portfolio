@@ -18,6 +18,7 @@ import Music from "./Music/Music"
 import MacLaunchpad from "./Launchpad"
 import MessagesApp from "./Message/Message"
 import Weather from "./weather/page"
+import Instagram from "./instagram/page"
 
 export default function MacOSInterface() {
   const [openApps, setOpenApps] = useState<string[]>([])
@@ -96,6 +97,9 @@ export default function MacOSInterface() {
       )}
       {openApps.includes("Weather") && (
         <Weather onClose={() => closeApp("Weather")} onFocus={()=> focusApp("Weather")} />
+      )}
+      {openApps.includes("Instagram") && (
+        <Instagram onClose={() => closeApp("Instagram")} onFocus={()=> focusApp("Instagram")} />
       )}
       <Dock openApp={toggleApp} openApps={openApps} />
     </div>

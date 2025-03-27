@@ -4,12 +4,12 @@ import { useState, useRef, useEffect } from "react"
 import Window from "./Window"
 import { Loader2 } from "lucide-react"
 
-interface YouTubeProps {
+interface InstagramProps {
   onClose: () => void
   onFocus: () => void
 }
 
-export default function YouTube({ onClose, onFocus }: YouTubeProps) {
+export default function Instagram({ onClose, onFocus }: InstagramProps) {
   const [isLoading, setIsLoading] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -31,7 +31,7 @@ export default function YouTube({ onClose, onFocus }: YouTubeProps) {
   }, [])
 
   return (
-    <Window title="YouTube" onClose={onClose} onFocus={onFocus} initialSize={{ width: 1024, height: 768 }}>
+    <Window title="Instagram" onClose={onClose} onFocus={onFocus} initialSize={{ width: 624, height: 468 }}>
       <div className="flex flex-col h-full bg-white">
         <div className="flex-grow relative">
           {isLoading && (
@@ -41,9 +41,9 @@ export default function YouTube({ onClose, onFocus }: YouTubeProps) {
           )}
           <iframe
             ref={iframeRef}
-            src="https://ytwallah.vercel.app/"
+            src="https://www.instagram.com/iamkavy75/embed"
             className="w-full h-full border-none"
-            title="YouTube"
+            title="Instagram"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
           />
         </div>
