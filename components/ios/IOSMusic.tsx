@@ -70,7 +70,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 1,
       title: "Phonk",
       description: "My Favourite phonks",
-      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
+      cover:
+        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
@@ -81,12 +82,13 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           duration: 259,
           file: "/woop.mp3", // This is a path that should be valid in your project
         },
-         {
+        {
           id: 2,
           title: "Matushka",
           artist: "satirin",
           album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/matushka.jpg?height=400&width=400&text=Urban+Rhythm",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/matushka.jpg?height=400&width=400&text=Urban+Rhythm",
           duration: 146,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/M%F0%9D%9A%8A%F0%9D%9A%9D%F0%9D%9A%9E%F0%9D%9A%9C%F0%9D%9A%91%F0%9D%9A%94%F0%9D%9A%8A%20%20U%F0%9D%9A%95%F0%9D%9A%9D%F0%9D%9A%9B%F0%9D%9A%8A%F0%9D%9A%8F%F0%9D%9A%9E%F0%9D%9A%97%F0%9D%9A%94.mp3",
         },
@@ -95,7 +97,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Aura",
           artist: "Ogryzek",
           album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/aura.jpg?height=400&width=400&text=Ocean+Waves",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/aura.jpg?height=400&width=400&text=Ocean+Waves",
           duration: 120,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/Ogryzek%20-%20AURA%20%28Official%20Visualiser%29.mp3",
         },
@@ -105,14 +108,16 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 2,
       title: "Yo Yo Honey Singh",
       description: "Some Honey Singh's Songs..",
-      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
+      cover:
+        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
       songs: [
         {
           id: 4,
           title: "Millionaire",
           artist: "YOYO Honey Singh",
           album: "Glory",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
           duration: 209,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.mp3",
         },
@@ -121,7 +126,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Goliyan",
           artist: "YOYO Honey Singh and Diljit Dosanjh",
           album: "International Villager",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/iv.jpeg?height=400&width=400&text=Rainy+Day",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/iv.jpeg?height=400&width=400&text=Rainy+Day",
           duration: 190,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/Goliyan",
         },
@@ -131,14 +137,16 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 3,
       title: "Workout Mix",
       description: "High energy tracks to fuel your workout",
-      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Workout+Mix",
+      cover:
+        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Workout+Mix",
       songs: [
         {
           id: 6,
           title: "Sultan",
           artist: "Sukhwindar Singh",
           album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Power+Up",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Power+Up",
           duration: 255,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/sultan-Qlhd7xFcGsqmgMY4dr6UvZpprA9RtN.mp3",
         },
@@ -147,7 +155,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Kar har maidan fateh",
           artist: "Rajkumar Hirani",
           album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Kar%20Har%20Maidaan%20Fateh%20-%20Sanju%20128%20Kbps-fo8bOFaCptlSIaBO8q4HoDklbuGOpf.jpg?height=400&width=400&text=Run+Faster",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Kar%20Har%20Maidaan%20Fateh%20-%20Sanju%20128%20Kbps-fo8bOFaCptlSIaBO8q4HoDklbuGOpf.jpg?height=400&width=400&text=Run+Faster",
           duration: 215,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/khmf-ogbOsNr53gDS3zFm3fBmmB75DHwDrM.mp3",
         },
@@ -156,7 +165,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Jagga Jiteya",
           artist: "Dalar Mehndi",
           album: "",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Jagga%20Jiteya%20-%20Uri%20-%20The%20Surgical%20Strike%20128%20Kbps-v9X7y0lej4eFnoRMPoXYv8Qw01okff.jpg?height=400&width=400&text=Run+Faster",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Jagga%20Jiteya%20-%20Uri%20-%20The%20Surgical%20Strike%20128%20Kbps-v9X7y0lej4eFnoRMPoXYv8Qw01okff.jpg?height=400&width=400&text=Run+Faster",
           duration: 200,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/jj-Gaf6Bpeyzv9kxtlVUVNcUowEnl31lX.mp3",
         },
@@ -165,7 +175,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Bhaag Milkha Bhaag",
           artist: "Siddharth Mahadevan",
           album: "Sprint",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Bhaag%20Milkha%20Bhaag%20-%20Bhaag%20Milkha%20Bhaag%20128%20Kbps-HK15b834m5prLVjFUf0wBVx17dW5Fa.jpg?height=400&width=400&text=Run+Faster",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Bhaag%20Milkha%20Bhaag%20-%20Bhaag%20Milkha%20Bhaag%20128%20Kbps-HK15b834m5prLVjFUf0wBVx17dW5Fa.jpg?height=400&width=400&text=Run+Faster",
           duration: 165,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/bhaag-nEoV9WJ9rd7TPMdtnDU2sOdoTpyHtO.mp3",
         },
@@ -426,12 +437,12 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
   // Render helpers
   const renderHomeView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
-      <h2 className="text-2xl font-bold mb-6">Listen Now</h2>
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Listen Now</h2>
 
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Top Playlists</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Top Playlists</h3>
           <button className="text-[#FF2D55] text-sm">See All</button>
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -449,8 +460,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h4 className="font-medium text-sm">{playlist.title}</h4>
-              <p className="text-xs text-gray-400">{playlist.description}</p>
+              <h4 className="font-medium text-sm text-gray-900">{playlist.title}</h4>
+              <p className="text-xs text-gray-500">{playlist.description}</p>
             </motion.div>
           ))}
         </div>
@@ -458,7 +469,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Recently Played</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Recently Played</h3>
           <button className="text-[#FF2D55] text-sm">See All</button>
         </div>
         <div className="space-y-3">
@@ -470,7 +481,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                 key={song.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleSearchSongSelect(song)}
-                className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+                className="flex items-center bg-gray-100 p-3 rounded-lg"
               >
                 <img
                   src={song.cover || "/placeholder.svg"}
@@ -478,10 +489,10 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                   className="w-12 h-12 rounded-md mr-3 object-cover"
                 />
                 <div className="flex-1">
-                  <h4 className="font-medium text-sm">{song.title}</h4>
-                  <p className="text-xs text-gray-400">{song.artist}</p>
+                  <h4 className="font-medium text-sm text-gray-900">{song.title}</h4>
+                  <p className="text-xs text-gray-500">{song.artist}</p>
                 </div>
-                <button className="text-gray-400 p-2">
+                <button className="text-gray-500 p-2">
                   <MoreHorizontal size={16} />
                 </button>
               </motion.div>
@@ -492,16 +503,16 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderPlayerView = () => (
-    <div className="flex-1 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-[#1E1E1E] to-black">
+    <div className="flex-1 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-gray-50 to-white">
       <div className="w-full flex items-center justify-between mb-8">
-        <button onClick={() => setActiveView("home")} className="text-white">
+        <button onClick={() => setActiveView("home")} className="text-gray-900">
           <ArrowLeft size={24} />
         </button>
         <div className="text-center">
-          <div className="text-xs opacity-70">Now Playing</div>
-          <div className="text-sm font-medium">{currentPlaylist.title}</div>
+          <div className="text-xs opacity-70 text-gray-500">Now Playing</div>
+          <div className="text-sm font-medium text-gray-900">{currentPlaylist.title}</div>
         </div>
-        <button className="text-white">
+        <button className="text-gray-900">
           <MoreHorizontal size={24} />
         </button>
       </div>
@@ -520,13 +531,13 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       </motion.div>
 
       <div className="w-full text-center mb-8">
-        <h2 className="text-2xl font-bold mb-1">{currentSong.title}</h2>
-        <p className="text-gray-300">{currentSong.artist}</p>
-        <p className="text-gray-400 text-sm">{currentSong.album}</p>
+        <h2 className="text-2xl font-bold mb-1 text-gray-900">{currentSong.title}</h2>
+        <p className="text-gray-700">{currentSong.artist}</p>
+        <p className="text-gray-500 text-sm">{currentSong.album}</p>
       </div>
 
       <div className="w-full mb-6">
-        <div className="flex justify-between text-xs mb-1">
+        <div className="flex justify-between text-xs mb-1 text-gray-500">
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration || currentSong.duration)}</span>
         </div>
@@ -536,49 +547,49 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           max={duration || currentSong.duration}
           value={currentTime}
           onChange={handleSeek}
-          className="w-full h-1 bg-gray-600 rounded-full appearance-none cursor-pointer"
+          className="w-full h-1 bg-gray-300 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #FF2D55 ${(currentTime / (duration || currentSong.duration)) * 100}%, rgba(255,255,255,0.3) 0%)`,
+            background: `linear-gradient(to right, #FF2D55 ${(currentTime / (duration || currentSong.duration)) * 100}%, #E5E7EB 0%)`,
           }}
         />
       </div>
 
       <div className="flex items-center justify-between w-full px-4 mb-8">
         <button
-          className={`text-gray-300 ${isShuffle ? "text-[#FF2D55]" : ""}`}
+          className={`text-gray-500 ${isShuffle ? "text-[#FF2D55]" : ""}`}
           onClick={() => setIsShuffle(!isShuffle)}
         >
           <Shuffle size={20} />
         </button>
 
         <div className="flex items-center space-x-6">
-          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePrevious} className="text-white">
+          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePrevious} className="text-gray-900">
             <SkipBack size={28} />
           </motion.button>
 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={togglePlay}
-            className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center"
+            className="w-16 h-16 rounded-full bg-[#FF2D55] text-white flex items-center justify-center"
           >
             {isPlaying ? <Pause size={28} /> : <Play size={28} className="ml-1" />}
           </motion.button>
 
-          <motion.button whileTap={{ scale: 0.95 }} onClick={handleNext} className="text-white">
+          <motion.button whileTap={{ scale: 0.95 }} onClick={handleNext} className="text-gray-900">
             <SkipForward size={28} />
           </motion.button>
         </div>
 
-        <button className={`text-gray-300 ${isRepeat ? "text-[#FF2D55]" : ""}`} onClick={() => setIsRepeat(!isRepeat)}>
+        <button className={`text-gray-500 ${isRepeat ? "text-[#FF2D55]" : ""}`} onClick={() => setIsRepeat(!isRepeat)}>
           <Repeat size={20} />
         </button>
       </div>
 
       <div className="flex items-center w-full mb-4">
-        <button className={`mr-4 ${isLiked ? "text-[#FF2D55]" : "text-gray-300"}`} onClick={() => setIsLiked(!isLiked)}>
+        <button className={`mr-4 ${isLiked ? "text-[#FF2D55]" : "text-gray-500"}`} onClick={() => setIsLiked(!isLiked)}>
           <Heart size={20} fill={isLiked ? "#FF2D55" : "none"} />
         </button>
-        <Volume2 size={16} className="text-gray-300 mr-2" />
+        <Volume2 size={16} className="text-gray-500 mr-2" />
         <input
           type="range"
           min={0}
@@ -586,9 +597,9 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           step={0.01}
           value={volume}
           onChange={handleVolumeChange}
-          className="w-full h-1 bg-gray-600 rounded-full appearance-none cursor-pointer"
+          className="w-full h-1 bg-gray-300 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, white ${volume * 100}%, rgba(255,255,255,0.3) 0%)`,
+            background: `linear-gradient(to right, #FF2D55 ${volume * 100}%, #E5E7EB 0%)`,
           }}
         />
       </div>
@@ -596,12 +607,12 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderPlaylistView = () => (
-    <div className="flex-1 overflow-y-auto bg-black">
-      <div className="sticky top-0 z-10 bg-black bg-opacity-90 backdrop-blur-md p-4 flex items-center">
-        <button onClick={() => setActiveView("home")} className="text-white mr-4">
+    <div className="flex-1 overflow-y-auto bg-white">
+      <div className="sticky top-0 z-10 bg-white bg-opacity-90 backdrop-blur-md p-4 flex items-center">
+        <button onClick={() => setActiveView("home")} className="text-gray-900 mr-4">
           <ArrowLeft size={24} />
         </button>
-        <h2 className="text-xl font-bold">{currentPlaylist.title}</h2>
+        <h2 className="text-xl font-bold text-gray-900">{currentPlaylist.title}</h2>
       </div>
 
       <div className="p-4">
@@ -612,9 +623,9 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="w-24 h-24 rounded-lg mr-4 object-cover shadow-lg"
           />
           <div>
-            <h3 className="text-lg font-bold">{currentPlaylist.title}</h3>
-            <p className="text-sm text-gray-400 mb-2">{currentPlaylist.description}</p>
-            <p className="text-xs text-gray-500">{currentPlaylist.songs.length} songs</p>
+            <h3 className="text-lg font-bold text-gray-900">{currentPlaylist.title}</h3>
+            <p className="text-sm text-gray-500 mb-2">{currentPlaylist.description}</p>
+            <p className="text-xs text-gray-400">{currentPlaylist.songs.length} songs</p>
           </div>
         </div>
 
@@ -638,7 +649,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               setIsPlaying(true)
               setActiveView("player")
             }}
-            className="bg-[#1C1C1E] text-white px-6 py-2 rounded-full font-medium text-sm"
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-full font-medium text-sm"
           >
             Shuffle
           </motion.button>
@@ -656,8 +667,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               }}
               className={`flex items-center p-3 rounded-lg ${
                 currentSongIndex === index && currentPlaylistIndex === currentPlaylistIndex
-                  ? "bg-[#1C1C1E]"
-                  : "hover:bg-[#1C1C1E]"
+                  ? "bg-gray-100"
+                  : "hover:bg-gray-50"
               }`}
             >
               <div className="w-8 text-center mr-3 text-sm text-gray-400">{index + 1}</div>
@@ -669,12 +680,14 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               <div className="flex-1">
                 <h4
                   className={`font-medium text-sm ${
-                    currentSongIndex === index && currentPlaylistIndex === currentPlaylistIndex ? "text-[#FF2D55]" : ""
+                    currentSongIndex === index && currentPlaylistIndex === currentPlaylistIndex
+                      ? "text-[#FF2D55]"
+                      : "text-gray-900"
                   }`}
                 >
                   {song.title}
                 </h4>
-                <p className="text-xs text-gray-400">{song.artist}</p>
+                <p className="text-xs text-gray-500">{song.artist}</p>
               </div>
               <div className="text-xs text-gray-400 mr-2">{formatTime(song.duration)}</div>
               <button className="text-gray-400">
@@ -688,51 +701,51 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderLibraryView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
-      <h2 className="text-2xl font-bold mb-6">Library</h2>
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Library</h2>
 
       <div className="space-y-4 mb-8">
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
           <div className="flex items-center">
             <ListMusic size={20} className="text-[#FF2D55] mr-3" />
-            <span className="font-medium">Playlists</span>
+            <span className="font-medium text-gray-900">Playlists</span>
           </div>
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
           <div className="flex items-center">
             <Music size={20} className="text-[#FF2D55] mr-3" />
-            <span className="font-medium">Artists</span>
+            <span className="font-medium text-gray-900">Artists</span>
           </div>
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
           <div className="flex items-center">
             <Radio size={20} className="text-[#FF2D55] mr-3" />
-            <span className="font-medium">Albums</span>
+            <span className="font-medium text-gray-900">Albums</span>
           </div>
           <ChevronRight size={18} className="text-gray-500" />
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1C1C1E] rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
           <div className="flex items-center">
             <Clock size={20} className="text-[#FF2D55] mr-3" />
-            <span className="font-medium">Recently Added</span>
+            <span className="font-medium text-gray-900">Recently Added</span>
           </div>
           <ChevronRight size={18} className="text-gray-500" />
         </div>
       </div>
 
-      <h3 className="text-lg font-semibold mb-4">Your Playlists</h3>
+      <h3 className="text-lg font-semibold mb-4 text-gray-900">Your Playlists</h3>
       <div className="space-y-3">
         {playlists.map((playlist, index) => (
           <motion.div
             key={playlist.id}
             whileTap={{ scale: 0.98 }}
             onClick={() => handlePlaylistSelect(index)}
-            className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+            className="flex items-center bg-gray-100 p-3 rounded-lg"
           >
             <img
               src={playlist.cover || "/placeholder.svg"}
@@ -740,8 +753,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
               className="w-12 h-12 rounded-md mr-3 object-cover"
             />
             <div className="flex-1">
-              <h4 className="font-medium text-sm">{playlist.title}</h4>
-              <p className="text-xs text-gray-400">{playlist.songs.length} songs</p>
+              <h4 className="font-medium text-sm text-gray-900">{playlist.title}</h4>
+              <p className="text-xs text-gray-500">{playlist.songs.length} songs</p>
             </div>
             <ChevronRight size={18} className="text-gray-500" />
           </motion.div>
@@ -751,23 +764,23 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   const renderSearchView = () => (
-    <div className="flex-1 overflow-y-auto bg-black px-4 py-6">
-      <h2 className="text-2xl font-bold mb-4">Search</h2>
+    <div className="flex-1 overflow-y-auto bg-white px-4 py-6">
+      <h2 className="text-2xl font-bold mb-4 text-gray-900">Search</h2>
 
-      <div className="sticky top-0 z-10 bg-black bg-opacity-90 backdrop-blur-md mb-6 pt-2 pb-4">
+      <div className="sticky top-0 z-10 bg-white bg-opacity-90 backdrop-blur-md mb-6 pt-2 pb-4">
         <input
           type="text"
           placeholder="Artists, songs, or albums"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-[#1C1C1E] text-white rounded-lg py-3 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-[#FF2D55]"
+          className="w-full bg-gray-100 text-gray-900 rounded-lg py-3 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-[#FF2D55]"
         />
         <Search size={18} className="absolute left-3 top-5 text-gray-500" />
       </div>
 
       {searchQuery ? (
         <div>
-          <h3 className="text-lg font-semibold mb-3">Results</h3>
+          <h3 className="text-lg font-semibold mb-3 text-gray-900">Results</h3>
           {filteredSongs.length > 0 ? (
             <div className="space-y-3">
               {filteredSongs.map((song) => (
@@ -775,7 +788,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                   key={song.id}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleSearchSongSelect(song)}
-                  className="flex items-center bg-[#1C1C1E] p-3 rounded-lg"
+                  className="flex items-center bg-gray-100 p-3 rounded-lg"
                 >
                   <img
                     src={song.cover || "/placeholder.svg"}
@@ -783,12 +796,12 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
                     className="w-12 h-12 rounded-md mr-3 object-cover"
                   />
                   <div className="flex-1">
-                    <h4 className="font-medium text-sm">{song.title}</h4>
-                    <p className="text-xs text-gray-400">
+                    <h4 className="font-medium text-sm text-gray-900">{song.title}</h4>
+                    <p className="text-xs text-gray-500">
                       {song.artist} • {song.album}
                     </p>
                   </div>
-                  <button className="text-gray-400 p-2">
+                  <button className="text-gray-500 p-2">
                     <MoreHorizontal size={16} />
                   </button>
                 </motion.div>
@@ -802,7 +815,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
         </div>
       ) : (
         <div>
-          <h3 className="text-lg font-semibold mb-3">Browse Categories</h3>
+          <h3 className="text-lg font-semibold mb-3 text-gray-900">Browse Categories</h3>
           <div className="grid grid-cols-2 gap-3">
             {["Hip-Hop", "Pop", "Rock", "Electronic", "R&B", "Jazz", "Classical", "Country"].map((category) => (
               <div
@@ -824,7 +837,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: 50, opacity: 0 }}
       transition={{ type: "spring", damping: 20 }}
-      className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-[56px] w-full z-10"
+      className="bg-gray-100 border-t border-gray-200 p-2 sticky bottom-[56px] w-full z-10"
     >
       <div className="flex items-center">
         <motion.div
@@ -838,8 +851,8 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="w-10 h-10 rounded-md mr-3 object-cover"
           />
           <div className="flex-1 min-w-0">
-            <h4 className="font-medium text-sm truncate">{currentSong.title}</h4>
-            <p className="text-xs text-gray-400 truncate">{currentSong.artist}</p>
+            <h4 className="font-medium text-sm truncate text-gray-900">{currentSong.title}</h4>
+            <p className="text-xs text-gray-500 truncate">{currentSong.artist}</p>
           </div>
         </motion.div>
 
@@ -857,7 +870,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             onClick={handleNext}
             className="w-8 h-8 flex items-center justify-center"
           >
-            <SkipForward size={18} className="text-white" />
+            <SkipForward size={18} className="text-gray-900" />
           </motion.button>
         </div>
       </div>
@@ -865,7 +878,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
   )
 
   return (
-    <div className="h-[758px] w-[350px] bg-black text-white flex flex-col overflow-y-auto">
+    <div className="h-[758px] w-[350px] bg-white text-gray-900 flex flex-col overflow-y-auto">
       {/* Main content */}
       <AnimatePresence mode="wait">
         {activeView === "home" && (
@@ -877,11 +890,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="flex-1 flex flex-col"
           >
             <div className="p-4 flex items-center sticky justify-between">
-              <button onClick={onClose} className="text-white">
+              <button onClick={onClose} className="text-gray-900">
                 <ArrowLeft size={24} />
               </button>
-              <h1 className="text-lg font-semibold">Apple Music</h1>
-              <button className="text-white">
+              <h1 className="text-lg font-semibold text-gray-900">Apple Music</h1>
+              <button className="text-gray-900">
                 <MoreHorizontal size={24} />
               </button>
             </div>
@@ -922,11 +935,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="flex-1 flex flex-col"
           >
             <div className="p-4 flex items-center justify-between">
-              <button onClick={onClose} className="text-white">
+              <button onClick={onClose} className="text-gray-900">
                 <ArrowLeft size={24} />
               </button>
-              <h1 className="text-lg font-semibold">Library</h1>
-              <button className="text-white">
+              <h1 className="text-lg font-semibold text-gray-900">Library</h1>
+              <button className="text-gray-900">
                 <MoreHorizontal size={24} />
               </button>
             </div>
@@ -943,11 +956,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
             className="flex-1 flex flex-col"
           >
             <div className="p-4 flex items-center justify-between">
-              <button onClick={onClose} className="text-white">
+              <button onClick={onClose} className="text-gray-900">
                 <ArrowLeft size={24} />
               </button>
-              <h1 className="text-lg font-semibold">Search</h1>
-              <button className="text-white">
+              <h1 className="text-lg font-semibold text-gray-900">Search</h1>
+              <button className="text-gray-900">
                 <MoreHorizontal size={24} />
               </button>
             </div>
@@ -961,11 +974,11 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
       {/* Bottom navigation */}
       {activeView !== "player" && (
-        <div className="bg-[#1C1C1E] border-t border-gray-800 p-2 sticky bottom-0 w-full">
+        <div className="bg-gray-100 border-t border-gray-200 p-2 sticky bottom-0 w-full">
           <div className="flex justify-around">
             <button
               onClick={() => setActiveView("home")}
-              className={`flex flex-col items-center p-2 ${activeView === "home" ? "text-[#FF2D55]" : "text-gray-400"}`}
+              className={`flex flex-col items-center p-2 ${activeView === "home" ? "text-[#FF2D55]" : "text-gray-500"}`}
             >
               <Home size={20} />
               <span className="text-xs mt-1">Home</span>
@@ -973,7 +986,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
             <button
               onClick={() => setActiveView("search")}
-              className={`flex flex-col items-center p-2 ${activeView === "search" ? "text-[#FF2D55]" : "text-gray-400"}`}
+              className={`flex flex-col items-center p-2 ${activeView === "search" ? "text-[#FF2D55]" : "text-gray-500"}`}
             >
               <Search size={20} />
               <span className="text-xs mt-1">Search</span>
@@ -981,7 +994,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
 
             <button
               onClick={() => setActiveView("library")}
-              className={`flex flex-col items-center p-2 ${activeView === "library" ? "text-[#FF2D55]" : "text-gray-400"}`}
+              className={`flex flex-col items-center p-2 ${activeView === "library" ? "text-[#FF2D55]" : "text-gray-500"}`}
             >
               <Library size={20} />
               <span className="text-xs mt-1">Library</span>
@@ -992,3 +1005,4 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
     </div>
   )
 }
+
