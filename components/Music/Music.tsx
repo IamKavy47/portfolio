@@ -171,18 +171,18 @@ export default function Music({ onClose, onFocus }: MusicProps) {
     },
     {
       id: 4,
-      title: "Focus Flow",
-      description: "Concentration-enhancing instrumental tracks",
-      cover: "/placeholder.svg?height=400&width=400&text=Focus+Flow",
+      title: "Requested",
+      description: "Songs requested by visitors.",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/aashiyan.jpeg?height=400&width=400&text=Focus+Flow",
       songs: [
         {
           id: 10,
-          title: "Deep Focus",
-          artist: "Study Beats",
-          album: "Concentration",
-          cover: "/placeholder.svg?height=400&width=400&text=Deep+Focus",
-          duration: 255,
-          file: "/woop.mp3",
+          title: "Aashiyan",
+          artist: "Gini",
+          album: "",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/aashiyan.jpeg?height=400&width=400&text=Deep+Focus",
+          duration: 185,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/gini%20-%20Aashiyan%20%20Official%20Performance%20Video.mp3",
         },
         {
           id: 11,
