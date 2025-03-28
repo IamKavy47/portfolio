@@ -24,7 +24,6 @@ import {
   Monitor,
   ShoppingCart,
   Check,
-  Trophy,
   Target,
   BookOpen,
   Server,
@@ -38,9 +37,50 @@ interface AboutMeProps {
   onFocus: () => void
 }
 
+// Project data structure
+interface Project {
+  title: string
+  description: string
+  image: string
+  technologies: string[]
+  githubUrl: string
+  liveUrl: string
+  date: string
+  gradient: string
+  icon: React.ReactNode
+}
+
 export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
   const { deviceType } = useDeviceDetect()
   const [activeSection, setActiveSection] = useState("about")
+
+  // Project data
+  const projects: Project[] = [
+    {
+      title: "Personal Portfolio",
+      description:
+        "A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI. The site includes interactive elements and smooth animations.",
+      image: "/projects/portfolio.jpg",
+      technologies: ["Next.js", "Tailwind CSS", "TypeScript"],
+      githubUrl: "https://github.com/iamkavy47/portfolio",
+      liveUrl: "https://iamkavy47.vercel.app",
+      date: "March 2024",
+      gradient: "from-blue-400 to-indigo-500",
+      icon: <Monitor className="h-16 w-16 text-white/80" />,
+    },
+    {
+      title: "Codestorm Website",
+      description:
+        "Codestorm is a National level 36 hours Hackathon conducted by Chancellor Brigade in Mandsaur University. I have used Next.js, TypeScript, and Aceternity UI.",
+      image: "/projects/codestorm.jpg",
+      technologies: ["Next.js", "TypeScript", "Aceternity UI"],
+      githubUrl: "#",
+      liveUrl: "https://mufests.com",
+      date: "February 2024",
+      gradient: "from-purple-400 to-pink-500",
+      icon: <ShoppingCart className="h-16 w-16 text-white/80" />,
+    },
+  ]
 
   // Simple sidebar item component
   const SidebarItem = ({ id, label, icon }: { id: string; label: string; icon: React.ReactNode }) => (
@@ -54,6 +94,21 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       <span>{label}</span>
     </button>
   )
+
+  // Handle contact button click
+  const handleContactClick = () => {
+    setActiveSection("contact")
+  }
+
+  // Handle view projects button click
+  const handleViewProjectsClick = () => {
+    setActiveSection("projects")
+  }
+
+  // Handle external link click
+  const handleExternalLinkClick = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer")
+  }
 
   // Content sections
   const aboutContent = (
@@ -85,10 +140,17 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           web technologies. I love turning complex problems into simple, beautiful, and intuitive designs.
         </p>
         <div className="mt-4 flex gap-3">
-          <Button variant="outline" className="rounded-full border-blue-300 hover:bg-blue-50 transition-all">
+          <Button
+            variant="outline"
+            className="rounded-full border-blue-300 hover:bg-blue-50 transition-all"
+            onClick={() => setActiveSection("about")}
+          >
             <User className="mr-2 h-4 w-4" /> More About Me
           </Button>
-          <Button className="rounded-full bg-blue-500 hover:bg-blue-600 transition-all">
+          <Button
+            className="rounded-full bg-blue-500 hover:bg-blue-600 transition-all"
+            onClick={handleViewProjectsClick}
+          >
             <FolderOpen className="mr-2 h-4 w-4" /> View Projects
           </Button>
         </div>
@@ -184,7 +246,14 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
             passionate about creating intuitive user interfaces and delivering exceptional user experiences.
           </p>
           <div className="mt-4">
-            <a href="#contact" className="rounded-full bg-blue w-10 h-5 text-blue-600 border-blue-200 hover:text-blue-500">Contact</a>
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full text-blue-600 border-blue-200 hover:bg-blue-50"
+              onClick={handleContactClick}
+            >
+              <Mail className="mr-2 h-3 w-3" /> Contact Me
+            </Button>
           </div>
         </div>
       </div>
@@ -200,7 +269,9 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           </div>
           <div className="bg-white p-3 rounded-[12px] border border-gray-100">
             <span className="text-purple-600 font-medium">Machine Learning </span>
-            <p className="text-sm text-gray-600 mt-1">Building machine learning projects to solve real world problems.</p>
+            <p className="text-sm text-gray-600 mt-1">
+              Building machine learning projects to solve real world problems.
+            </p>
           </div>
         </div>
       </div>
@@ -262,23 +333,6 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
         Achievements
       </h3>
 
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
-          <Award className="h-8 w-8 text-yellow-500 mb-3" />
-          <h4 className="font-medium text-lg">Hackathon Finalist</h4>
-          <p className="text-gray-700 mt-2">
-            Reached the finals in the university hackathon with an innovative web application.
-          </p>
-        </div>
-
-        <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-blue-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
-          <Trophy className="h-8 w-8 text-blue-500 mb-3" />
-          <h4 className="font-medium text-lg">Coding Competition</h4>
-          <p className="text-gray-700 mt-2">Secured 3rd position in the regional coding competition.</p>
-        </div>
-      </div> */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="group bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-400 rotate-45 translate-x-8 -translate-y-8 opacity-20 group-hover:opacity-30 transition-opacity" />
@@ -331,88 +385,92 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       </h3>
 
       <div className="grid grid-cols-1 gap-6">
-        <div className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
-          <div className="h-40 bg-gradient-to-r from-blue-400 to-indigo-500 relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Monitor className="h-16 w-16 text-white/80" />
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden"
+          >
+            <div className={`h-40 bg-gradient-to-r ${project.gradient} relative overflow-hidden`}>
+              {/* Project image */}
+              {project.image && (
+                <div className="absolute inset-0">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    width={800}
+                    height={300}
+                    className="w-full h-full object-cover opacity-60"
+                  />
+                </div>
+              )}
+              <div className="absolute inset-0 flex items-center justify-center">{project.icon}</div>
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
+                <h4 className="text-white font-medium">{project.title}</h4>
+                <div className="flex gap-2">
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                  >
+                    <Github className="h-4 w-4 text-white" />
+                  </a>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4 text-white" />
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
-            <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
-              <h4 className="text-white font-medium">Personal Portfolio</h4>
-              <div className="flex gap-2">
-                <a href="github.com/iamkavy47/portfolio" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
-                  <Github className="h-4 w-4 text-white" />
-                </a>
-                <a href="iamkavy47.vercel.app" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
-                  <ExternalLink className="h-4 w-4 text-white" />
-                </a>
+            <div className="p-5">
+              <div className="flex flex-wrap gap-2 mb-3">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className={`${
+                      tech === "Next.js"
+                        ? "bg-blue-100 text-blue-800"
+                        : tech === "TypeScript"
+                          ? "bg-purple-100 text-purple-800"
+                          : tech === "Tailwind CSS"
+                            ? "bg-cyan-100 text-cyan-800"
+                            : "bg-yellow-100 text-yellow-800"
+                    } px-2 py-0.5 rounded-[5px] text-xs font-medium`}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <p className="text-gray-700">{project.description}</p>
+              <div className="mt-4 flex justify-between items-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full"
+                  onClick={() => handleExternalLinkClick(project.liveUrl)}
+                >
+                  <Eye className="mr-2 h-3.5 w-3.5" /> View Details
+                </Button>
+                <span className="text-xs text-gray-500">{project.date}</span>
               </div>
             </div>
           </div>
-          <div className="p-5">
-            <div className="flex flex-wrap gap-2 mb-3">
-              <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">Next.js</span>
-              <span className="bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">Tailwind CSS</span>
-              <span className="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-[5px] text-xs font-medium">
-                TypeScript
-              </span>
-            </div>
-            <p className="text-gray-700">
-              A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI. The site
-              includes interactive elements and smooth animations.
-            </p>
-            <div className="mt-4 flex justify-between items-center">
-              <Button variant="outline" size="sm" className="rounded-full">
-                <Eye className="mr-2 h-3.5 w-3.5" /> View Details
-              </Button>
-              <span className="text-xs text-gray-500">March 2024</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
-          <div className="h-40 bg-gradient-to-r from-purple-400 to-pink-500 relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <ShoppingCart className="h-16 w-16 text-white/80" />
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
-            <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
-              <h4 className="text-white font-medium">Codestorm Website </h4>
-              <div className="flex gap-2">
-                <a href="#" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
-                  <Github className="h-4 w-4 text-white" />
-                </a>
-                <a href="mufests.com" className="p-1.5 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
-                  <ExternalLink className="h-4 w-4 text-white" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="p-5">
-            <div className="flex flex-wrap gap-2 mb-3">
-              <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md text-xs font-medium">Nextjs</span>
-              <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded-md text-xs font-medium">Typescript</span>
-              <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-md text-xs font-medium">Aceternity UI</span>
-            </div>
-            <p className="text-gray-700">
-              Codestorm is an National level 36 hours Hackathon conducted by Chancellor Brigade in Mandsaur University. I have used Next js, Typescript , and aceternity ui.
-            </p>
-            <div className="mt-4 flex justify-between items-center">
-              <Button variant="outline" size="sm" className="rounded-full">
-                <Eye className="mr-2 h-3.5 w-3.5" /> View Details
-              </Button>
-              <span className="text-xs text-gray-500">February 2024</span>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
 
   const contactContent = (
-    <div id="cm" className="animate-in fade-in duration-500">
-      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Contact Information</h3>
-      
+    <div id="contact" className="animate-in fade-in duration-500">
+      <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Contact Information
+      </h3>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 group">
           <div className="flex items-center gap-4">
@@ -421,11 +479,13 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
             </div>
             <div>
               <h4 className="text-sm text-gray-500 font-medium">Phone</h4>
-              <a href="tel:+9191672623" className="text-gray-800 hover:text-blue-600 transition-colors">+91-91672623</a>
+              <a href="tel:+9191672623" className="text-gray-800 hover:text-blue-600 transition-colors">
+                +91-91672623
+              </a>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 group">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
@@ -433,40 +493,48 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
             </div>
             <div>
               <h4 className="text-sm text-gray-500 font-medium">Email</h4>
-              <a href="mailto:kavyporwal75@gmail.com" className="text-gray-800 hover:text-blue-600 transition-colors">kavyporwal75@gmail.com</a>
+              <a href="mailto:kavyporwal75@gmail.com" className="text-gray-800 hover:text-blue-600 transition-colors">
+                kavyporwal75@gmail.com
+              </a>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100 shadow-sm">
         <h4 className="font-medium text-blue-700 mb-4">Send Me a Message</h4>
-        <div className="space-y-4">
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium text-gray-700">Name</label>
-              <input 
-                type="text" 
-                id="name" 
+              <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
                 className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Your name"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
-              <input 
-                type="email" 
-                id="email" 
+              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
                 className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Your email"
               />
             </div>
           </div>
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium text-gray-700">Message</label>
-            <textarea 
-              id="message" 
-              rows={4} 
+            <label htmlFor="message" className="text-sm font-medium text-gray-700">
+              Message
+            </label>
+            <textarea
+              id="message"
+              rows={4}
               className="w-full px-3 py-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Your message"
             ></textarea>
@@ -474,21 +542,40 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white rounded-[10px] transition-colors">
             <Send className="mr-2 h-4 w-4" /> Send Message
           </Button>
-        </div>
+        </form>
       </div>
 
       <div className="mt-6 flex flex-col items-center">
-        <Button className="bg-blue-500 rounded-full text-white px-6" variant="default">
+        <Button
+          className="bg-blue-500 rounded-full text-white px-6"
+          variant="default"
+          onClick={() => window.open("/resume.pdf", "_blank")}
+        >
           <Download className="mr-2 h-4 w-4" /> Download Resume
         </Button>
         <div className="mt-4 flex gap-4">
-          <a href="https://twitter.com/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+          <a
+            href="https://twitter.com/iamkavy47"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+          >
             <Twitter className="h-5 w-5 text-gray-700" />
           </a>
-          <a href="https://github.com/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+          <a
+            href="https://github.com/iamkavy47"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+          >
             <Github className="h-5 w-5 text-gray-700" />
           </a>
-          <a href="https://linkedin.com/in/iamkavy47" className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+          <a
+            href="https://linkedin.com/in/iamkavy47"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+          >
             <Linkedin className="h-5 w-5 text-gray-700" />
           </a>
         </div>
@@ -572,13 +659,28 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
           <div className="mt-auto pt-4 border-t border-black/10">
             <h4 className="text-sm px-3 mb-2">Social Links</h4>
             <div className="flex justify-around px-3">
-              <a href="x.com/iamkavy47" className=" hover:text-gray-500">
+              <a
+                href="https://twitter.com/iamkavy47"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-500"
+              >
                 <Twitter size={18} />
               </a>
-              <a href="github.com/iamkavy47" className="hover:text-gray-500">
+              <a
+                href="https://github.com/iamkavy47"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-500"
+              >
                 <Github size={18} />
               </a>
-              <a href="linkedin.in/iamkavy47" className="hover:text-gray-500">
+              <a
+                href="https://linkedin.com/in/iamkavy47"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-500"
+              >
                 <Linkedin size={18} />
               </a>
             </div>
