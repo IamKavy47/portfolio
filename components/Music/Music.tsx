@@ -160,12 +160,13 @@ export default function Music({ onClose, onFocus }: MusicProps) {
         },
         {
           id: 9,
-          title: "Bhaag Milkha Bhaag",
+          title: "Zinda",
           artist: "Siddharth Mahadevan",
-          album: "Sprint",
-          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Bhaag%20Milkha%20Bhaag%20-%20Bhaag%20Milkha%20Bhaag%20128%20Kbps-HK15b834m5prLVjFUf0wBVx17dW5Fa.jpg?height=400&width=400&text=Run+Faster",
-          duration: 165,
-          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/bhaag-nEoV9WJ9rd7TPMdtnDU2sOdoTpyHtO.mp3",
+          album: "",
+          cover:
+            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Bhaag%20Milkha%20Bhaag%20-%20Bhaag%20Milkha%20Bhaag%20128%20Kbps-HK15b834m5prLVjFUf0wBVx17dW5Fa.jpg?height=400&width=400&text=Run+Faster",
+          duration: 222,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128-Zinda%20-%20Bhaag%20Milkha%20Bhaag%20128%20Kbps.mp3",
         },
       ],
     },
