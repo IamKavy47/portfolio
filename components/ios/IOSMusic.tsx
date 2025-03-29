@@ -197,15 +197,6 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           duration: 185,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/gini%20-%20Aashiyan%20%20Official%20Performance%20Video.mp3",
         },
-        {
-          id: 11,
-          title: "Productivity",
-          artist: "Work Mode",
-          album: "Flow State",
-          cover: "/placeholder.svg?height=400&width=400&text=Productivity",
-          duration: 230,
-          file: "/woop.mp3",
-        },
       ],
     },
   ]
