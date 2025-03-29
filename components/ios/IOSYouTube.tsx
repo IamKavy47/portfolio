@@ -57,7 +57,7 @@ export default function IOSYouTube({ onClose }: IOSYouTubeProps) {
         )}
         <iframe
           ref={iframeRef}
-          src="https://ytwallah.vercel.app/"
+          src="https://youtube-clone-4ibp.vercel.app/"
           className="w-full h-full border-none"
           onLoad={handleIframeLoad}
           title="YouTube"
