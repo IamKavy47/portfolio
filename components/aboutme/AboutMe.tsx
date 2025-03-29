@@ -77,8 +77,8 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       githubUrl: "#",
       liveUrl: "https://mufests.com",
       date: "February 2024",
-      gradient: "from-purple-400 to-pink-500",
-      icon: <ShoppingCart className="h-16 w-16 text-white/80" />,
+      gradient: "",
+      icon: "",
     },
   ]
 
@@ -390,7 +390,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
             key={index}
             className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden"
           >
-            <div className={`h-40 bg-gradient-to-r ${project.gradient} relative overflow-hidden`}>
+            <div className={`h-40 bg-transparent relative overflow-hidden`}>
               {/* Project image */}
               {project.image && (
                 <div className="absolute inset-0">
