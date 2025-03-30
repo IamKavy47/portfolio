@@ -1479,7 +1479,7 @@ export default function MacTerminal({ onClose, onFocus }: MacTerminalProps) {
 
   // Get prompt string
   const getPrompt = (tab: TerminalTab): string => {
-    const username = "kavy"
+    const username = "iamkavy47"
     const hostname = "macbook-pro"
     const path = getCurrentPath(tab).replace(/^\/Users\/user/, "~")
 
