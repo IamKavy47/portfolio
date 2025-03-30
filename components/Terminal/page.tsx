@@ -291,7 +291,7 @@ export default function MacTerminal({ onClose, onFocus }: MacTerminalProps) {
         {
           command: "",
           output: [
-            "Last login: " + new Date().toLocaleString() + " on ttys001",
+            "Last login: " + new Date().toLocaleString(),
             "Welcome to Terminal. Type 'help' to see available commands.",
             "",
           ],
