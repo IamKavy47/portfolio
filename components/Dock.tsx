@@ -157,7 +157,12 @@ export default function Dock({ openApp, openApps }: DockProps) {
     {
       name: "Message",
       icon: <img src="/Icon/msg.png" alt="Messages" className="w-full h-full object-cover rounded-lg" />,
-    background: "",
+      background: "",
+    },
+    {
+      name : "Terminal",
+      icon : <img src="https://cdn.jim-nielsen.com/macos/1024/terminal-2021-06-03.png?rf=1024" alt="Terminal" className="w-full h-full object-cover rounded-lg" />,
+      background: "bg-transparent",
     },
     {
       name: "Safari",
