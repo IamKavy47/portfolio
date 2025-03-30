@@ -161,7 +161,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
     },
     {
       name : "Terminal",
-      icon : <img src="https://cdn.jim-nielsen.com/macos/1024/terminal-2021-06-03.png?rf=1024" alt="Terminal" className="w-full h-full object-cover rounded-lg" />,
+      icon : <img src="/Icon/terminal.webp" alt="Terminal" className="w-full h-full object-cover rounded-lg" />,
       background: "bg-transparent",
     },
     {
