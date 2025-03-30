@@ -1674,7 +1674,7 @@ export default function MacTerminal({ onClose, onFocus }: MacTerminalProps) {
     <Window title="Terminal" onClose={onClose} onFocus={onFocus} initialSize={{ width: 800, height: 500 }}>
       <div className="flex flex-col h-full">
         {/* Terminal toolbar */}
-        <div className="flex items-center px-2 py-1 bg-[#E5E5E5] dark:bg-[#2D2D2D] border-b border-[#D1D1D1] dark:border-[#1A1A1A]">
+        <div className="flex items-center px-2 py-1 bg-[#E5E5E5] dark:bg-[#3c3c3c] border-b border-[#D1D1D1] dark:border-[#1A1A1A]">
           <div className="flex space-x-0.5 mr-4">
             {tabs.map((tab) => (
               <div
