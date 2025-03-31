@@ -161,7 +161,7 @@ export default function Dock({ openApp, openApps }: DockProps) {
     },
     {
       name : "Terminal",
-      icon : <img src="/Icon/terminal.webp" alt="Terminal" className="w-full h-full object-cover rounded-lg" />,
+      icon : <img src="/Icon/terminal.jpg" alt="Terminal" className="w-full h-full object-cover rounded-lg" />,
       background: "bg-transparent",
     },
     {
