@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useRef, useEffect } from "react"
 import Window from "./Window"
 import { Input } from "@/components/ui/input"
