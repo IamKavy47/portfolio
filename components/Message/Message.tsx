@@ -37,7 +37,7 @@ const initialConversations: Conversation[] = [
     id: 1,
     contactName: "Arjun Sharma",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Start a conversation",
+    lastMessage: "Software Developer",
     lastMessageTime: new Date(),
     unread: 0,
     isOnline: true,
@@ -49,7 +49,7 @@ const initialConversations: Conversation[] = [
     id: 2,
     contactName: "Priya Patel",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Start a conversation",
+    lastMessage: "Marketing Specialist",
     lastMessageTime: new Date(),
     unread: 0,
     isOnline: true,
@@ -61,7 +61,7 @@ const initialConversations: Conversation[] = [
     id: 3,
     contactName: "Vikram Malhotra",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Start a conversation",
+    lastMessage: "Old Friend",
     lastMessageTime: new Date(),
     unread: 0,
     isOnline: false,
@@ -73,7 +73,7 @@ const initialConversations: Conversation[] = [
     id: 4,
     contactName: "Neha Gupta",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Start a conversation",
+    lastMessage: "Your Colleague",
     lastMessageTime: new Date(),
     unread: 0,
     isOnline: false,
@@ -85,7 +85,7 @@ const initialConversations: Conversation[] = [
     id: 5,
     contactName: "Raj Kapoor",
     avatar: "/placeholder.svg?height=40&width=40",
-    lastMessage: "Start a conversation",
+    lastMessage: "Movie Enthusiast Person",
     lastMessageTime: new Date(),
     unread: 0,
     isOnline: true,
@@ -302,7 +302,7 @@ ${conversation.contactName}:`
               <Input
                 type="text"
                 placeholder="Search"
-                className="pl-9 pr-4 py-1.5 w-full bg-gray-100 border-0"
+                className="pl-9 pr-4 py-1.5 w-full bg-gray-100 border-0 rounded-[8px]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
