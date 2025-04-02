@@ -69,16 +69,15 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
     {
       id: 1,
       title: "Phonk",
-      description: "My Favourite phonks",
-      cover:
-        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
+      description: "Some phonks",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/phonk.jpeg?height=400&width=400&text=Today's+Hits",
       songs: [
         {
           id: 1,
           title: "Woops",
           artist: "Bounty Hunter Woops (TECHNO)",
           album: "",
-          cover: "/woop.jpg?height=400&width=400&text=Woops",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/woops.jpeg?height=400&width=400&text=Woops",
           duration: 259,
           file: "/woop.mp3", // This is a path that should be valid in your project
         },
@@ -87,8 +86,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Matushka",
           artist: "satirin",
           album: "",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/matushka.jpg?height=400&width=400&text=Urban+Rhythm",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/matushka.jpg?height=400&width=400&text=Urban+Rhythm",
           duration: 146,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/M%F0%9D%9A%8A%F0%9D%9A%9D%F0%9D%9A%9E%F0%9D%9A%9C%F0%9D%9A%91%F0%9D%9A%94%F0%9D%9A%8A%20%20U%F0%9D%9A%95%F0%9D%9A%9D%F0%9D%9A%9B%F0%9D%9A%8A%F0%9D%9A%8F%F0%9D%9A%9E%F0%9D%9A%97%F0%9D%9A%94.mp3",
         },
@@ -97,8 +95,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Aura",
           artist: "Ogryzek",
           album: "",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/aura.jpg?height=400&width=400&text=Ocean+Waves",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/aura.jpg?height=400&width=400&text=Ocean+Waves",
           duration: 120,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/phonk/Ogryzek%20-%20AURA%20%28Official%20Visualiser%29.mp3",
         },
@@ -108,16 +105,14 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 2,
       title: "Yo Yo Honey Singh",
       description: "Some Honey Singh's Songs..",
-      cover:
-        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Chill+Vibes",
       songs: [
         {
           id: 4,
           title: "Millionaire",
           artist: "YOYO Honey Singh",
           album: "Glory",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.jpg?height=400&width=400&text=Sunset+Dreams",
           duration: 209,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/millionaire.mp3",
         },
@@ -126,8 +121,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Goliyan",
           artist: "YOYO Honey Singh and Diljit Dosanjh",
           album: "International Villager",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/iv.jpeg?height=400&width=400&text=Rainy+Day",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/iv.jpeg?height=400&width=400&text=Rainy+Day",
           duration: 190,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/yoyo/Goliyan",
         },
@@ -137,16 +131,14 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
       id: 3,
       title: "Workout Mix",
       description: "High energy tracks to fuel your workout",
-      cover:
-        "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Workout+Mix",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Workout+Mix",
       songs: [
         {
           id: 6,
           title: "Sultan",
           artist: "Sukhwindar Singh",
           album: "",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Power+Up",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Sultan%20-%20Sultan%20128%20Kbps-0Ei4Fe3BpA1ULK8v7BXwJhtGiax47J.jpg?height=400&width=400&text=Power+Up",
           duration: 255,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/sultan-Qlhd7xFcGsqmgMY4dr6UvZpprA9RtN.mp3",
         },
@@ -155,8 +147,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Kar har maidan fateh",
           artist: "Rajkumar Hirani",
           album: "",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Kar%20Har%20Maidaan%20Fateh%20-%20Sanju%20128%20Kbps-fo8bOFaCptlSIaBO8q4HoDklbuGOpf.jpg?height=400&width=400&text=Run+Faster",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Kar%20Har%20Maidaan%20Fateh%20-%20Sanju%20128%20Kbps-fo8bOFaCptlSIaBO8q4HoDklbuGOpf.jpg?height=400&width=400&text=Run+Faster",
           duration: 215,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/khmf-ogbOsNr53gDS3zFm3fBmmB75DHwDrM.mp3",
         },
@@ -165,8 +156,7 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
           title: "Jagga Jiteya",
           artist: "Dalar Mehndi",
           album: "",
-          cover:
-            "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Jagga%20Jiteya%20-%20Uri%20-%20The%20Surgical%20Strike%20128%20Kbps-v9X7y0lej4eFnoRMPoXYv8Qw01okff.jpg?height=400&width=400&text=Run+Faster",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/128Jagga%20Jiteya%20-%20Uri%20-%20The%20Surgical%20Strike%20128%20Kbps-v9X7y0lej4eFnoRMPoXYv8Qw01okff.jpg?height=400&width=400&text=Run+Faster",
           duration: 200,
           file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/workout/jj-Gaf6Bpeyzv9kxtlVUVNcUowEnl31lX.mp3",
         },
@@ -184,12 +174,38 @@ export default function IOSMusic({ onClose }: IOSMusicProps) {
     },
     {
       id: 4,
+      title: "Hanumankind",
+      description: "Hanumankind.....",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/MbJ72KO5khs-HD.jpg",
+      songs: [
+        {
+          id: 10,
+          title: "Run it up",
+          artist: "Hanumankind",
+          album: "",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/MbJ72KO5khs-HD.jpg",
+          duration: 193,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Hanumankind%20-%20Run%20It%20Up%20%28%20Prod.%20By%20Kalmi%20%29%20%20%28Official%20Music%20Video%29.mp3",
+        },
+        {
+          id: 11,
+          title: "Big Dawgs",
+          artist: "Hanumankind",
+          album: "",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Big_Dawgs_Hanumankind.jpg",
+          duration: 190,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Big%20Dawgs%20-%20Hanumankind%20%28pagalall.com%29.mp3",
+        },
+      ],
+    },
+    {
+      id: 5,
       title: "Requested",
       description: "Songs requested by visitors.",
       cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/aashiyan.jpeg?height=400&width=400&text=Focus+Flow",
       songs: [
         {
-          id: 10,
+          id: 12,
           title: "Aashiyan",
           artist: "Gini",
           album: "",
