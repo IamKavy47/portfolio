@@ -172,12 +172,38 @@ export default function Music({ onClose, onFocus }: MusicProps) {
     },
     {
       id: 4,
+      title: "Hanumankind",
+      description: "Hanumankind.....",
+      cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/MbJ72KO5khs-HD.jpg",
+      songs: [
+        {
+          id: 10,
+          title: "Run it up",
+          artist: "Hanumankind",
+          album: "",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/MbJ72KO5khs-HD.jpg",
+          duration: 193,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Hanumankind%20-%20Run%20It%20Up%20%28%20Prod.%20By%20Kalmi%20%29%20%20%28Official%20Music%20Video%29.mp3",
+        },
+        {
+          id: 11,
+          title: "Big Dawgs",
+          artist: "Hanumankind",
+          album: "",
+          cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Big_Dawgs_Hanumankind.jpg",
+          duration: 190,
+          file: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/hanumankind/Big%20Dawgs%20-%20Hanumankind%20%28pagalall.com%29.mp3",
+        },
+      ],
+    },
+    {
+      id: 5,
       title: "Requested",
       description: "Songs requested by visitors.",
       cover: "https://reriyznm2homh55q.public.blob.vercel-storage.com/music/requested/aashiyan.jpeg?height=400&width=400&text=Focus+Flow",
       songs: [
         {
-          id: 10,
+          id: 12,
           title: "Aashiyan",
           artist: "Gini",
           album: "",
