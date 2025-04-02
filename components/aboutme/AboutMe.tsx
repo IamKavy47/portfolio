@@ -65,8 +65,8 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       githubUrl: "https://github.com/iamkavy47/portfolio",
       liveUrl: "https://iamkavy47.vercel.app",
       date: "March 2024",
-      gradient: "from-blue-400 to-indigo-500",
-      icon: <Monitor className="h-16 w-16 text-white/80" />,
+      gradient: "",
+      icon: "",
     },
     {
       title: "Codestorm Website",
@@ -76,6 +76,18 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       technologies: ["Next.js", "TypeScript", "Aceternity UI"],
       githubUrl: "#",
       liveUrl: "https://mufests.com",
+      date: "February 2024",
+      gradient: "",
+      icon: "",
+    },
+    {
+      title: "Free Fire Tournament Website",
+      description:
+        "Free Fire Tournament websited which is organized by Chancellor Brigade Team,Mandsaur University",
+      image: "/projects/mulan.jpg",
+      technologies: ["Next.js", "TypeScript", "Aceternity UI"],
+      githubUrl: "https://github.com/iamkavy47/freefire",
+      liveUrl: "https://mulangaming.vercel.app",
       date: "February 2024",
       gradient: "",
       icon: "",
@@ -399,7 +411,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
                     alt={project.title}
                     width={800}
                     height={300}
-                    className="w-full h-full object-cover opacity-60"
+                    className="w-full h-full object-cover opacity-100"
                   />
                 </div>
               )}
