@@ -152,7 +152,7 @@ export default function Window({
         stiffness: 300,
         damping: 30,
       }}
-      className="absolute z-40 bg-white rounded-[10px] shadow-lg overflow-hidden max-w-full max-h-full"
+      className="absolute z-40 bg-[#454647] rounded-[10px] shadow-lg overflow-hidden max-w-full max-h-full"
       style={{
         zIndex: isMinimized ? 0 : 10,
         width: isMaximized ? "100%" : Math.min(size.width, window.innerWidth - 20),
@@ -160,7 +160,7 @@ export default function Window({
       }}
     >
       <div
-        className="bg-gray-800 px-4 py-2 flex justify-between text-white border-none items-center cursor-move select-none"
+        className="bg-[#454647] px-4 py-2 flex justify-between text-white border-none items-center cursor-move select-none"
         onPointerDown={(e) => dragControls.start(e)}
       >
         <div className="flex space-x-2 border-hidden">

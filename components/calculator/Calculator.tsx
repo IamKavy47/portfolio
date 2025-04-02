@@ -57,9 +57,9 @@ export default function Calculator({ onClose, onFocus }: CalculatorProps) {
 
   return (
     <Window title="Calculator" onClose={onClose} onFocus={onFocus} initialSize={{ width: 300, height: 400 }}>
-      <div className="h-full flex flex-col bg-gray-800 p-4 rounded-lg">
-        <div className="bg-gray-900 text-white text-right p-2 mb-2 rounded text-3xl flex-none">{display}</div>
-        <div className="flex-1 grid grid-cols-4 gap-2">
+      <div className="h-full flex flex-col bg-transparent rounded-lg">
+        <div className="text-white text-right pr-4 mb-2 rounded text-7xl flex-none">{display}</div>
+        <div className="flex-1 grid grid-cols-4 gap-[1.5px]">
           {buttons.map((btn) => (
             <button
               key={btn}
@@ -69,9 +69,9 @@ export default function Calculator({ onClose, onFocus }: CalculatorProps) {
                 else if (btn === "=") handleEquals()
                 else if (btn === "C") handleClear()
               }}
-              className={`p-2 rounded-full text-white text-xl flex items-center justify-center
+              className={` text-white text-3xl flex items-center justify-center
                 ${btn === "0" ? "col-span-2" : ""}
-                ${["÷", "×", "-", "+", "="].includes(btn) ? "bg-orange-500" : "bg-gray-700"}
+                ${["÷", "×", "-", "+", "="].includes(btn) ? "bg-[#FF9f09]" : "bg-[#737474]"}
                 hover:bg-opacity-80`}
             >
               {btn}
