@@ -18,6 +18,7 @@ import IOSSafari from "./ios/IOSSafari"
 import IOSMusic from "./ios/IOSMusic"
 import BootAnimation from "./BootAnimation"
 import IOSYouTube from "./ios/IOSYouTube"
+import IOSMessages from "./ios/IOSMessages"
 
 const apps = [
   {
@@ -112,6 +113,12 @@ const apps = [
 </svg>,
     component: IOSWallpaperApp,
     background: "bg-gradient-to-b from-purple-500 to-purple-700",
+  },
+  {
+    name: "Messages",
+    icon: <img src="/Icon/msg.png" className="w-full h-full rounded-[10px]" alt="" />,
+    component: IOSMessages,
+    background: "bg-transparent",
   },
   {
     name: "Youtube",
