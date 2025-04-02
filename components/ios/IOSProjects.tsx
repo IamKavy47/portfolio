@@ -187,7 +187,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                     >
                       <div className="flex items-center">
                         <Github size={20} className="text-gray-700 mr-3" />
-                        <span className="text-[15px]">View Source Code</span>
+                        <span className="text-[15px] rounded-[12px]">View Source Code</span>
                       </div>
                       <ExternalLink size={16} className="text-gray-400" />
                     </a>
@@ -202,7 +202,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                     >
                       <div className="flex items-center">
                         <ExternalLink size={20} className="mr-3" />
-                        <span className="text-[15px]">Visit Live Project</span>
+                        <span className="text-[15px] rounded-[12px]">Visit Live Project</span>
                       </div>
                       <ChevronRight size={16} />
                     </a>
@@ -221,9 +221,9 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
             >
               {/* Category selector */}
               <div className="px-4 py-4">
-                <div className="bg-[#E5E5EA] p-1 rounded-lg flex mb-6">
+                <div className="bg-[#E5E5EA] p-1 rounded-[12px] flex mb-6">
                   <button
-                    className={`flex-1 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
+                    className={`flex-1 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                       activeCategory === "all" ? "bg-white text-black shadow-sm" : "text-gray-500"
                     }`}
                     onClick={() => setActiveCategory("all")}
@@ -231,7 +231,7 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
                     All
                   </button>
                   <button
-                    className={`flex-1 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
+                    className={`flex-1 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                       activeCategory === "featured" ? "bg-white text-black shadow-sm" : "text-gray-500"
                     }`}
                     onClick={() => setActiveCategory("featured")}
