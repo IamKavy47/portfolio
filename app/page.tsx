@@ -1,6 +1,7 @@
 "use client"
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 import { useState } from "react"
 import { useDeviceDetect } from "@/hooks/useDeviceDetect"
 import MacOSInterface from "@/components/MacOSInterface"
