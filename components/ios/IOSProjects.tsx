@@ -77,8 +77,8 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
       title: "Retro Design Portfolio",
       description:
         "A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI. The site includes interactive elements and smooth animations.",
-      image: "/projects/portfolio.jpg",
-      detailImages: ["/projects/portfolio-detail1.jpg", "/projects/portfolio-detail2.jpg"],
+      image: "https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Image.png.jpg",
+      detailImages: ["https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Image.png.jpg", "/projects/portfolio-detail2.jpg"],
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       features: [
         "macOS-inspired user interface with window management",
