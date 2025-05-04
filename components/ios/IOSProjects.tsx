@@ -73,7 +73,26 @@ export default function IOSProjects({ onClose }: IOSProjectsProps) {
       featured: false,
     },
     {
-      id: 2,
+      id: 4,
+      title: "Retro Design Portfolio",
+      description:
+        "A modern portfolio website built with Next.js and Tailwind CSS featuring a macOS-inspired UI. The site includes interactive elements and smooth animations.",
+      image: "/projects/portfolio.jpg",
+      detailImages: ["/projects/portfolio-detail1.jpg", "/projects/portfolio-detail2.jpg"],
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      features: [
+        "macOS-inspired user interface with window management",
+        "Interactive desktop environment with draggable windows",
+        "Smooth animations and transitions",
+        "Responsive design for all devices",
+        "Project showcase with detailed information",
+      ],
+      github: "https://github.com/iamkavy47/miranda",
+      liveUrl: "https://mirandaclone.vercel.app",
+      featured: true,
+    },
+    {
+      id: 3,
       title: "Free Fire Tournament Website",
       description:
         "Free Fire Tournament websited which is organized by Chancellor Brigade Team,Mandsaur University",
