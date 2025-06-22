@@ -96,7 +96,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       title: "Obys Website CLone",
       description:
         "Clone of Obys Agency Website using html , css , js and gsap.",
-      image: "",
+      image: "https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Screenshot_20250622_072719_Chrome.jpg",
       technologies: ["HTML", "CSS", "JS", "GSAP"],
       githubUrl: "https://github.com/iamkavy47/Obys-clone",
       liveUrl: "https://obys-two.vercel.app",
@@ -108,7 +108,7 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       title: "Dribble Landing page clone ",
       description:
         "Dribble landing page clone using html css only.",
-      image: "",
+      image: "https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Screenshot_20250622_073252_Chrome.jpg",
       technologies: ["HTML", "CSS"],
       githubUrl: "https://github.com/iamkavy47/Dribble",
       liveUrl: "https://dribble-neon.vercel.app",
@@ -144,11 +144,23 @@ export default function AboutMe({ onClose, onFocus }: AboutMeProps) {
       title: "Miranda CLone",
       description:
         "Clone of a award winning website Miranda , this is a newspaper style website.",
-      image: "",
+      image: "https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Screenshot_20250622_073017_Chrome.jpg",
       technologies: ["HTML", "CSS", "JS", "GSAP"],
       githubUrl: "https://github.com/iamkavy47/Miranda",
       liveUrl: "https://mirandaclone.vercel.app",
       date: "May 2025",
+      gradient: "",
+      icon: "",
+    },
+    {
+      title: "Bennet CLone",
+      description:
+        "Clone of a award winning website Bennet , this is a clean website.",
+      image: "https://reriyznm2homh55q.public.blob.vercel-storage.com/projects/Screenshot_20250622_073123_Chrome.jpg",
+      technologies: ["HTML", "CSS", "JS", "GSAP"],
+      githubUrl: "https://github.com/iamkavy47/bennet",
+      liveUrl: "https://bennet-seven.vercel.app",
+      date: "April 2025",
       gradient: "",
       icon: "",
     },
