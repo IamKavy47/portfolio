@@ -30,7 +30,7 @@ const projects = [
     icon: "🌤️",
     github: "https://github.com/kavyporwal/weather-app",
     demo: "https://weather-app-kavyporwal.vercel.app",
-    date: "February 2023",
+    date: "February 2025",
   },
 ]
 
